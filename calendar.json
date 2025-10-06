@@ -1,0 +1,221 @@
+{
+  "season": "2025–2026",
+  "grand_prix": [
+    {
+      "name": "Гран-при Франции 2025 (ISU)",
+      "type": "GP",
+      "city": "Анже",
+      "country": "Франция",
+      "date_display": "17–19 октября 2025",
+      "participants": {
+        "men": [
+          "Mihhail Selevko",
+          "Luc Economides",
+          "Francois Pitot",
+          "Adam Siao Him Fa",
+          "Nika Egadze",
+          "Gabriele Frangipani",
+          "Kao Miura",
+          "Tatsuya Tsuboi",
+          "Lukas Britschgi",
+          "Ilia Malinin",
+          "Maxim Naumov",
+          "Andrew Torgashev"
+        ],
+        "women": [
+          "Niina Petrokina",
+          "Clemence Mayindu",
+          "Lorine Schild",
+          "Lea Serna",
+          "Ami Nakai",
+          "Kaori Sakamoto",
+          "Rion Sumiyoshi",
+          "Chaeyeon Kim",
+          "Young You",
+          "Livia Kaiser",
+          "Isabeau Levito",
+          "Elyce Lin-Gracey"
+        ],
+        "pairs": [
+          "Deanna Stellato-Dudek / Maxime Deschamps",
+          "Aurelie Faula / Theo Belle",
+          "Camille Kovalev / Pavel Kovalev",
+          "Megan Wessenberg / Denys Strekalin",
+          "Maria Pavlova / Alexei Sviatchenko",
+          "Riku Miura / Ryuichi Kihara",
+          "Katie McBeath / Daniil Parkman",
+          "Audrey Shin / Balazs Nagy"
+        ],
+        "dance": [
+          "Marie-Jade Lauriault / Romain Le Gac",
+          "Laurence Fournier Beaudry / Guillaume Cizeron",
+          "Celina Fradji / Jean-Hans Fourneaux",
+          "Natacha Lagouge / Arnaud Caffa",
+          "Lilah Fear / Lewis Gibson",
+          "Diana Davis / Gleb Smolkin",
+          "Charlene Guignard / Marco Fabbri",
+          "Allison Reed / Saulius Ambrulevicius",
+          "Emily Bratti / Ian Somerville",
+          "Eva Pate / Logan Bye"
+        ]
+      }
+    },
+    {
+      "name": "Кубок Китая 2025 (ISU)",
+      "type": "GP",
+      "city": "Чунцин",
+      "country": "Китай",
+      "date_display": "24–26 октября 2025",
+      "participants": {
+        "men": [
+          "Vladimir Litvintsev",
+          "Daiwei Dai",
+          "Boyang Jin",
+          "Zhiming Peng",
+          "Daniel Grassl",
+          "Shun Sato",
+          "Sota Yamamoto",
+          "Mikhail Shaidorov",
+          "Junhwan Cha",
+          "Deniss Vasiljevs",
+          "Camden Pulkinen",
+          "Jacob Sanchez"
+        ],
+        "women": [
+          "Xiangyi An",
+          "Ruiyang Zhang",
+          "Yi Zhu",
+          "Anastasiia Gubanova",
+          "Rino Matsuike",
+          "Rinka Watanabe",
+          "Hana Yoshida",
+          "Haein Lee",
+          "Jia Shin",
+          "Kimmy Repond",
+          "Amber Glenn",
+          "Alysa Liu"
+        ],
+        "pairs": [
+          "Wenjing Sui / Cong Han",
+          "Jiaxuan Zhang / Yihang Huang",
+          "Anastasiia Metelkina / Luka Berulava",
+          "Annika Hocke / Robert Kunkel",
+          "Lucrezia Beccari / Matteo Guarise",
+          "Sara Conti / Niccolo Macii",
+          "Rebecca Ghilardi / Filippo Ambrosini",
+          "Katie McBeath / Daniil Parkman"
+        ],
+        "dance": [
+          "Junfei Ren / Jianing Xing",
+          "Shiyue Wang / Xinyu Liu",
+          "Zixi Xiao / Linghao He",
+          "Olivia Smart / Tim Dieck",
+          "Loicia Demougeot / Theo Le Mercier",
+          "Evgeniia Lopareva / Geoffrey Brissaud",
+          "Hannah Lim / Ye Quan",
+          "Madison Chock / Evan Bates",
+          "Caroline Green / Michael Parsons",
+          "Emilea Zingas / Vadym Kolesnik"
+        ]
+      }
+    },
+    {
+      "name": "Skate Canada International 2025 (ISU)",
+      "type": "GP",
+      "city": "Саскатун",
+      "country": "Канада",
+      "date_display": "31 октября – 2 ноября 2025",
+      "participants": {
+        "men": [
+          "Stephen Gogolev",
+          "Aleksa Rakic",
+          "Roman Sadovsky",
+          "Aleksandr Selevko",
+          "Kevin Aymoz",
+          "Nika Egadze",
+          "Nikolaj Memola",
+          "Kao Miura",
+          "Kazuki Tomono",
+          "Vladimir Samoilov",
+          "Tomoki Hiwatashi",
+          "Ilia Malinin"
+        ],
+        "women": [
+          "Nina Pinzarrone",
+          "Sara-Maude Dupuis",
+          "Madeline Schizas",
+          "Uliana Shyryaeva",
+          "Lara Naki Gutmann",
+          "Yuna Aoki",
+          "Mone Chiba",
+          "Ami Nakai",
+          "Ahsun Yun",
+          "Sarah Everhardt",
+          "Isabeau Levito",
+          "Bradie Tennell"
+        ],
+        "pairs": [
+          "Kelly Ann Laurin / Loucas Ethier",
+          "Lia Pereira / Trennt Michaud",
+          "Deanna Stellato-Dudek / Maxime Deschamps",
+          "Anastasia Vaipan-Law / Luke Digby",
+          "Minerva Fabienne Hase / Nikita Volodin",
+          "Oxana Vouillamoz / Tom Bouvart",
+          "Ellie Kam / Danny O'Shea"
+        ],
+        "dance": [
+          "Piper Gilles / Paul Poirier",
+          "Marjorie Lajoie / Zachary Lagha",
+          "Marie-Jade Lauriault / Romain Le Gac",
+          "Katerina Mrazkova / Daniel Mrazek",
+          "Juulia Turkkila / Matthias Versluis",
+          "Jennifer Janse Van Rensburg / Benjamin Steffan",
+          "Allison Reed / Saulius Ambrulevicius",
+          "Emily Bratti / Ian Somerville",
+          "Christina Carreira / Anthony Ponomarenko",
+          "Leah Neset / Artem Markelov"
+        ]
+      }
+    },
+    {
+      "name": "NHK Trophy 2025 (ISU)",
+      "type": "GP",
+      "city": "Осака (Кадома)",
+      "country": "Япония",
+      "date_display": "7–9 ноября 2025"
+    },
+    {
+      "name": "ISU Figure Skating Grand Prix 2025 Saatva Skate America",
+      "type": "GP",
+      "city": "Лейк-Плэсид",
+      "country": "США",
+      "date_display": "14–16 ноября 2025"
+    },
+    {
+      "name": "ISU Grand Prix Finlandia Trophy 2025",
+      "type": "GP",
+      "city": "Хельсинки",
+      "country": "Финляндия",
+      "date_display": "21–23 ноября 2025"
+    },
+    {
+      "name": "Финал Гран-при 2025 (Нагойя)",
+      "type": "GPF",
+      "city": "Нагойя",
+      "country": "Япония",
+      "date_display": "4–7 декабря 2025"
+    }
+  ],
+  "challengers": [
+    {
+      "name": "Trialeti Trophy 2025 (ISU CS)",
+      "type": "CS",
+      "city": "Тбилиси",
+      "country": "Грузия",
+      "date_display": "8–11 октября 2025"
+    }
+  ],
+  "majors": [],
+  "juniors": [],
+  "russian": []
+}
