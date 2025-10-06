@@ -52,11 +52,21 @@
       "url": "https://isu-skating.com/figure-skating/events/eventdetail/isu-gp-cup-of-china-2025/",
       "entries": "https://isu-skating.com/figure-skating/entries/isu-gp-cup-of-china-2025/",
       "participants": {
-        men: ["Mihhail Selevko","Luc Economides","Francois Pitot","Adam Siao Him Fa","Nika Egadze","Gabriele Frangipani","Kao Miura","Tatsuya Tsuboi","Lukas Britschgi","Ilia Malinin","Maxim Naumov","Andrew Torgashev"],
-      women: ["Niina Petrokina","Clemence Mayindu","Lorine Schild","Lea Serna","Ami Nakai","Kaori Sakamoto","Rion Sumiyoshi","Chaeyeon Kim","Young You","Livia Kaiser","Isabeau Levito","Elyce Lin-Gracey"],
-      pairs: ["Deanna Stellato-Dudek / Maxime Deschamps","Aurelie Faula / Theo Belle","Camille Kovalev / Pavel Kovalev","Megan Wessenberg / Denys Strekalin","Maria Pavlova / Alexei Sviatchenko","Riku Miura / Ryuichi Kihara","Katie McBeath / Daniil Parkman","Audrey Shin / Balazs Nagy"],
-      dance: ["Marie-Jade Lauriault / Romain Le Gac","Laurence Fournier Beaudry / Guillaume Cizeron","Celina Fradji / Jean-Hans Fourneaux","Natacha Lagouge / Arnaud Caffa","Lilah Fear / Lewis Gibson","Diana Davis / Gleb Smolkin","Charlene Guignard / Marco Fabbri","Allison Reed / Saulius Ambrulevicius","Emily Bratti / Ian Somerville","Eva Pate / Logan Bye"]
-    },
+        "men": [
+          "Vladimir Litvintsev",
+          "Daiwei Dai",
+          "Boyang Jin",
+          "Zhiming Peng",
+          "Daniel Grassl",
+          "Shun Sato",
+          "Sota Yamamoto",
+          "Mikhail Shaidorov",
+          "Junhwan Cha",
+          "Deniss Vasiljevs"
+        ],
+        "women": [],
+        "pairs": [],
+        "dance": []
       }
     },
     {
