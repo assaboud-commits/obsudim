@@ -1,4 +1,4 @@
-// Mini App v10 with i18n, transitions, participants page
+// Mini App v10 with i18n, transitions, participants page + Challenger support
 const TG = window.Telegram ? window.Telegram.WebApp : null;
 const app = document.getElementById('app');
 const backBtn = document.getElementById('backBtn');
@@ -29,7 +29,12 @@ const I18N = {
     men: "Мужчины", women: "Женщины", pairs: "Пары", dance: "Танцы на льду",
     date: "Дата",
     place: "Место",
-    gp: "Гран-при", gpf: "Финал Гран-при", worlds: "Чемпионат мира", euros: "Чемпионат Европы", oly: "Олимпиада"
+    gp: "Гран-при",
+    gpf: "Финал Гран-при",
+    cs: "Челленджер",
+    worlds: "Чемпионат мира",
+    euros: "Чемпионат Европы",
+    oly: "Олимпиада"
   },
   en: {
     greet: "Hi, we hope to help you!",
@@ -48,7 +53,12 @@ const I18N = {
     men: "Men", women: "Women", pairs: "Pairs", dance: "Ice Dance",
     date: "Dates",
     place: "Place",
-    gp: "Grand Prix", gpf: "Grand Prix Final", worlds: "World Championships", euros: "European Championships", oly: "Olympics"
+    gp: "Grand Prix",
+    gpf: "Grand Prix Final",
+    cs: "Challenger",
+    worlds: "World Championships",
+    euros: "European Championships",
+    oly: "Olympics"
   }
 };
 
@@ -63,7 +73,7 @@ function setLang(lang){
   langEn.classList.toggle('active', lang==='en');
   greetEl.textContent = t('greet');
   tBack.textContent = t('back');
-  render(); // re-render to update text
+  render();
   saveLang();
 }
 
@@ -99,8 +109,18 @@ function fmtDateRange(a,b){
 // Classify special events
 function classify(it){
   const name = (it.name||'').toLowerCase();
+  const type = (it.type||'').toLowerCase();
+
+  if(type==='gpf') return 'gpf';
+  if(type==='gp') return 'gp';
+  if(type==='cs') return 'cs';
+  if(type==='worlds'||type==='world') return 'worlds';
+  if(type==='euros'||type==='europe') return 'euros';
+  if(type==='oly'||type==='olympics') return 'oly';
+
   if(name.includes('grand prix final') || (name.includes('гран-при') && name.includes('финал'))) return 'gpf';
   if(name.includes('grand prix') || name.includes('гран-при')) return 'gp';
+  if(name.includes('challenger') || name.includes('isu cs') || name.includes('(isu cs)')) return 'cs';
   if(name.includes('world') || name.includes('мир')) return 'worlds';
   if(name.includes('europe') || name.includes('европ')) return 'euros';
   if(name.includes('olymp')) return 'oly';
@@ -109,16 +129,17 @@ function classify(it){
 function colorForClass(cls){
   return cls==='gpf' ? '#2563eb'
     : cls==='gp' ? '#0ea5e9'
+    : cls==='cs' ? '#9333ea'
     : cls==='worlds' ? '#16a34a'
     : cls==='euros' ? '#f59e0b'
     : cls==='oly' ? '#ef4444'
-    : '#821130'; // default accent
+    : '#821130';
 }
 
 function chips(it){
   const cls = classify(it);
   const base = colorForClass(cls);
-  const light = base + 'cc'; // muted 80% opacity
+  const light = base + 'cc';
   const place = [it.city, it.country].filter(Boolean).join(', ');
   return `
     <div class="subtags">
@@ -134,9 +155,9 @@ function listView(items, kind){
     <div class="list">
       ${sorted.map((it,i)=>{
         const cls = classify(it);
-        const map = {gp:'is-gp', gpf:'is-gpf', worlds:'is-worlds', euros:'is-euros', oly:'is-oly'};
+        const map = {gp:'is-gp', gpf:'is-gpf', cs:'is-cs', worlds:'is-worlds', euros:'is-euros', oly:'is-oly'};
+        const labelMap = {gp:t('gp'), gpf:t('gpf'), cs:t('cs'), worlds:t('worlds'), euros:t('euros'), oly:t('oly')};
         const cssc = map[cls]||'';
-        const labelMap = {gp:t('gp'), gpf:t('gpf'), worlds:t('worlds'), euros:t('euros'), oly:t('oly')};
         const label = labelMap[cls]||'';
         return `
           <a class="event ${cssc}" data-kind="${kind}" data-idx="${i}">
@@ -213,7 +234,7 @@ function view_event_details(kind, idx){
       <div class="title">${it.name}</div>
       ${chips(it)}
       <div style="margin-top:10px">
-        <a class="btn" href="${it.url||'#'}" target="_blank" rel="noopener">🌐 ${t('official')}</a>
+        ${it.url?`<a class="btn" href="${it.url}" target="_blank" rel="noopener">🌐 ${t('official')}</a>`:''}
         ${it.entries?` <a class="btn" href="${it.entries}" target="_blank" rel="noopener">📝 Entries</a>`:''}
       </div>
       <div class="grid" style="margin-top:12px">
@@ -243,7 +264,6 @@ function render(){
   }
   app.innerHTML = html;
 
-  // Wire events
   if(view==='menu'){
     document.getElementById('btnCalendar')?.addEventListener('click', ()=> go('calendar_select'));
   }
@@ -260,8 +280,6 @@ function render(){
       });
     });
   }
-
-  // Back button visibility
   backBtn.style.display = NAV.length>1 ? 'inline-flex' : 'none';
   tBack.textContent = t('back');
 }
