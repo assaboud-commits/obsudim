@@ -127,4 +127,71 @@
           "Elyce Lin-Gracey"
         ],
         "pairs": [
-          "Deanna Stellato-Dudek /
+          "Deanna Stellato-Dudek / Maxime Deschamps",
+          "Aurelie Faula / Theo Belle",
+          "Camille Kovalev / Pavel Kovalev",
+          "Megan Wessenberg / Denys Strekalin",
+          "Maria Pavlova / Alexei Sviatchenko",
+          "Riku Miura / Ryuichi Kihara",
+          "Katie McBeath / Daniil Parkman",
+          "Audrey Shin / Balazs Nagy"
+        ],
+        "dance": [
+          "Marie-Jade Lauriault / Romain Le Gac",
+          "Laurence Fournier Beaudry / Guillaume Cizeron",
+          "Celina Fradji / Jean-Hans Fourneaux",
+          "Natacha Lagouge / Arnaud Caffa",
+          "Lilah Fear / Lewis Gibson",
+          "Diana Davis / Gleb Smolkin",
+          "Charlene Guignard / Marco Fabbri",
+          "Allison Reed / Saulius Ambrulevicius",
+          "Emily Bratti / Ian Somerville",
+          "Eva Pate / Logan Bye"
+        ]
+      }
+    },
+    {
+      "name": "Гран-при Китая 2025 (ISU)",
+      "city": "Чунцин",
+      "country": "Китай",
+      "start": "2025-10-24",
+      "end": "2025-10-26"
+    },
+    {
+      "name": "Гран-при Канады 2025 (ISU Skate Canada International)",
+      "city": "Саскатун",
+      "country": "Канада",
+      "start": "2025-10-31",
+      "end": "2025-11-02"
+    },
+    {
+      "name": "Гран-при Японии 2025 (ISU NHK Trophy)",
+      "city": "Осака (Кадома)",
+      "country": "Япония",
+      "start": "2025-11-07",
+      "end": "2025-11-09"
+    },
+    {
+      "name": "Гран-при США 2025 (ISU Skate America)",
+      "city": "Лейк-Плэсид",
+      "country": "США",
+      "start": "2025-11-14",
+      "end": "2025-11-16"
+    },
+    {
+      "name": "Гран-при Финляндии 2025 (ISU Finlandia Trophy)",
+      "city": "Хельсинки",
+      "country": "Финляндия",
+      "start": "2025-11-21",
+      "end": "2025-11-23"
+    },
+    {
+      "name": "Финал Гран-при 2025 (Нагойя)",
+      "city": "Нагойя",
+      "country": "Япония",
+      "start": "2025-12-04",
+      "end": "2025-12-07"
+    }
+  ],
+  "russian": []
+}
