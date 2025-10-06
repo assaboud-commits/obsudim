@@ -1,17 +1,20 @@
 {
   "season": "2025–2026",
-  "grand_prix": [
+  "international": [
     {
       "name": "Гран-при Франции 2025 (ISU)",
       "type": "GP",
+      "start": "2025-10-17",
+      "end": "2025-10-19",
       "city": "Анже",
-      "country": "Франция",
-      "date_display": "17–19 октября 2025",
+      "country": "FRA",
+      "url": "https://isu-skating.com/figure-skating/events/eventdetail/isu-gp-grand-prix-de-france-2025/",
+      "entries": "https://isu-skating.com/figure-skating/entries/isu-gp-grand-prix-de-france-2025/",
       "participants": {
         "men": [
           "Mihhail Selevko",
           "Luc Economides",
-          "Francois Pitot",
+          "François Pitot",
           "Adam Siao Him Fa",
           "Nika Egadze",
           "Gabriele Frangipani",
@@ -24,48 +27,30 @@
         ],
         "women": [
           "Niina Petrokina",
-          "Clemence Mayindu",
+          "Clémence Mayindu",
           "Lorine Schild",
-          "Lea Serna",
+          "Léa Serna",
           "Ami Nakai",
           "Kaori Sakamoto",
           "Rion Sumiyoshi",
-          "Chaeyeon Kim",
-          "Young You",
-          "Livia Kaiser",
+          "Kim Chae-yeon",
+          "You Young",
           "Isabeau Levito",
           "Elyce Lin-Gracey"
         ],
-        "pairs": [
-          "Deanna Stellato-Dudek / Maxime Deschamps",
-          "Aurelie Faula / Theo Belle",
-          "Camille Kovalev / Pavel Kovalev",
-          "Megan Wessenberg / Denys Strekalin",
-          "Maria Pavlova / Alexei Sviatchenko",
-          "Riku Miura / Ryuichi Kihara",
-          "Katie McBeath / Daniil Parkman",
-          "Audrey Shin / Balazs Nagy"
-        ],
-        "dance": [
-          "Marie-Jade Lauriault / Romain Le Gac",
-          "Laurence Fournier Beaudry / Guillaume Cizeron",
-          "Celina Fradji / Jean-Hans Fourneaux",
-          "Natacha Lagouge / Arnaud Caffa",
-          "Lilah Fear / Lewis Gibson",
-          "Diana Davis / Gleb Smolkin",
-          "Charlene Guignard / Marco Fabbri",
-          "Allison Reed / Saulius Ambrulevicius",
-          "Emily Bratti / Ian Somerville",
-          "Eva Pate / Logan Bye"
-        ]
+        "pairs": [],
+        "dance": []
       }
     },
     {
       "name": "Кубок Китая 2025 (ISU)",
       "type": "GP",
+      "start": "2025-10-24",
+      "end": "2025-10-26",
       "city": "Чунцин",
-      "country": "Китай",
-      "date_display": "24–26 октября 2025",
+      "country": "CHN",
+      "url": "https://isu-skating.com/figure-skating/events/eventdetail/isu-gp-cup-of-china-2025/",
+      "entries": "https://isu-skating.com/figure-skating/entries/isu-gp-cup-of-china-2025/",
       "participants": {
         "men": [
           "Vladimir Litvintsev",
@@ -77,54 +62,22 @@
           "Sota Yamamoto",
           "Mikhail Shaidorov",
           "Junhwan Cha",
-          "Deniss Vasiljevs",
-          "Camden Pulkinen",
-          "Jacob Sanchez"
+          "Deniss Vasiljevs"
         ],
-        "women": [
-          "Xiangyi An",
-          "Ruiyang Zhang",
-          "Yi Zhu",
-          "Anastasiia Gubanova",
-          "Rino Matsuike",
-          "Rinka Watanabe",
-          "Hana Yoshida",
-          "Haein Lee",
-          "Jia Shin",
-          "Kimmy Repond",
-          "Amber Glenn",
-          "Alysa Liu"
-        ],
-        "pairs": [
-          "Wenjing Sui / Cong Han",
-          "Jiaxuan Zhang / Yihang Huang",
-          "Anastasiia Metelkina / Luka Berulava",
-          "Annika Hocke / Robert Kunkel",
-          "Lucrezia Beccari / Matteo Guarise",
-          "Sara Conti / Niccolo Macii",
-          "Rebecca Ghilardi / Filippo Ambrosini",
-          "Katie McBeath / Daniil Parkman"
-        ],
-        "dance": [
-          "Junfei Ren / Jianing Xing",
-          "Shiyue Wang / Xinyu Liu",
-          "Zixi Xiao / Linghao He",
-          "Olivia Smart / Tim Dieck",
-          "Loicia Demougeot / Theo Le Mercier",
-          "Evgeniia Lopareva / Geoffrey Brissaud",
-          "Hannah Lim / Ye Quan",
-          "Madison Chock / Evan Bates",
-          "Caroline Green / Michael Parsons",
-          "Emilea Zingas / Vadym Kolesnik"
-        ]
+        "women": [],
+        "pairs": [],
+        "dance": []
       }
     },
     {
-      "name": "Skate Canada International 2025 (ISU)",
+      "name": "Скейт Канада Интернэшнл 2025 (ISU)",
       "type": "GP",
+      "start": "2025-10-31",
+      "end": "2025-11-02",
       "city": "Саскатун",
-      "country": "Канада",
-      "date_display": "31 октября – 2 ноября 2025",
+      "country": "CAN",
+      "url": "https://isu-skating.com/figure-skating/events/eventdetail/isu-gp-skate-canada-international-2025/",
+      "entries": "https://isu-skating.com/figure-skating/entries/isu-gp-skate-canada-international-2025/",
       "participants": {
         "men": [
           "Stephen Gogolev",
@@ -136,86 +89,80 @@
           "Nikolaj Memola",
           "Kao Miura",
           "Kazuki Tomono",
-          "Vladimir Samoilov",
-          "Tomoki Hiwatashi",
-          "Ilia Malinin"
+          "Vladimir Samoilov"
         ],
-        "women": [
-          "Nina Pinzarrone",
-          "Sara-Maude Dupuis",
-          "Madeline Schizas",
-          "Uliana Shyryaeva",
-          "Lara Naki Gutmann",
-          "Yuna Aoki",
-          "Mone Chiba",
-          "Ami Nakai",
-          "Ahsun Yun",
-          "Sarah Everhardt",
-          "Isabeau Levito",
-          "Bradie Tennell"
-        ],
-        "pairs": [
-          "Kelly Ann Laurin / Loucas Ethier",
-          "Lia Pereira / Trennt Michaud",
-          "Deanna Stellato-Dudek / Maxime Deschamps",
-          "Anastasia Vaipan-Law / Luke Digby",
-          "Minerva Fabienne Hase / Nikita Volodin",
-          "Oxana Vouillamoz / Tom Bouvart",
-          "Ellie Kam / Danny O'Shea"
-        ],
-        "dance": [
-          "Piper Gilles / Paul Poirier",
-          "Marjorie Lajoie / Zachary Lagha",
-          "Marie-Jade Lauriault / Romain Le Gac",
-          "Katerina Mrazkova / Daniel Mrazek",
-          "Juulia Turkkila / Matthias Versluis",
-          "Jennifer Janse Van Rensburg / Benjamin Steffan",
-          "Allison Reed / Saulius Ambrulevicius",
-          "Emily Bratti / Ian Somerville",
-          "Christina Carreira / Anthony Ponomarenko",
-          "Leah Neset / Artem Markelov"
-        ]
+        "women": [],
+        "pairs": [],
+        "dance": []
       }
     },
     {
       "name": "NHK Trophy 2025 (ISU)",
       "type": "GP",
+      "start": "2025-11-07",
+      "end": "2025-11-09",
       "city": "Осака (Кадома)",
-      "country": "Япония",
-      "date_display": "7–9 ноября 2025"
+      "country": "JPN",
+      "url": "https://isu-skating.com/figure-skating/events/eventdetail/isu-gp-nhk-trophy-2025/",
+      "entries": "https://isu-skating.com/figure-skating/entries/isu-gp-nhk-trophy-2025/",
+      "participants": {
+        "men": [
+          "Boyang Jin",
+          "François Pitot",
+          "Gabriele Frangipani",
+          "Matteo Rizzo",
+          "Yuma Kagiyama",
+          "Haru Kakiuchi",
+          "Shun Sato",
+          "Junhwan Cha"
+        ],
+        "women": [],
+        "pairs": [],
+        "dance": []
+      }
     },
     {
-      "name": "ISU Figure Skating Grand Prix 2025 Saatva Skate America",
+      "name": "Skate America 2025 (ISU)",
       "type": "GP",
-      "city": "Лейк-Плэсид",
-      "country": "США",
-      "date_display": "14–16 ноября 2025"
+      "start": "2025-11-14",
+      "end": "2025-11-16",
+      "city": "Лейк-Плэсид, Нью-Йорк",
+      "country": "USA",
+      "url": "https://isu-skating.com/figure-skating/events/eventdetail/isu-gp-skate-america-2025/",
+      "entries": "https://isu-skating.com/figure-skating/entries/isu-gp-skate-america-2025/",
+      "participants": {
+        "men": [
+          "Vladimir Litvintsev",
+          "Daiwei Dai",
+          "Kevin Aymoz",
+          "Luc Economides",
+          "Corey Circelli",
+          "Daniel Grassl",
+          "Nikolaj Memola",
+          "Kazuki Tomono",
+          "Tatsuya Tsuboi"
+        ],
+        "women": [],
+        "pairs": [],
+        "dance": []
+      }
     },
     {
-      "name": "ISU Grand Prix Finlandia Trophy 2025",
+      "name": "Finlandia Trophy 2025 (ISU, Гран-при)",
       "type": "GP",
+      "start": "2025-11-21",
+      "end": "2025-11-23",
       "city": "Хельсинки",
-      "country": "Финляндия",
-      "date_display": "21–23 ноября 2025"
-    },
-    {
-      "name": "Финал Гран-при 2025 (Нагойя)",
-      "type": "GPF",
-      "city": "Нагойя",
-      "country": "Япония",
-      "date_display": "4–7 декабря 2025"
+      "country": "FIN",
+      "url": "https://isu-skating.com/figure-skating/events/eventdetail/isu-gp-finlandia-trophy-2025/",
+      "entries": "https://isu-skating.com/figure-skating/events/eventdetail/isu-gp-finlandia-trophy-2025/",
+      "participants": {
+        "men": [],
+        "women": [],
+        "pairs": [],
+        "dance": []
+      }
     }
   ],
-  "challengers": [
-    {
-      "name": "Trialeti Trophy 2025 (ISU CS)",
-      "type": "CS",
-      "city": "Тбилиси",
-      "country": "Грузия",
-      "date_display": "8–11 октября 2025"
-    }
-  ],
-  "majors": [],
-  "juniors": [],
   "russian": []
 }
