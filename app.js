@@ -7,23 +7,6 @@ const tBack = document.getElementById('t_back');
 
 const NAV = [];
 
-// 🌈 Градиенты флагов (для цветового блюра)
-function flagColor(country) {
-  const map = {
-    "США": "linear-gradient(90deg, #3c3b6e 0%, #fff 50%, #b22234 100%)",
-    "Канада": "linear-gradient(90deg, #ff0000 0%, #fff 50%, #ff0000 100%)",
-    "Франция": "linear-gradient(90deg, #0055a4 0%, #fff 50%, #ef4135 100%)",
-    "Япония": "linear-gradient(90deg, #fff 0%, #d60000 80%)",
-    "Китай": "linear-gradient(90deg, #de2910 0%, #ffde00 90%)",
-    "Грузия": "linear-gradient(90deg, #fff 0%, #ff0000 100%)",
-    "Италия": "linear-gradient(90deg, #008C45 0%, #fff 50%, #CD212A 100%)",
-    "Германия": "linear-gradient(90deg, #000 0%, #dd0000 50%, #ffce00 100%)",
-    "Корея": "linear-gradient(90deg, #003478 0%, #fff 50%, #c60c30 100%)",
-    "Россия": "linear-gradient(90deg, #0039A6 0%, #fff 50%, #D52B1E 100%)"
-  };
-  return map[country] || "linear-gradient(90deg, #444, #222)";
-}
-
 function go(view, params = {}) {
   if (
     NAV.length === 0 ||
@@ -54,6 +37,7 @@ function fmtDateRange(a, b) {
   return `${aS}–${bS}.${db.getFullYear()}`;
 }
 
+// Тип турнира (для цвета)
 function classify(it) {
   const name = (it.name || '').toLowerCase();
   if (name.includes('финал гран-при')) return 'gpf';
@@ -90,7 +74,6 @@ function chips(it) {
   `;
 }
 
-// 🩵 Рендер списка стартов с флаговым блюром
 function listView(items, kind) {
   const sorted = items.slice().sort((a, b) => new Date(a.start) - new Date(b.start));
   return `
@@ -114,16 +97,16 @@ function listView(items, kind) {
             oly: 'Олимпиада',
           };
           const label = labelMap[cls] || '';
-          const grad = flagColor(it.country);
           return `
-            <a class="event ${cssc}" style="--flag-grad:${grad}" data-kind="${kind}" data-idx="${i}">
-              <div><strong>${it.name}</strong>
-              ${
-                label
-                  ? `<span class="subtag" style="background:${colorForClass(cls)}33;color:#000;border:1px solid ${colorForClass(cls)}55">${label}</span>`
-                  : ''
-              }</div>
-              <div class="emeta">${fmtDateRange(it.start, it.end)} | ${it.city}, ${it.country}</div>
+            <a class="event ${cssc}" data-kind="${kind}" data-idx="${i}">
+              <div><strong>${it.name}</strong> ${
+            label
+              ? `<span class="subtag" style="background:${colorForClass(cls)}33;color:#000;border:1px solid ${colorForClass(
+                  cls
+                )}55">${label}</span>`
+              : ''
+          }</div>
+              <div class="emeta">${fmtDateRange(it.start, it.end)}</div>
               ${chips(it)}
             </a>
           `;
@@ -151,6 +134,27 @@ function view_menu() {
   `;
 }
 
+function view_calendar_select() {
+  backBtn.style.display = 'inline-flex';
+  return `
+    <div class="card view">
+      <div class="title">Календарь — выбери раздел</div>
+      <div class="grid" style="margin-top:10px">
+        <div class="card">
+          <div class="title">Зарубежные старты</div>
+          <p class="muted">ISU: Гран-при, ЧМ, ЧЕ, Олимпиада и др.</p>
+          <button class="btn primary" id="btnIntl">Открыть</button>
+        </div>
+        <div class="card">
+          <div class="title">Российские старты</div>
+          <p class="muted">Календарь ФФККР и всероссийские турниры</p>
+          <button class="btn primary" id="btnRus">Открыть</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 function columnList(title, arr) {
   if (!arr || arr.length === 0) return '';
   return `
@@ -166,16 +170,21 @@ function columnList(title, arr) {
 function view_event_details(kind, idx) {
   backBtn.style.display = 'inline-flex';
   let items = [];
+
+  // ✅ Исправление: поддержка обеих структур календаря
   if (DATA.international || DATA.russian) {
     items = (kind === 'international' ? DATA.international : DATA.russian) || [];
   } else if (Array.isArray(DATA)) {
     items = DATA;
   }
+
   const it = items[idx];
   if (!it) return `<div class="card view"><div class="title">Ошибка данных</div></div>`;
+
   const cls = classify(it);
   const topBorder = colorForClass(cls);
   const p = it.participants || { men: [], women: [], pairs: [], dance: [] };
+
   return `
     <div class="card view" style="border-top:4px solid ${topBorder}">
       <div class="title">${it.name}</div>
@@ -199,23 +208,7 @@ function render() {
   const view = top ? top.view : 'menu';
   let html = '';
   if (view === 'menu') html = view_menu();
-  if (view === 'calendar_select') html = `
-    <div class="card view">
-      <div class="title">Календарь — выбери раздел</div>
-      <div class="grid" style="margin-top:10px">
-        <div class="card">
-          <div class="title">Зарубежные старты</div>
-          <p class="muted">ISU: Гран-при, ЧМ, ЧЕ, Олимпиада и др.</p>
-          <button class="btn primary" id="btnIntl">Открыть</button>
-        </div>
-        <div class="card">
-          <div class="title">Российские старты</div>
-          <p class="muted">Календарь ФФККР и всероссийские турниры</p>
-          <button class="btn primary" id="btnRus">Открыть</button>
-        </div>
-      </div>
-    </div>
-  `;
+  if (view === 'calendar_select') html = view_calendar_select();
   if (view === 'calendar_list') {
     const kind = top.params.kind;
     let items = [];
@@ -229,13 +222,19 @@ function render() {
     }</div>${listView(items, kind)}</div>`;
   }
   if (view === 'event_details') html = view_event_details(top.params.kind, top.params.idx);
+
   app.innerHTML = html;
+
   if (view === 'menu') {
     document.getElementById('btnCalendar')?.addEventListener('click', () => go('calendar_select'));
   }
   if (view === 'calendar_select') {
-    document.getElementById('btnIntl')?.addEventListener('click', () => go('calendar_list', { kind: 'international' }));
-    document.getElementById('btnRus')?.addEventListener('click', () => go('calendar_list', { kind: 'russian' }));
+    document.getElementById('btnIntl')?.addEventListener('click', () =>
+      go('calendar_list', { kind: 'international' })
+    );
+    document.getElementById('btnRus')?.addEventListener('click', () =>
+      go('calendar_list', { kind: 'russian' })
+    );
   }
   if (view === 'calendar_list') {
     document.querySelectorAll('.event').forEach((el) => {
@@ -246,6 +245,7 @@ function render() {
       });
     });
   }
+
   backBtn.style.display = NAV.length > 1 ? 'inline-flex' : 'none';
   tBack.textContent = 'Назад';
 }
