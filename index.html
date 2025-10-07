@@ -3,20 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ФК — мини-приложение</title>
+  <title>ФК — мини‑приложение</title>
   <link rel="icon" href="data:," />
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
   <style>
     :root{
       --bg:#ffffff;
-      --bg-grad: linear-gradient(135deg, #821130 0%, #f9c2d8 100%);
-      --bg-overlay:
-        radial-gradient(1200px 600px at 80% -20%, rgba(255,255,255,.18) 0%, rgba(255,255,255,0) 60%),
-        radial-gradient(900px 500px at -10% 110%, rgba(255,255,255,.16) 0%, rgba(255,255,255,0) 55%);
-      --card:#ffffffF2;
+      --card:#f8f9fb;
       --text:#111318;
       --muted:#6b7280;
       --accent:#821130;
@@ -25,131 +17,53 @@
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-
-    body{
-      margin:0;
-      color:var(--text);
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, 'Noto Sans', sans-serif;
-      background: var(--bg-grad), var(--bg);
-      position:relative;
-    }
-    body::before{
-      content:"";
-      position:fixed; inset:0; pointer-events:none;
-      background: var(--bg-overlay);
-      mix-blend-mode: screen;
-      z-index:0;
-    }
-
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Noto Sans',sans-serif;background:var(--bg);color:var(--text)}
     a{color:inherit;text-decoration:none}
-    .container{max-width:980px;margin:0 auto;padding:16px 16px 72px; position:relative; z-index:1}
-
-    /* Header (glass) */
-    header.top{
-      position:sticky; top:0; z-index:20;
-      background: linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.65));
-      backdrop-filter: blur(10px) saturate(140%);
-      border-bottom:1px solid rgba(255,255,255,.6);
-    }
+    .container{max-width:980px;margin:0 auto;padding:16px 16px 72px}
+    header.top{position:sticky;top:0;background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.86));backdrop-filter:saturate(140%) blur(6px);border-bottom:1px solid var(--border);z-index:20}
     header .row{display:flex;align-items:flex-end;justify-content:flex-end;gap:12px;padding:10px 16px;flex-direction:column}
     .brandwrap{display:flex;align-items:center;gap:8px;align-self:flex-end}
-    .logo{max-width:120px;height:auto;display:block}
+    .logo{max-width:120px;height:auto;display:block} /* оригинальные пропорции, без округления */
     .backTop{margin-top:6px;align-self:flex-end}
-
     /* Language toggle */
-    .lang{display:inline-flex;gap:6px;border:1px solid rgba(0,0,0,.06);border-radius:999px;padding:6px 8px;background:#fff}
-    .lang button{
-      border:0;background:transparent;padding:4px 8px;border-radius:999px;cursor:pointer
-    }
-    .lang button.active{
-      background:linear-gradient(180deg, #fff, #ffe9ee);
-      border:1px solid #82113055;
-      box-shadow: 0 2px 8px rgba(130,17,48,.18);
-    }
-
-    /* Buttons */
+    .lang{display:inline-flex;gap:6px;border:1px solid var(--border);border-radius:999px;padding:6px 8px;background:#fff}
+    .lang button{border:0;background:transparent;padding:4px 8px;border-radius:999px;cursor:pointer}
+    .lang button.active{background:linear-gradient(180deg, var(--accent)12, var(--accent)22);border:1px solid var(--accent)66}
+    /* Glossy neon buttons */
     .btn{
       display:inline-flex;align-items:center;justify-content:center;gap:8px;
-      padding:12px 14px;border:1px solid #82113040;border-radius:999px;
-      background: linear-gradient(180deg, #fff 0%, #f7f2f4 60%, #f3e9ec 100%);
-      box-shadow: inset 0 1px 2px rgba(255,255,255,0.9), 0 4px 12px rgba(130,17,48,.25);
-      transition: transform .12s ease, box-shadow .2s ease, filter .2s ease;
-      will-change: transform;
+      padding:12px 14px;border:1px solid #82113080;border-radius:999px;
+      background: linear-gradient(180deg, #fff 0%, #f9f9f9 40%, #f3f3f3 100%);
+      box-shadow: inset 0 1px 2px rgba(255,255,255,0.9), 0 0 12px 2px #82113055;
+      transition: box-shadow .2s ease, transform .08s ease;
     }
-    .btn:hover{ transform: translateY(-1px); box-shadow: inset 0 1px 3px rgba(255,255,255,0.9), 0 6px 16px rgba(130,17,48,.32) }
-    .btn:active{ transform: translateY(0); filter: saturate(1.05) }
-    .btn.primary{ border-color:#82113080; background: linear-gradient(180deg, #fff, #fffbfc) }
-
-    /* Cards */
-    .card{
-      border:1px solid rgba(255,255,255,.5);
-      background: var(--card);
-      backdrop-filter: blur(8px) saturate(120%);
-      border-radius: var(--radius);
-      padding:18px;
-      box-shadow: 0 10px 30px rgba(130,17,48,.10), 0 2px 8px rgba(0,0,0,.05);
-    }
-
-    /* Layout */
+    .btn:hover{box-shadow: inset 0 1px 3px rgba(255,255,255,0.9), 0 0 14px 3px #82113088; transform: translateY(-1px)}
+    .btn.primary{border-color:#82113099;background:linear-gradient(180deg, #ffffff, #fff5f7)}
+    .btn:disabled{opacity:.6;filter:grayscale(.1)}
+    .card{border:1px solid var(--border);background:#fff;border-radius:var(--radius);padding:18px}
     .grid{display:grid;grid-template-columns:1fr;gap:12px}
     @media(min-width:720px){.grid{grid-template-columns:1fr 1fr}}
-
-    .title{font-weight:700;font-size:18px;font-family:Jost, Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, 'Noto Sans', sans-serif; letter-spacing:.2px}
+    .title{font-weight:700;font-size:18px}
     .muted{color:var(--muted)}
-
     /* Splash */
-    .splash{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:100;animation: fadeOut 1s ease 2s forwards}
+    .splash{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:100;animation: fadeOut 1s ease 2s forwards}
     .splash h1{font-size:22px;padding:16px 20px;border-radius:14px;border:1px solid var(--border);background:#fff;box-shadow:0 8px 20px rgba(0,0,0,.06)}
     @keyframes fadeOut{to{opacity:0;visibility:hidden}}
-
     /* View transitions */
-    .view{ animation: viewIn .36s cubic-bezier(.22,.61,.36,1) both }
-    @keyframes viewIn{
-      from{ opacity:0; transform: translateY(8px) scale(.995) }
-      to{   opacity:1; transform: translateY(0)    scale(1) }
-    }
-
+    .view{animation: viewFade .4s ease both}
+    @keyframes viewFade{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:translateY(0)}}
     /* Event list */
     .list{display:grid;grid-template-columns:1fr;gap:10px}
-    .event{
-      border:1px solid var(--border);background:#fff;border-radius:14px;padding:14px;display:block;
-      transition: transform .12s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
-    }
-    .event:hover{ transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,.07) }
+    .event{border:1px solid var(--border);background:#fff;border-radius:14px;padding:14px;display:block}
     .emeta{font-size:14px;color:var(--muted);margin-top:6px}
-
     .subtags{margin-top:8px}
-    .subtag{
-      display:inline-block;
-      margin:4px 6px 0 0;
-      padding:4px 10px;
-      border-radius:999px;
-      color:#fff; /* белый текст */
-      font-size:12px;font-weight:600;
-      background:rgba(130,17,48,.65); /* дефолтный бордовый */
-      border:1px solid rgba(255,255,255,.25);
-      backdrop-filter: blur(6px) saturate(120%);
-      text-shadow:0 1px 2px rgba(0,0,0,.25);
-      transition:background .3s ease, transform .1s ease;
-    }
-    .subtag:hover{ transform:translateY(-1px); background:rgba(130,17,48,.8) }
-
-    /* Type borders */
-    .is-gp{border-color:#38bdf8}
-    .is-gpf{border-color:#60a5fa}
-    .is-worlds{border-color:#34d399}
-    .is-euros{border-color:#fbbf24}
-    .is-oly{border-color:#f87171}
-    .is-cs{border-color:#a78bfa}
-    .is-rus{border-color:#821130}
-
-    /* Stickers near headers (optional) */
-    .section-header{ display:flex; align-items:center; gap:10px; margin-bottom:12px }
-    .section-sticker{
-      width:40px; height:40px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.12);
-      animation: popIn .28s ease both;
-    }
-    @keyframes popIn{ from{ opacity:0; transform: scale(.8)} to{ opacity:1; transform: scale(1)} }
+    .subtag{display:inline-block;margin:4px 6px 0 0;padding:3px 10px;border-radius:999px;color:#fff;font-size:12px;font-weight:500;opacity:.85}
+    /* Special color classes */
+    .is-gp{border-color:#0ea5e9}
+    .is-gpf{border-color:#2563eb}
+    .is-worlds{border-color:#16a34a}
+    .is-euros{border-color:#f59e0b}
+    .is-oly{border-color:#ef4444}
   </style>
 </head>
 <body>
@@ -179,6 +93,6 @@
     <div id="app" class="view"></div>
   </div>
 
-  <script src="./app.js"></script>
+<script src="./app.js"></script>
 </body>
 </html>
