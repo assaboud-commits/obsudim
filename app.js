@@ -163,7 +163,14 @@ function view_menu(){
         <div class="title">${t('menu_rules')}</div>
         <p class="muted">${t('rules_soon')}</p>
         <button class="btn" id="btnRules" disabled>${t('soon')}</button>
+      <div class="card">
+        <div class="title">🔔 Напоминания</div>
+        <p class="muted">${STATE.lang==='ru'
+          ? 'Включай уведомления о стартах, чтобы бот напоминал в день начала.'
+          : 'Enable event reminders.'}</p>
+        <button class="btn primary" id="btnReminders">Открыть</button>
       </div>
+
     </div>
   `;
 }
@@ -260,6 +267,9 @@ function render(){
       });
     });
   }
+  if(view==='reminders') html = view_reminders();
+  document.getElementById('btnReminders')?.addEventListener('click', ()=> go('reminders'));
+
 
   // Back button visibility
   backBtn.style.display = NAV.length>1 ? 'inline-flex' : 'none';
@@ -299,3 +309,76 @@ load();
   if(t.section_separator_color) root.style.setProperty('--border', t.section_separator_color);
   try{ TG.onEvent && TG.onEvent('themeChanged', applyThemeFromTelegram); }catch(e){}
 })();
+// === Раздел "Напоминания" ===
+function view_reminders() {
+  backBtn.style.display = 'inline-flex';
+  const allEvents = (DATA.international || []).concat(DATA.russian || []);
+  const sorted = allEvents.slice().sort((a, b) => new Date(a.start) - new Date(b.start));
+
+  const html = sorted.map(ev => {
+    const id = ev.name.replace(/\s+/g, '_');
+    return `
+      <div class="card" style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div class="title">${ev.name}</div>
+          <p class="muted">${fmtDateRange(ev.start, ev.end)}</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="rem_${id}" onchange="toggleReminder('${ev.name}','${ev.start}',this.checked)">
+          <span class="slider"></span>
+        </label>
+      </div>
+    `;
+  }).join('');
+
+  app.innerHTML = `
+    <div class="card view">
+      <div class="title">🔔 Напоминания</div>
+      <p class="muted">Включай уведомления, чтобы бот напоминал о стартах в день их начала.</p>
+      ${html}
+    </div>
+  `;
+}
+
+function toggleReminder(eventName, dateStart, enabled) {
+  const payload = {
+    action: enabled ? 'set_reminder' : 'unset_reminder',
+    event: eventName,
+    date: dateStart
+  };
+  if (window.Telegram && window.Telegram.WebApp) {
+    window.Telegram.WebApp.sendData(JSON.stringify(payload));
+  }
+}
+// === Раздел "Напоминания" ===
+function view_reminders(){
+  backBtn.style.display = 'inline-flex';
+  const all = (DATA.international || []).concat(DATA.russian || []);
+  const sorted = all.slice().sort((a,b)=> new Date(a.start)-new Date(b.start));
+  const html = sorted.map(ev=>{
+    const id = ev.name.replace(/\s+/g,'_');
+    return `
+      <div class="card" style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div class="title">${ev.name}</div>
+          <p class="muted">${fmtDateRange(ev.start,ev.end)}</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="rem_${id}" onchange="toggleReminder('${ev.name}','${ev.start}',this.checked)">
+          <span class="slider"></span>
+        </label>
+      </div>`;
+  }).join('');
+  app.innerHTML = `<div class="card view"><div class="title">🔔 Напоминания</div>${html}</div>`;
+}
+
+function toggleReminder(eventName,dateStart,enabled){
+  const payload = {
+    action: enabled ? 'set_reminder' : 'unset_reminder',
+    event: eventName,
+    date: dateStart
+  };
+  if(window.Telegram && window.Telegram.WebApp){
+    window.Telegram.WebApp.sendData(JSON.stringify(payload));
+  }
+}
