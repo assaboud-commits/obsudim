@@ -5,186 +5,108 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ФК — мини-приложение</title>
   <link rel="icon" href="data:," />
-
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#ffffff;
-      --bg-grad: linear-gradient(135deg, #821130 0%, #f9c2d8 100%);
-      --bg-overlay:
-        radial-gradient(1200px 600px at 80% -20%, rgba(255,255,255,.18) 0%, rgba(255,255,255,0) 60%),
-        radial-gradient(900px 500px at -10% 110%, rgba(255,255,255,.16) 0%, rgba(255,255,255,0) 55%);
-      --card:#ffffffF2;
-      --text:#111318;
-      --muted:#6b7280;
-      --accent:#821130;
-      --border:#e7e9ef;
-      --radius:16px;
+      --bg-grad:linear-gradient(135deg,#821130 0%,#f9c2d8 100%);
+      --card:#ffffffF2;--text:#111318;--muted:#6b7280;--accent:#821130;
+      --border:#e7e9ef;--radius:16px;
     }
     *{box-sizing:border-box}
-    html,body{height:100%}
-
     body{
-      margin:0;
-      color:var(--text);
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, 'Noto Sans', sans-serif;
-      background: var(--bg-grad), var(--bg);
-      position:relative;
+      margin:0;font-family:Inter,system-ui,sans-serif;color:var(--text);
+      background:var(--bg-grad);overflow-x:hidden;position:relative;
     }
-    body::before{
-      content:"";
-      position:fixed; inset:0; pointer-events:none;
-      background: var(--bg-overlay);
-      mix-blend-mode: screen;
-      z-index:0;
-    }
-
     a{color:inherit;text-decoration:none}
-    .container{max-width:980px;margin:0 auto;padding:16px 16px 72px; position:relative; z-index:1}
-
-    /* Header (glass) */
-    header.top{
-      position:sticky; top:0; z-index:20;
-      background: linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.65));
-      backdrop-filter: blur(10px) saturate(140%);
-      border-bottom:1px solid rgba(255,255,255,.6);
-    }
-    header .row{display:flex;align-items:flex-end;justify-content:flex-end;gap:12px;padding:10px 16px;flex-direction:column}
-    .brandwrap{display:flex;align-items:center;gap:8px;align-self:flex-end}
-    .logo{max-width:120px;height:auto;display:block}
-    .backTop{margin-top:6px;align-self:flex-end}
-
-    /* Language toggle */
-    .lang{display:inline-flex;gap:6px;border:1px solid rgba(0,0,0,.06);border-radius:999px;padding:6px 8px;background:#fff}
-    .lang button{
-      border:0;background:transparent;padding:4px 8px;border-radius:999px;cursor:pointer
-    }
-    .lang button.active{
-      background:linear-gradient(180deg, #fff, #ffe9ee);
-      border:1px solid #82113055;
-      box-shadow: 0 2px 8px rgba(130,17,48,.18);
-    }
-
-    /* Buttons */
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:8px;
-      padding:12px 14px;border:1px solid #82113040;border-radius:999px;
-      background: linear-gradient(180deg, #fff 0%, #f7f2f4 60%, #f3e9ec 100%);
-      box-shadow: inset 0 1px 2px rgba(255,255,255,0.9), 0 4px 12px rgba(130,17,48,.25);
-      transition: transform .12s ease, box-shadow .2s ease, filter .2s ease;
-      will-change: transform;
-    }
-    .btn:hover{ transform: translateY(-1px); box-shadow: inset 0 1px 3px rgba(255,255,255,0.9), 0 6px 16px rgba(130,17,48,.32) }
-    .btn:active{ transform: translateY(0); filter: saturate(1.05) }
-    .btn.primary{ border-color:#82113080; background: linear-gradient(180deg, #fff, #fffbfc) }
-
-    /* Cards */
-    .card{
-      border:1px solid rgba(255,255,255,.5);
-      background: var(--card);
-      backdrop-filter: blur(8px) saturate(120%);
-      border-radius: var(--radius);
-      padding:18px;
-      box-shadow: 0 10px 30px rgba(130,17,48,.10), 0 2px 8px rgba(0,0,0,.05);
-    }
-    /* Elevation utilities */
-    .card--e1{box-shadow:0 6px 14px rgba(0,0,0,.06)}
-    .card--e2{box-shadow:0 10px 24px rgba(130,17,48,.12)}
-    .card--e3{box-shadow:0 18px 38px rgba(130,17,48,.16)}
-
-    /* Layout */
-    .grid{display:grid;grid-template-columns:1fr;gap:12px}
-    @media(min-width:720px){.grid{grid-template-columns:1fr 1fr}}
-
-    .title{font-weight:700;font-size:18px;font-family:Jost, Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, 'Noto Sans', sans-serif; letter-spacing:.2px}
-    .muted{color:var(--muted)}
 
     /* Splash */
-    .splash{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:100;animation: fadeOut 1s ease 2s forwards}
-    .splash h1{font-size:22px;padding:16px 20px;border-radius:14px;border:1px solid var(--border);background:#fff;box-shadow:0 8px 20px rgba(0,0,0,.06)}
+    .splash{
+      position:fixed;inset:0;display:flex;flex-direction:column;
+      align-items:center;justify-content:center;z-index:200;
+      background:var(--bg-grad);
+      animation:fadeOut 1s ease 2s forwards; /* скрыть через 2с */
+    }
+    .splash-logo{
+      width:90px;height:auto;margin-bottom:12px;
+      filter:drop-shadow(0 0 6px rgba(255,255,255,.6));
+      animation:neonPulse 1s ease-in-out infinite alternate; /* неоновый пульс */
+    }
+    .splash h1{
+      font-size:22px;padding:14px 20px;border-radius:14px;border:1px solid var(--border);
+      background:#fff;box-shadow:0 8px 20px rgba(0,0,0,.06);
+      animation:popIn .5s ease-out both;
+    }
     @keyframes fadeOut{to{opacity:0;visibility:hidden}}
+    @keyframes popIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+    @keyframes neonPulse{
+      from{filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 10px #ffbfd0);}
+      to{filter:drop-shadow(0 0 8px #fff) drop-shadow(0 0 20px #ff99b8);}
+    }
 
-    /* Hero banner */
+    /* Header */
+    header.top{
+      position:sticky;top:0;z-index:20;
+      background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,.65));
+      backdrop-filter:blur(10px) saturate(140%);
+      border-bottom:1px solid rgba(255,255,255,.6);
+      transition:all .6s ease;
+    }
+    .row{display:flex;align-items:flex-end;justify-content:flex-end;gap:12px;padding:10px 16px;flex-direction:column}
+    .brandwrap{display:flex;align-items:center;gap:8px;}
+    .logo{width:60px;height:auto;transition:all .6s ease;}
+    .logo.move-in{
+      transform:translate(-60px,-10px) scale(.85);
+      filter:drop-shadow(0 0 3px rgba(130,17,48,.3));
+    }
+
+    .lang{display:inline-flex;gap:6px;border:1px solid rgba(0,0,0,.06);
+      border-radius:999px;padding:6px 8px;background:#fff;}
+    .lang button{border:0;background:transparent;padding:4px 8px;border-radius:999px;cursor:pointer;}
+    .lang button.active{
+      background:linear-gradient(180deg,#fff,#ffe9ee);
+      border:1px solid #82113055;box-shadow:0 2px 8px rgba(130,17,48,.18);
+    }
+
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      padding:12px 14px;border:1px solid #82113040;border-radius:999px;
+      background:linear-gradient(180deg,#fff 0%,#f7f2f4 60%,#f3e9ec 100%);
+      transition:.12s ease;box-shadow:0 3px 10px rgba(130,17,48,.25);}
+    .btn:hover{transform:translateY(-1px)}
+    .backTop{margin-top:6px;align-self:flex-end}
+
+    /* Основной контент: скрыт под сплэшем, плавно появляется */
+    .container{
+      max-width:980px;margin:0 auto;padding:16px 16px 72px;position:relative;z-index:1;
+      opacity:0; transform:translateY(18px);
+      transition:opacity .45s ease, transform .45s ease;
+    }
+    body.reveal .container{opacity:1; transform:translateY(0)}
+
+    /* Hero */
     .hero{position:relative;height:160px;margin:12px 0 18px;border-radius:20px;overflow:hidden}
-    .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,#821130, #f9c2d8)}
-    .hero-ice{position:absolute;inset:-20% -10%;background:
-      radial-gradient(40% 20% at 70% 10%,rgba(255,255,255,.25),transparent 60%),
-      radial-gradient(30% 15% at 10% 80%,rgba(255,255,255,.2),transparent 60%);
-      transform:translateY(-6px);filter:blur(1px)}
-    .hero-title{position:absolute;left:18px;bottom:16px;color:#fff;font:700 28px Jost, sans-serif;text-shadow:0 4px 18px rgba(0,0,0,.25)}
+    .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,#821130,#f9c2d8)}
+    .hero-title{position:absolute;left:18px;bottom:16px;color:#fff;
+      font:700 28px Jost,sans-serif;text-shadow:0 4px 18px rgba(0,0,0,.25)}
 
-    /* View transitions */
-    .view{ animation: viewIn .36s cubic-bezier(.22,.61,.36,1) both }
-    @keyframes viewIn{
-      from{ opacity:0; transform: translateY(8px) scale(.995) }
-      to{   opacity:1; transform: translateY(0)    scale(1) }
-    }
-
-    /* Event list with scroll shadows */
-    .list{display:grid;grid-template-columns:1fr;gap:10px; position:relative}
-    .list::before,.list::after{
-      content:"";position:sticky;left:0;right:0;height:14px;display:block;z-index:5
-    }
-    .list::before{top:0;background:linear-gradient(#ffffff,rgba(255,255,255,0))}
-    .list::after{bottom:0;background:linear-gradient(rgba(255,255,255,0),#ffffff)}
-
-    .event{
-      border:1px solid var(--border);background:#fff;border-radius:14px;padding:14px;display:block;
-      transition: transform .12s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
-    }
-    .event:hover{ transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,.07) }
-    .emeta{font-size:14px;color:var(--muted);margin-top:6px}
-
-    .subtags{margin-top:8px}
-    .subtag{
-      display:inline-block;
-      margin:4px 6px 0 0;
-      padding:4px 10px;
-      border-radius:999px;
-      color:#fff; /* белый текст на цветных плашках */
-      font-size:12px;font-weight:600;
-      background:rgba(130,17,48,.65); /* дефолт на случай отсутствия inline-bg */
-      border:1px solid rgba(255,255,255,.25);
-      backdrop-filter: blur(6px) saturate(120%);
-      text-shadow:0 1px 2px rgba(0,0,0,.25);
-      transition:background .3s ease, transform .1s ease;
-    }
-    .subtag:hover{ transform:translateY(-1px); background:rgba(130,17,48,.8) }
-
-    /* Type borders (карточки) */
-    .is-gp{border-color:#38bdf8}
-    .is-gpf{border-color:#60a5fa}
-    .is-worlds{border-color:#34d399}
-    .is-euros{border-color:#fbbf24}
-    .is-oly{border-color:#f87171}
-    .is-cs{border-color:#a78bfa}
-    .is-rus{border-color:#821130}
-
-    /* Badge system (если захочешь использовать вручную) */
-    .badge{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;
-      font:600 12px/1 Inter;background:#ffffffcc;backdrop-filter:blur(6px);border:1px solid rgba(0,0,0,.06)}
-    .badge-dot{width:8px;height:8px;border-radius:50%}
-    .badge--gp .badge-dot{background:#38bdf8}
-    .badge--gpf .badge-dot{background:#60a5fa}
-    .badge--cs .badge-dot{background:#a78bfa}
-    .badge--rus .badge-dot{background:#821130}
-
-    /* Optional stickers */
-    .section-header{ display:flex; align-items:center; gap:10px; margin-bottom:12px }
-    .section-sticker{
-      width:40px; height:40px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.12);
-      animation: popIn .28s ease both;
-    }
-    @keyframes popIn{ from{ opacity:0; transform: scale(.8)} to{ opacity:1; transform: scale(1)} }
+    /* Карточки / события */
+    .card{border:1px solid rgba(255,255,255,.5);background:var(--card);
+      border-radius:var(--radius);padding:18px;backdrop-filter:blur(8px);}
+    .event{border:1px solid #e7e9ef;background:#fff;border-radius:14px;padding:14px;
+      transition:.2s;}
+    .event:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.07)}
+    .subtag{display:inline-block;margin:4px 6px 0 0;padding:4px 10px;border-radius:999px;
+      color:#fff;font:600 12px/1 Inter;background:rgba(130,17,48,.65);
+      border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(6px);
+      text-shadow:0 1px 2px rgba(0,0,0,.25);}
   </style>
 </head>
 <body>
-  <!-- Splash -->
+  <!-- Splash (только при входе, 2 сек) -->
   <div id="splash" class="splash">
-    <h1 id="greet">Привет, надеюсь, мы поможем тебе!)</h1>
+    <img src="./brand.png" alt="Brand" class="splash-logo" />
+    <h1>Привет, надеюсь, мы поможем тебе!)</h1>
   </div>
 
   <header class="top">
@@ -195,7 +117,7 @@
           <button id="langEn">🇬🇧</button>
         </div>
         <a class="brandlink" href="https://t.me/obsudiim_fk" target="_blank" rel="noopener" title="Канал">
-          <img class="logo" src="./brand.png" alt="Brand"/>
+          <img class="logo" id="headerLogo" src="./brand.png" alt="Brand"/>
         </a>
       </div>
       <div class="backTop">
@@ -205,38 +127,27 @@
   </header>
 
   <div class="container">
-    <!-- Hero banner -->
     <div class="hero">
-      <div class="hero-ice"></div>
       <h1 class="hero-title">Сезон 2025–2026</h1>
     </div>
-
-    <div id="app" class="view"></div>
+    <div id="app"></div>
   </div>
 
   <script src="./app.js"></script>
-
-  <!-- Tiny visual decorator: повышает "высоту" карточек и добавляет тень спискам -->
   <script>
-    // Пассивные визуальные улучшения без правок app.js
-    const decorate = () => {
-      // Повышаем "elevation" карточек
-      document.querySelectorAll('.card').forEach(el => el.classList.add('card--e2'));
-      document.querySelectorAll('.event').forEach(el => el.classList.add('card--e1'));
-      // Добавляем скролл-тени спискам
-      document.querySelectorAll('.list').forEach(el => el.classList.add('list--shadow'));
-      // Если есть заголовок страницы, синхронизируем с героем
-      const firstTitle = document.querySelector('h1, .title');
-      const heroTitle = document.querySelector('.hero-title');
-      if (firstTitle && heroTitle && firstTitle.textContent.trim().length > 0) {
-        heroTitle.textContent = firstTitle.textContent.trim();
-      }
-    };
-    // после рендера app.js
-    window.addEventListener('load', () => setTimeout(decorate, 0));
-    // на всякий случай — при навигации внутри SPA
-    const mo = new MutationObserver(() => setTimeout(decorate, 0));
-    mo.observe(document.getElementById('app'), {childList: true, subtree: true});
+    // Скрываем сплэш через 2с, показываем контент (выезд снизу), логотип "улетает" в хедер
+    window.addEventListener("load", () => {
+      const splash = document.getElementById("splash");
+      const headerLogo = document.getElementById("headerLogo");
+      setTimeout(() => {
+        splash.style.opacity = "0";
+        setTimeout(() => {
+          splash.remove();                   // полностью убрать приветствие
+          document.body.classList.add('reveal'); // показать основной контент (анимация)
+          headerLogo.classList.add("move-in");   // лого в угол
+        }, 600); // совпадает с fadeOut
+      }, 2000);
+    });
   </script>
 </body>
 </html>
