@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ФК — мини-приложение</title>
   <link rel="icon" href="data:," />
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -89,6 +90,10 @@
       padding:18px;
       box-shadow: 0 10px 30px rgba(130,17,48,.10), 0 2px 8px rgba(0,0,0,.05);
     }
+    /* Elevation utilities */
+    .card--e1{box-shadow:0 6px 14px rgba(0,0,0,.06)}
+    .card--e2{box-shadow:0 10px 24px rgba(130,17,48,.12)}
+    .card--e3{box-shadow:0 18px 38px rgba(130,17,48,.16)}
 
     /* Layout */
     .grid{display:grid;grid-template-columns:1fr;gap:12px}
@@ -102,6 +107,15 @@
     .splash h1{font-size:22px;padding:16px 20px;border-radius:14px;border:1px solid var(--border);background:#fff;box-shadow:0 8px 20px rgba(0,0,0,.06)}
     @keyframes fadeOut{to{opacity:0;visibility:hidden}}
 
+    /* Hero banner */
+    .hero{position:relative;height:160px;margin:12px 0 18px;border-radius:20px;overflow:hidden}
+    .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,#821130, #f9c2d8)}
+    .hero-ice{position:absolute;inset:-20% -10%;background:
+      radial-gradient(40% 20% at 70% 10%,rgba(255,255,255,.25),transparent 60%),
+      radial-gradient(30% 15% at 10% 80%,rgba(255,255,255,.2),transparent 60%);
+      transform:translateY(-6px);filter:blur(1px)}
+    .hero-title{position:absolute;left:18px;bottom:16px;color:#fff;font:700 28px Jost, sans-serif;text-shadow:0 4px 18px rgba(0,0,0,.25)}
+
     /* View transitions */
     .view{ animation: viewIn .36s cubic-bezier(.22,.61,.36,1) both }
     @keyframes viewIn{
@@ -109,8 +123,14 @@
       to{   opacity:1; transform: translateY(0)    scale(1) }
     }
 
-    /* Event list */
-    .list{display:grid;grid-template-columns:1fr;gap:10px}
+    /* Event list with scroll shadows */
+    .list{display:grid;grid-template-columns:1fr;gap:10px; position:relative}
+    .list::before,.list::after{
+      content:"";position:sticky;left:0;right:0;height:14px;display:block;z-index:5
+    }
+    .list::before{top:0;background:linear-gradient(#ffffff,rgba(255,255,255,0))}
+    .list::after{bottom:0;background:linear-gradient(rgba(255,255,255,0),#ffffff)}
+
     .event{
       border:1px solid var(--border);background:#fff;border-radius:14px;padding:14px;display:block;
       transition: transform .12s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
@@ -124,9 +144,9 @@
       margin:4px 6px 0 0;
       padding:4px 10px;
       border-radius:999px;
-      color:#fff; /* белый текст */
+      color:#fff; /* белый текст на цветных плашках */
       font-size:12px;font-weight:600;
-      background:rgba(130,17,48,.65); /* дефолтный бордовый */
+      background:rgba(130,17,48,.65); /* дефолт на случай отсутствия inline-bg */
       border:1px solid rgba(255,255,255,.25);
       backdrop-filter: blur(6px) saturate(120%);
       text-shadow:0 1px 2px rgba(0,0,0,.25);
@@ -134,7 +154,7 @@
     }
     .subtag:hover{ transform:translateY(-1px); background:rgba(130,17,48,.8) }
 
-    /* Type borders */
+    /* Type borders (карточки) */
     .is-gp{border-color:#38bdf8}
     .is-gpf{border-color:#60a5fa}
     .is-worlds{border-color:#34d399}
@@ -143,7 +163,16 @@
     .is-cs{border-color:#a78bfa}
     .is-rus{border-color:#821130}
 
-    /* Stickers near headers (optional) */
+    /* Badge system (если захочешь использовать вручную) */
+    .badge{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;
+      font:600 12px/1 Inter;background:#ffffffcc;backdrop-filter:blur(6px);border:1px solid rgba(0,0,0,.06)}
+    .badge-dot{width:8px;height:8px;border-radius:50%}
+    .badge--gp .badge-dot{background:#38bdf8}
+    .badge--gpf .badge-dot{background:#60a5fa}
+    .badge--cs .badge-dot{background:#a78bfa}
+    .badge--rus .badge-dot{background:#821130}
+
+    /* Optional stickers */
     .section-header{ display:flex; align-items:center; gap:10px; margin-bottom:12px }
     .section-sticker{
       width:40px; height:40px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,.12);
@@ -176,9 +205,38 @@
   </header>
 
   <div class="container">
+    <!-- Hero banner -->
+    <div class="hero">
+      <div class="hero-ice"></div>
+      <h1 class="hero-title">Сезон 2025–2026</h1>
+    </div>
+
     <div id="app" class="view"></div>
   </div>
 
   <script src="./app.js"></script>
+
+  <!-- Tiny visual decorator: повышает "высоту" карточек и добавляет тень спискам -->
+  <script>
+    // Пассивные визуальные улучшения без правок app.js
+    const decorate = () => {
+      // Повышаем "elevation" карточек
+      document.querySelectorAll('.card').forEach(el => el.classList.add('card--e2'));
+      document.querySelectorAll('.event').forEach(el => el.classList.add('card--e1'));
+      // Добавляем скролл-тени спискам
+      document.querySelectorAll('.list').forEach(el => el.classList.add('list--shadow'));
+      // Если есть заголовок страницы, синхронизируем с героем
+      const firstTitle = document.querySelector('h1, .title');
+      const heroTitle = document.querySelector('.hero-title');
+      if (firstTitle && heroTitle && firstTitle.textContent.trim().length > 0) {
+        heroTitle.textContent = firstTitle.textContent.trim();
+      }
+    };
+    // после рендера app.js
+    window.addEventListener('load', () => setTimeout(decorate, 0));
+    // на всякий случай — при навигации внутри SPA
+    const mo = new MutationObserver(() => setTimeout(decorate, 0));
+    mo.observe(document.getElementById('app'), {childList: true, subtree: true});
+  </script>
 </body>
 </html>
