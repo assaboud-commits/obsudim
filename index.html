@@ -54,7 +54,6 @@
     header .row{display:flex;align-items:flex-end;justify-content:flex-end;gap:12px;padding:10px 16px;flex-direction:column}
     .brandwrap{display:flex;align-items:center;gap:8px;align-self:flex-end}
     .logo{max-width:120px;height:auto;display:block}
-
     .backTop{margin-top:6px;align-self:flex-end}
 
     /* Language toggle */
@@ -68,7 +67,7 @@
       box-shadow: 0 2px 8px rgba(130,17,48,.18);
     }
 
-    /* Buttons (glossy) */
+    /* Buttons */
     .btn{
       display:inline-flex;align-items:center;justify-content:center;gap:8px;
       padding:12px 14px;border:1px solid #82113040;border-radius:999px;
@@ -81,7 +80,7 @@
     .btn:active{ transform: translateY(0); filter: saturate(1.05) }
     .btn.primary{ border-color:#82113080; background: linear-gradient(180deg, #fff, #fffbfc) }
 
-    /* Cards (glassmorphism) */
+    /* Cards */
     .card{
       border:1px solid rgba(255,255,255,.5);
       background: var(--card);
@@ -109,9 +108,6 @@
       from{ opacity:0; transform: translateY(8px) scale(.995) }
       to{   opacity:1; transform: translateY(0)    scale(1) }
     }
-    @media (prefers-reduced-motion: reduce){
-      .view{ animation:none !important }
-    }
 
     /* Event list */
     .list{display:grid;grid-template-columns:1fr;gap:10px}
@@ -124,10 +120,19 @@
 
     .subtags{margin-top:8px}
     .subtag{
-      display:inline-block;margin:4px 6px 0 0;padding:4px 10px;border-radius:999px;
-      color:#111; font-size:12px;font-weight:600; background:rgba(255,255,255,.7);
-      border:1px solid rgba(17,19,24,.06); backdrop-filter: blur(6px);
+      display:inline-block;
+      margin:4px 6px 0 0;
+      padding:4px 10px;
+      border-radius:999px;
+      color:#fff; /* белый текст */
+      font-size:12px;font-weight:600;
+      background:rgba(130,17,48,.65); /* дефолтный бордовый */
+      border:1px solid rgba(255,255,255,.25);
+      backdrop-filter: blur(6px) saturate(120%);
+      text-shadow:0 1px 2px rgba(0,0,0,.25);
+      transition:background .3s ease, transform .1s ease;
     }
+    .subtag:hover{ transform:translateY(-1px); background:rgba(130,17,48,.8) }
 
     /* Type borders */
     .is-gp{border-color:#38bdf8}
@@ -136,6 +141,7 @@
     .is-euros{border-color:#fbbf24}
     .is-oly{border-color:#f87171}
     .is-cs{border-color:#a78bfa}
+    .is-rus{border-color:#821130}
 
     /* Stickers near headers (optional) */
     .section-header{ display:flex; align-items:center; gap:10px; margin-bottom:12px }
