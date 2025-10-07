@@ -1,4 +1,4 @@
-// Mini App v12 — Полная локализация + авто-транслитерация имён
+// Mini App v13 — авто-транслитерация, кликабельные карточки, чистая локализация
 const TG = window.Telegram ? window.Telegram.WebApp : null;
 const app = document.getElementById('app');
 const backBtn = document.getElementById('backBtn');
@@ -73,15 +73,12 @@ function translit(str){
     А:'A',Б:'B',В:'V',Г:'G',Д:'D',Е:'E',Ё:'Yo',Ж:'Zh',З:'Z',И:'I',Й:'Y',
     К:'K',Л:'L',М:'M',Н:'N',О:'O',П:'P',Р:'R',С:'S',Т:'T',У:'U',Ф:'F',
     Х:'Kh',Ц:'Ts',Ч:'Ch',Ш:'Sh',Щ:'Sch',Ы:'Y',Э:'E',Ю:'Yu',Я:'Ya',
-    Ь:'',Ъ:'',Ь:'',  а:'a',б:'b',в:'v',г:'g',д:'d',е:'e',ё:'yo',ж:'zh',з:'z',и:'i',
-    й:'y',к:'k',л:'l',м:'m',н:'n',о:'o',п:'p',р:'r',с:'s',т:'t',у:'u',ф:'f',х:'kh',
-    ц:'ts',ч:'ch',ш:'sh',щ:'sch',ы:'y',э:'e',ю:'yu',я:'ya'
+    Ь:'',Ъ:'', а:'a',б:'b',в:'v',г:'g',д:'d',е:'e',ё:'yo',ж:'zh',з:'z',и:'i',
+    й:'y',к:'k',л:'l',м:'m',н:'n',о:'o',п:'p',р:'r',с:'s',т:'t',у:'u',ф:'f',
+    х:'kh',ц:'ts',ч:'ch',ш:'sh',щ:'sch',ы:'y',э:'e',ю:'yu',я:'ya'
   };
-  let result = '';
-  for (const ch of str) result += map[ch] ?? ch;
-  return result;
+  return str.split('').map(ch=>map[ch]||ch).join('');
 }
-
 function maybeTranslit(name){
   return STATE.lang === 'en' && /[А-Яа-яЁё]/.test(name) ? translit(name) : name;
 }
@@ -215,37 +212,57 @@ function view_event_details(kind,idx){
 
 // === Router ===
 function render(){
-  const top=NAV[NAV.length-1];
-  const view=top?top.view:'menu';
+  const top = NAV[NAV.length-1];
+  const view = top ? top.view : 'menu';
   let html='';
-  if(view==='menu')html=view_menu();
-  if(view==='calendar_select')html=view_calendar_select();
+
+  if(view==='menu') html=view_menu();
+  if(view==='calendar_select') html=view_calendar_select();
   if(view==='calendar_list'){
     const kind=top.params.kind;
     const items=(kind==='international'?DATA.international:DATA.russian)||[];
     html=`<div class="card view"><div class="title">${kind==='international'?t('intl'):t('rus')}</div>${listView(items,kind)}</div>`;
   }
-  if(view==='event_details')html=view_event_details(top.params.kind,top.params.idx);
-  app.innerHTML=html;
+  if(view==='event_details') html=view_event_details(top.params.kind,top.params.idx);
 
-  if(view==='menu')document.getElementById('btnCalendar')?.addEventListener('click',()=>go('calendar_select'));
-  if(view==='calendar_select'){
-    document.getElementById('btnIntl')?.addEventListener('click',()=>go('calendar_list',{kind:'international'}));
-    document.getElementById('btnRus')?.addEventListener('click',()=>go('calendar_list',{kind:'russian'}));
-  }
-  if(view==='calendar_list'){
-    document.querySelectorAll('.event').forEach(el=>{
-      el.addEventListener('click',()=>{
-        const kind=el.getAttribute('data-kind');
-        const idx=+el.getAttribute('data-idx');
-        go('event_details',{kind,idx});
+  app.innerHTML = html;
+
+  // навешиваем обработчики после рендера
+  requestAnimationFrame(() => {
+    if(view==='menu'){
+      document.getElementById('btnCalendar')?.addEventListener('click',()=>go('calendar_select'));
+    }
+    if(view==='calendar_select'){
+      document.getElementById('btnIntl')?.addEventListener('click',()=>go('calendar_list',{kind:'international'}));
+      document.getElementById('btnRus')?.addEventListener('click',()=>go('calendar_list',{kind:'russian'}));
+    }
+    if(view==='calendar_list'){
+      document.querySelectorAll('.event').forEach(el=>{
+        el.addEventListener('click',()=>{
+          const kind=el.getAttribute('data-kind');
+          const idx=+el.getAttribute('data-idx');
+          go('event_details',{kind,idx});
+        });
       });
-    });
-  }
+    }
+  });
 
   backBtn.style.display = NAV.length>1?'inline-flex':'none';
   tBack.textContent = t('back');
 }
+
+// === Навигация ===
+function go(view, params={}) {
+  if(NAV.length===0 || NAV[NAV.length-1].view!==view || JSON.stringify(NAV[NAV.length-1].params)!==JSON.stringify(params)){
+    NAV.push({view, params});
+  }
+  render();
+}
+function back(){
+  NAV.pop();
+  render();
+}
+backBtn.addEventListener('click', back);
 
 // === Загрузка данных ===
 async function load(){
