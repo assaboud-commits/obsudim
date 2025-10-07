@@ -50,13 +50,9 @@
       border-bottom:1px solid rgba(255,255,255,.6);
       transition:all .6s ease;
     }
-    .row{display:flex;align-items:center;justify-content:space-between;
-      gap:12px;padding:10px 16px;}
-    .brandwrap{display:flex;align-items:center;gap:12px;}
+    .row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px;}
     .logo{width:60px;height:auto;transition:all .6s ease;}
-    .logo.move-in{transform:translateY(0) scale(.9);
-      filter:drop-shadow(0 0 3px rgba(130,17,48,.3));}
-
+    .logo.move-in{transform:translateY(0) scale(.9);filter:drop-shadow(0 0 3px rgba(130,17,48,.3));}
     .lang{display:inline-flex;gap:6px;border:1px solid rgba(0,0,0,.06);
       border-radius:999px;padding:6px 8px;background:#fff;}
     .lang button{border:0;background:transparent;padding:4px 8px;border-radius:999px;cursor:pointer;}
@@ -64,7 +60,6 @@
       background:linear-gradient(180deg,#fff,#ffe9ee);
       border:1px solid #82113055;box-shadow:0 2px 8px rgba(130,17,48,.18);
     }
-
     .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
       padding:12px 14px;border:1px solid #82113040;border-radius:999px;
       background:linear-gradient(180deg,#fff 0%,#f7f2f4 60%,#f3e9ec 100%);
@@ -72,7 +67,7 @@
     .btn:hover{transform:translateY(-1px)}
     .backTop{margin-top:6px}
 
-    /* Container: плавное появление */
+    /* Container */
     .container{
       max-width:980px;margin:0 auto;padding:16px 16px 72px;
       opacity:0; transform:translateY(18px);
@@ -105,7 +100,7 @@
 
   <header class="top">
     <div class="row">
-      <a class="brandlink" href="https://t.me/obsudiim_fk" target="_blank" rel="noopener" title="Канал">
+      <a class="brandlink" href="https://t.me/obsudiim_fk" target="_blank" rel="noopener">
         <img class="logo" id="headerLogo" src="./brand.png" alt="Brand"/>
       </a>
       <div class="lang">
@@ -124,7 +119,6 @@
 
   <script src="./app.js"></script>
   <script>
-    // Скрываем сплэш, показываем меню и лого
     window.addEventListener("load", () => {
       const splash = document.getElementById("splash");
       const headerLogo = document.getElementById("headerLogo");
