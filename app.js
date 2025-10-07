@@ -1,4 +1,4 @@
-// Mini App v17 — полный перевод: всё на русском / всё на английском
+// Mini App v18 — русский ↔ английский, транслитерируются только имена
 const TG = window.Telegram ? window.Telegram.WebApp : null;
 const app = document.getElementById('app');
 const backBtn = document.getElementById('backBtn');
@@ -10,7 +10,7 @@ const tBack = document.getElementById('t_back');
 const NAV = [];
 const STATE = { lang: 'ru' };
 
-// === Локализация ===
+// === Локализация интерфейса ===
 const I18N = {
   ru: {
     greet: "Привет! Надеемся, мы тебе поможем 🙂",
@@ -50,7 +50,7 @@ const I18N = {
 
 function t(k){return I18N[STATE.lang][k]||k;}
 
-// === Язык ===
+// === Определение языка ===
 function saveLang(){try{localStorage.setItem('lang',STATE.lang);}catch(e){}}
 function loadLang(){
   try{
@@ -63,7 +63,6 @@ function loadLang(){
     }
   }catch(e){}
 }
-
 function setLang(lang){
   STATE.lang = lang;
   langRu.classList.toggle('active', lang==='ru');
@@ -73,11 +72,10 @@ function setLang(lang){
   saveLang();
   if(NAV.length) render();
 }
-
 langRu.addEventListener('click',()=>setLang('ru'));
 langEn.addEventListener('click',()=>setLang('en'));
 
-// === Транслитерация ===
+// === Транслитерация имён ===
 function translit(str){
   if(!str) return '';
   const map = {
@@ -90,10 +88,10 @@ function translit(str){
   };
   return str.split('').map(ch=>map[ch]||ch).join('');
 }
-function maybeLang(text){
-  if(!text) return '';
-  if(Array.isArray(text)) return text.map(v=>maybeLang(v));
-  return STATE.lang==='en' && /[А-Яа-яЁё]/.test(text) ? translit(text) : text;
+function maybeName(name){
+  if(!name) return '';
+  if(STATE.lang==='en' && /[А-Яа-яЁё]/.test(name)) return translit(name);
+  return name;
 }
 
 // === Формат даты ===
@@ -124,16 +122,18 @@ function colorForClass(c){
   return c==='gpf'?'#2563eb':c==='gp'?'#0ea5e9':c==='worlds'?'#16a34a':c==='euros'?'#f59e0b':c==='oly'?'#ef4444':'#821130';
 }
 
-// === Отрисовка ===
+// === Чипсы ===
 function chips(it){
   const cls=classify(it),base=colorForClass(cls)+'cc';
   const place=[it.city,it.country].filter(Boolean).join(', ');
+  const placeText = STATE.lang==='en' && /[А-Яа-яЁё]/.test(place) ? translit(place) : place;
   return `<div class="subtags">
     <span class="subtag" style="background:${base}">📅 ${fmtDateRange(it.start,it.end)}</span>
-    ${place?`<span class="subtag" style="background:${base}">📍 ${maybeLang(place)}</span>`:''}
+    ${place?`<span class="subtag" style="background:${base}">📍 ${placeText}</span>`:''}
   </div>`;
 }
 
+// === Список соревнований ===
 function listView(items,kind){
   const sorted=items.slice().sort((a,b)=>new Date(a.start)-new Date(b.start));
   return `<div class="list">
@@ -141,24 +141,26 @@ function listView(items,kind){
       const cls=classify(it);
       const labelMap={gp:t('gp'),gpf:t('gpf'),worlds:t('worlds'),euros:t('euros'),oly:t('oly')};
       const label=labelMap[cls]||'';
+      const title = STATE.lang==='en' && /[А-Яа-яЁё]/.test(it.name) ? translit(it.name) : it.name;
       return `<a class="event ${cls?`is-${cls}`:''}" data-kind="${kind}" data-idx="${i}">
-        <div><strong>${maybeLang(it.name)}</strong> ${label?`<span class="subtag" style="background:${colorForClass(cls)}33;color:#000;border:1px solid ${colorForClass(cls)}55">${label}</span>`:''}</div>
+        <div><strong>${title}</strong> ${label?`<span class="subtag" style="background:${colorForClass(cls)}33;color:#000;border:1px solid ${colorForClass(cls)}55">${label}</span>`:''}</div>
         ${chips(it)}
       </a>`;
     }).join('')}
   </div>`;
 }
 
+// === Список участников ===
 function columnList(title,arr){
   if(!arr?.length)return'';
-  const names = maybeLang(arr);
   return `<div class="card" style="min-width:220px">
     <div class="title">${title}</div>
     <ul style="margin:8px 0 0 16px; padding:0">
-      ${names.map(n=>`<li style="margin:6px 0">${n}</li>`).join('')}
+      ${arr.map(n=>`<li style="margin:6px 0">${maybeName(n)}</li>`).join('')}
     </ul></div>`;
 }
 
+// === Экраны ===
 function view_menu(){
   backBtn.style.display='none';
   return `<div class="grid view">
@@ -166,7 +168,7 @@ function view_menu(){
       <div class="title">${t('menu_calendar')}</div>
       <p class="muted">${STATE.lang==='ru'
         ?'Выбери раздел, чтобы посмотреть даты и составы участников.'
-        :'Choose a section to see dates and entries lists.'}</p>
+        :'Choose a section to see event dates and entries lists.'}</p>
       <button class="btn primary" id="btnCalendar">${t('open_calendar')}</button>
     </div>
     <div class="card">
@@ -176,7 +178,6 @@ function view_menu(){
     </div>
   </div>`;
 }
-
 function view_calendar_select(){
   backBtn.style.display='inline-flex';
   return `<div class="card view">
@@ -199,7 +200,6 @@ function view_calendar_select(){
     </div>
   </div>`;
 }
-
 function view_event_details(kind,idx){
   backBtn.style.display='inline-flex';
   const items=(kind==='international'?DATA.international:DATA.russian)||[];
@@ -207,8 +207,9 @@ function view_event_details(kind,idx){
   const cls=classify(it);
   const topBorder=colorForClass(cls);
   const p=it.participants||{men:[],women:[],pairs:[],dance:[]};
+  const title = STATE.lang==='en' && /[А-Яа-яЁё]/.test(it.name) ? translit(it.name) : it.name;
   return `<div class="card view" style="border-top:4px solid ${topBorder}">
-    <div class="title">${maybeLang(it.name)}</div>
+    <div class="title">${title}</div>
     ${chips(it)}
     <div style="margin-top:10px">
       ${it.url?`<a class="btn" href="${it.url}" target="_blank">🌐 ${t('official')}</a>`:''}
@@ -223,7 +224,7 @@ function view_event_details(kind,idx){
   </div>`;
 }
 
-// === Router ===
+// === Рендер и навигация ===
 function render(){
   const top=NAV[NAV.length-1];
   const view=top?top.view:'menu';
@@ -239,9 +240,7 @@ function render(){
   app.innerHTML=html;
 
   requestAnimationFrame(()=>{
-    if(view==='menu'){
-      document.getElementById('btnCalendar')?.addEventListener('click',()=>go('calendar_select'));
-    }
+    if(view==='menu')document.getElementById('btnCalendar')?.addEventListener('click',()=>go('calendar_select'));
     if(view==='calendar_select'){
       document.getElementById('btnIntl')?.addEventListener('click',()=>go('calendar_list',{kind:'international'}));
       document.getElementById('btnRus')?.addEventListener('click',()=>go('calendar_list',{kind:'russian'}));
@@ -256,17 +255,14 @@ function render(){
       });
     }
   });
-
   backBtn.style.display=NAV.length>1?'inline-flex':'none';
   tBack.textContent=t('back');
 }
-
-// === Навигация ===
 function go(view,params={}){NAV.push({view,params});render();}
 function back(){NAV.pop();render();}
 backBtn.addEventListener('click',back);
 
-// === Загрузка ===
+// === Загрузка данных ===
 async function load(){
   try{
     const res=await fetch('calendar.json',{cache:'no-store'});
@@ -283,4 +279,3 @@ loadLang();
 setLang(STATE.lang);
 NAV.push({view:'menu',params:{}});
 load();
-
