@@ -1,20 +1,9 @@
 let currentView = "menu";
 let calendarData = null;
-
 const app = document.getElementById("app");
 const backBtn = document.getElementById("backBtn");
 
-// ===== стартовый экран =====
-document.addEventListener("DOMContentLoaded", () => {
-  // скрываем сплэш через 2c и показываем меню
-  setTimeout(() => {
-    const splash = document.querySelector(".splash");
-    if (splash) splash.remove();
-    showMainMenu();
-  }, 2000);
-});
-
-// ===== главное меню =====
+// Главное меню
 function showMainMenu() {
   currentView = "menu";
   backBtn.style.display = "none";
@@ -31,7 +20,7 @@ function showMainMenu() {
   document.getElementById("rulesButton").addEventListener("click", showRules);
 }
 
-// ===== правила =====
+// Правила
 function showRules() {
   currentView = "rules";
   backBtn.style.display = "inline-flex";
@@ -39,67 +28,68 @@ function showRules() {
     <div class="card view">
       <h2>Правила соревнований</h2>
       <p>Здесь будут основные правила и регламенты соревнований по фигурному катанию.</p>
-      <p class="muted">Позже можно добавить ссылки на документы ISU и ФФКР.</p>
+      <p>Позже можно добавить ссылки на документы ISU и ФФКР.</p>
     </div>
   `;
 }
 
-// ===== утилиты =====
-function classByType(t) {
-  if (!t) return "";
-  return t === "GP" ? "is-gp" :
-         t === "GPF" ? "is-gpf" :
-         t === "CS" ? "is-cs" :
-         t === "RUS" ? "is-rus" : "";
-}
+// Календарь
+async function showCalendar() {
+  currentView = "calendar";
+  backBtn.style.display = "inline-flex";
 
-function safeJoin(arr, sep=", ") {
-  return (arr || []).filter(Boolean).join(sep);
-}
-
-// строим HTML вкладок участников
-function buildParticipantsHTML(participants = {}) {
-  const groups = [
-    { key: "men", label: "Мужчины" },
-    { key: "women", label: "Женщины" },
-    { key: "pairs", label: "Пары" },
-    { key: "dance", label: "Танцы" },
-  ];
-  const counts = {};
-  groups.forEach(g => counts[g.key] = (participants[g.key] || []).length);
-
-  // вкладки
-  const tabs = groups.map(g => {
-    const c = counts[g.key] || 0;
-    return `<button class="tab" data-tab="${g.key}">${g.label} (${c})</button>`;
-  }).join("");
-
-  // список по умолчанию (men или первая с данными)
-  let defaultKey = groups.find(g => counts[g.key] > 0)?.key || "men";
-  const list = (participants[defaultKey] || []).map(n => `<li>${n}</li>`).join("") || `<li class="muted">Нет данных</li>`;
-
-  return `
-    <div class="details">
-      <div class="tabs">${tabs}</div>
-      <ul class="plist" data-current="${defaultKey}">${list}</ul>
-    </div>
-  `;
-}
-
-// навешиваем обработчики на вкладки для одной карточки
-function attachTabsHandlers(detailsEl, participants = {}) {
-  const tabs = detailsEl.querySelectorAll(".tab");
-  const list = detailsEl.querySelector(".plist");
-
-  function activate(tabKey) {
-    tabs.forEach(t => t.classList.toggle("active", t.dataset.tab === tabKey));
-    const arr = participants[tabKey] || [];
-    list.dataset.current = tabKey;
-    list.innerHTML = arr.length ? arr.map(n => `<li>${n}</li>`).join("") : `<li class="muted">Нет данных</li>`;
+  if (!calendarData) {
+    try {
+      const res = await fetch("./calendar.json");
+      calendarData = await res.json();
+    } catch (e) {
+      app.innerHTML = `<div class="card"><p>Ошибка загрузки календаря 😔</p></div>`;
+      return;
+    }
   }
 
-  // первый активный
-  const first = Array.from(tabs).find(t => (participants[t.dataset.tab] || []).length > 0) || tabs[0];
-  activate(first.dataset.tab);
+  let html = `<div class="view"><h2>Календарь соревнований</h2>`;
+  const intl = calendarData.international || [];
+  const rus = calendarData.russian || [];
 
- 
+  if (intl.length > 0) {
+    html += `<h3>🌍 Международные</h3><div class="list">`;
+    intl.forEach(ev => {
+      const tag = ev.type || "";
+      const tagClass = tag === "GP" ? "is-gp" : tag === "GPF" ? "is-gpf" : tag === "CS" ? "is-cs" : "";
+      html += `
+        <div class="event ${tagClass}">
+          <div class="title">${ev.name}</div>
+          <div class="emeta">${ev.city}, ${ev.country}</div>
+          <div class="emeta">${ev.start} — ${ev.end}</div>
+          <div class="subtags"><span class="subtag">${ev.type || "—"}</span></div>
+        </div>`;
+    });
+    html += `</div>`;
+  }
+
+  if (rus.length > 0) {
+    html += `<h3>🇷🇺 Российские</h3><div class="list">`;
+    rus.forEach(ev => {
+      html += `
+        <div class="event is-rus">
+          <div class="title">${ev.name}</div>
+          <div class="emeta">${ev.city}</div>
+          <div class="emeta">${ev.start} — ${ev.end}</div>
+          <div class="subtags"><span class="subtag">RUS</span></div>
+        </div>`;
+    });
+    html += `</div>`;
+  }
+
+  html += `</div>`;
+  app.innerHTML = html;
+}
+
+// Назад
+backBtn.addEventListener("click", () => {
+  if (currentView !== "menu") showMainMenu();
+});
+
+// Запуск
+document.addEventListener("DOMContentLoaded", showMainMenu);
