@@ -1,4 +1,4 @@
-// Mini App v14 — стабильная версия с кликами и авто-транслитерацией
+// Mini App v17 — полный перевод: всё на русском / всё на английском
 const TG = window.Telegram ? window.Telegram.WebApp : null;
 const app = document.getElementById('app');
 const backBtn = document.getElementById('backBtn');
@@ -13,16 +13,16 @@ const STATE = { lang: 'ru' };
 // === Локализация ===
 const I18N = {
   ru: {
-    greet: "Привет, надеюсь, мы поможем тебе!)",
+    greet: "Привет! Надеемся, мы тебе поможем 🙂",
     menu_calendar: "Календарь соревнований",
-    menu_rules: "Правила",
+    menu_rules: "Правила и материалы",
     soon: "Скоро",
     open_calendar: "Открыть календарь",
     open: "Открыть",
     calendar_select_title: "Календарь — выбери раздел",
     intl: "Зарубежные старты",
     rus: "Российские старты",
-    rules_soon: "Здесь появятся правила и полезные материалы.",
+    rules_soon: "Здесь появятся правила, ссылки и документы.",
     back: "Назад",
     official: "Официальная страница",
     men: "Мужчины", women: "Женщины", pairs: "Пары", dance: "Танцы на льду",
@@ -30,38 +30,48 @@ const I18N = {
     euros: "Чемпионат Европы", oly: "Олимпиада"
   },
   en: {
-    greet: "Hi, we hope to help you!",
-    menu_calendar: "Competition Calendar",
-    menu_rules: "Rules",
-    soon: "Soon",
-    open_calendar: "Open Calendar",
+    greet: "Hi! We hope this helps you 🙂",
+    menu_calendar: "Competition schedule",
+    menu_rules: "Rules & materials",
+    soon: "Coming soon",
+    open_calendar: "Open schedule",
     open: "Open",
-    calendar_select_title: "Calendar — choose a section",
-    intl: "International Events",
-    rus: "Russian Events",
-    rules_soon: "Rules and useful materials will appear here soon.",
+    calendar_select_title: "Schedule — choose a section",
+    intl: "International events",
+    rus: "Domestic events",
+    rules_soon: "Official rules, documents and materials will appear here.",
     back: "Back",
-    official: "Official page",
-    men: "Men", women: "Women", pairs: "Pairs", dance: "Ice Dance",
+    official: "Official website",
+    men: "Men", women: "Women", pairs: "Pairs", dance: "Ice dance",
     gp: "Grand Prix", gpf: "Grand Prix Final", worlds: "World Championships",
-    euros: "European Championships", oly: "Olympics"
+    euros: "European Championships", oly: "Olympic Games"
   }
 };
 
 function t(k){return I18N[STATE.lang][k]||k;}
 
+// === Язык ===
 function saveLang(){try{localStorage.setItem('lang',STATE.lang);}catch(e){}}
-function loadLang(){try{const v=localStorage.getItem('lang');if(v)STATE.lang=v;}catch(e){}}
+function loadLang(){
+  try{
+    const saved = localStorage.getItem('lang');
+    if(saved) STATE.lang = saved;
+    else {
+      const sys = TG?.initDataUnsafe?.user?.language_code || navigator.language || 'ru';
+      STATE.lang = sys.startsWith('en') ? 'en' : 'ru';
+      saveLang();
+    }
+  }catch(e){}
+}
 
 function setLang(lang){
-  STATE.lang=lang;
-  langRu.classList.toggle('active',lang==='ru');
-  langEn.classList.toggle('active',lang==='en');
-  greetEl.textContent=t('greet');
-  tBack.textContent=t('back');
+  STATE.lang = lang;
+  langRu.classList.toggle('active', lang==='ru');
+  langEn.classList.toggle('active', lang==='en');
+  greetEl.textContent = t('greet');
+  tBack.textContent = t('back');
   saveLang();
-  // Перерисовываем только если уже открыт экран
-  if (NAV.length) render();
+  if(NAV.length) render();
 }
 
 langRu.addEventListener('click',()=>setLang('ru'));
@@ -80,22 +90,24 @@ function translit(str){
   };
   return str.split('').map(ch=>map[ch]||ch).join('');
 }
-function maybeTranslit(name){
-  return STATE.lang === 'en' && /[А-Яа-яЁё]/.test(name) ? translit(name) : name;
+function maybeLang(text){
+  if(!text) return '';
+  if(Array.isArray(text)) return text.map(v=>maybeLang(v));
+  return STATE.lang==='en' && /[А-Яа-яЁё]/.test(text) ? translit(text) : text;
 }
 
 // === Формат даты ===
 function fmtDateRange(a,b){
-  const opts={day:'2-digit',month:'2-digit',year:'numeric'};
+  const opts={day:'2-digit',month:'short',year:'numeric'};
   const da=new Date(a),db=new Date(b);
   if(da.toDateString()===db.toDateString())
     return da.toLocaleDateString(STATE.lang==='ru'?'ru-RU':'en-GB',opts);
   const sm=da.getMonth()===db.getMonth()&&da.getFullYear()===db.getFullYear();
-  const d=n=>String(n).padStart(2,'0');
-  if(sm)return`${da.getDate()}–${db.getDate()}.${d(db.getMonth()+1)}.${db.getFullYear()}`;
-  const aS=da.toLocaleDateString(STATE.lang==='ru'?'ru-RU':'en-GB',{day:'2-digit',month:'2-digit'});
-  const bS=db.toLocaleDateString(STATE.lang==='ru'?'ru-RU':'en-GB',{day:'2-digit',month:'2-digit'});
-  return`${aS}–${bS}.${db.getFullYear()}`;
+  if(sm){
+    const month = da.toLocaleString(STATE.lang==='ru'?'ru-RU':'en-GB',{month:'short'});
+    return `${da.getDate()}–${db.getDate()} ${month}`;
+  }
+  return `${da.toLocaleDateString(STATE.lang==='ru'?'ru-RU':'en-GB',{day:'2-digit',month:'short'})} – ${db.toLocaleDateString(STATE.lang==='ru'?'ru-RU':'en-GB',{day:'2-digit',month:'short'})}`;
 }
 
 // === Цвета турниров ===
@@ -112,13 +124,13 @@ function colorForClass(c){
   return c==='gpf'?'#2563eb':c==='gp'?'#0ea5e9':c==='worlds'?'#16a34a':c==='euros'?'#f59e0b':c==='oly'?'#ef4444':'#821130';
 }
 
-// === Отрисовка элементов ===
+// === Отрисовка ===
 function chips(it){
   const cls=classify(it),base=colorForClass(cls)+'cc';
   const place=[it.city,it.country].filter(Boolean).join(', ');
   return `<div class="subtags">
     <span class="subtag" style="background:${base}">📅 ${fmtDateRange(it.start,it.end)}</span>
-    ${place?`<span class="subtag" style="background:${base}">📍 ${place}</span>`:''}
+    ${place?`<span class="subtag" style="background:${base}">📍 ${maybeLang(place)}</span>`:''}
   </div>`;
 }
 
@@ -130,7 +142,7 @@ function listView(items,kind){
       const labelMap={gp:t('gp'),gpf:t('gpf'),worlds:t('worlds'),euros:t('euros'),oly:t('oly')};
       const label=labelMap[cls]||'';
       return `<a class="event ${cls?`is-${cls}`:''}" data-kind="${kind}" data-idx="${i}">
-        <div><strong>${maybeTranslit(it.name)}</strong> ${label?`<span class="subtag" style="background:${colorForClass(cls)}33;color:#000;border:1px solid ${colorForClass(cls)}55">${label}</span>`:''}</div>
+        <div><strong>${maybeLang(it.name)}</strong> ${label?`<span class="subtag" style="background:${colorForClass(cls)}33;color:#000;border:1px solid ${colorForClass(cls)}55">${label}</span>`:''}</div>
         ${chips(it)}
       </a>`;
     }).join('')}
@@ -139,22 +151,22 @@ function listView(items,kind){
 
 function columnList(title,arr){
   if(!arr?.length)return'';
+  const names = maybeLang(arr);
   return `<div class="card" style="min-width:220px">
     <div class="title">${title}</div>
     <ul style="margin:8px 0 0 16px; padding:0">
-      ${arr.map(n=>`<li style="margin:6px 0">${maybeTranslit(n)}</li>`).join('')}
+      ${names.map(n=>`<li style="margin:6px 0">${n}</li>`).join('')}
     </ul></div>`;
 }
 
-// === Представления ===
 function view_menu(){
   backBtn.style.display='none';
   return `<div class="grid view">
     <div class="card">
       <div class="title">${t('menu_calendar')}</div>
       <p class="muted">${STATE.lang==='ru'
-        ?'Выбери раздел и смотри даты, ссылки и составы.'
-        :'Choose a section to view dates, links and entries.'}</p>
+        ?'Выбери раздел, чтобы посмотреть даты и составы участников.'
+        :'Choose a section to see dates and entries lists.'}</p>
       <button class="btn primary" id="btnCalendar">${t('open_calendar')}</button>
     </div>
     <div class="card">
@@ -174,14 +186,14 @@ function view_calendar_select(){
         <div class="title">${t('intl')}</div>
         <p class="muted">${STATE.lang==='ru'
           ?'ISU: Гран-при, ЧМ, ЧЕ, Олимпиада и др.'
-          :'ISU: Grand Prix, Worlds, Euros, Olympics etc.'}</p>
+          :'ISU events: Grand Prix, Worlds, Euros, Olympics etc.'}</p>
         <button class="btn primary" id="btnIntl">${t('open')}</button>
       </div>
       <div class="card">
         <div class="title">${t('rus')}</div>
         <p class="muted">${STATE.lang==='ru'
-          ?'Календарь ФФККР и всероссийские турниры'
-          :'FFKR calendar and national events'}</p>
+          ?'Календарь ФФККР и национальные турниры'
+          :'FFKR calendar and domestic competitions'}</p>
         <button class="btn primary" id="btnRus">${t('open')}</button>
       </div>
     </div>
@@ -196,7 +208,7 @@ function view_event_details(kind,idx){
   const topBorder=colorForClass(cls);
   const p=it.participants||{men:[],women:[],pairs:[],dance:[]};
   return `<div class="card view" style="border-top:4px solid ${topBorder}">
-    <div class="title">${maybeTranslit(it.name)}</div>
+    <div class="title">${maybeLang(it.name)}</div>
     ${chips(it)}
     <div style="margin-top:10px">
       ${it.url?`<a class="btn" href="${it.url}" target="_blank">🌐 ${t('official')}</a>`:''}
@@ -213,23 +225,20 @@ function view_event_details(kind,idx){
 
 // === Router ===
 function render(){
-  const top = NAV[NAV.length-1];
-  const view = top ? top.view : 'menu';
+  const top=NAV[NAV.length-1];
+  const view=top?top.view:'menu';
   let html='';
-
-  if(view==='menu') html=view_menu();
-  if(view==='calendar_select') html=view_calendar_select();
+  if(view==='menu')html=view_menu();
+  if(view==='calendar_select')html=view_calendar_select();
   if(view==='calendar_list'){
     const kind=top.params.kind;
     const items=(kind==='international'?DATA.international:DATA.russian)||[];
     html=`<div class="card view"><div class="title">${kind==='international'?t('intl'):t('rus')}</div>${listView(items,kind)}</div>`;
   }
-  if(view==='event_details') html=view_event_details(top.params.kind,top.params.idx);
+  if(view==='event_details')html=view_event_details(top.params.kind,top.params.idx);
+  app.innerHTML=html;
 
-  app.innerHTML = html;
-
-  // навешиваем обработчики после рендера
-  requestAnimationFrame(() => {
+  requestAnimationFrame(()=>{
     if(view==='menu'){
       document.getElementById('btnCalendar')?.addEventListener('click',()=>go('calendar_select'));
     }
@@ -248,24 +257,16 @@ function render(){
     }
   });
 
-  backBtn.style.display = NAV.length>1?'inline-flex':'none';
-  tBack.textContent = t('back');
+  backBtn.style.display=NAV.length>1?'inline-flex':'none';
+  tBack.textContent=t('back');
 }
 
 // === Навигация ===
-function go(view, params={}) {
-  if(NAV.length===0 || NAV[NAV.length-1].view!==view || JSON.stringify(NAV[NAV.length-1].params)!==JSON.stringify(params)){
-    NAV.push({view, params});
-  }
-  render();
-}
-function back(){
-  NAV.pop();
-  render();
-}
-backBtn.addEventListener('click', back);
+function go(view,params={}){NAV.push({view,params});render();}
+function back(){NAV.pop();render();}
+backBtn.addEventListener('click',back);
 
-// === Загрузка данных ===
+// === Загрузка ===
 async function load(){
   try{
     const res=await fetch('calendar.json',{cache:'no-store'});
@@ -279,20 +280,7 @@ async function load(){
 
 // === Инициализация ===
 loadLang();
-STATE.lang = STATE.lang || 'ru';
 setLang(STATE.lang);
 NAV.push({view:'menu',params:{}});
 load();
 
-// === Telegram-тема ===
-(function applyTheme(){
-  if(!TG||!TG.themeParams) return;
-  const t=TG.themeParams, r=document.documentElement;
-  if(t.bg_color) r.style.setProperty('--bg',t.bg_color);
-  if(t.secondary_bg_color) r.style.setProperty('--card',t.secondary_bg_color);
-  if(t.text_color) r.style.setProperty('--text',t.text_color);
-  if(t.hint_color) r.style.setProperty('--muted',t.hint_color);
-  if(t.link_color) r.style.setProperty('--accent',t.link_color);
-  if(t.section_separator_color) r.style.setProperty('--border',t.section_separator_color);
-  try{TG.onEvent&&TG.onEvent('themeChanged',applyTheme);}catch(e){}
-})();
