@@ -1,214 +1,319 @@
-{
-  "season": "2025–2026",
-  "international": [
-    {
-      "name": "Trialeti Trophy 2025 (ISU CS)",
-      "type": "CS",
-      "city": "Тбилиси",
-      "country": "Грузия",
-      "start": "2025-10-08",
-      "end": "2025-10-11",
-      "participants": {
-        "men": [
-          "Vladimir Litvintsev","Georgii Reshtenko","Pablo Garcia","Arlet Levandi","Aleksandr Selevko",
-          "Nika Egadze","Nikita Starostin","Sota Yamamoto","Nikita Krivosheyev","Sihyeong Lee",
-          "Daniel Korabelnik","Donovan Carrillo","Vladimir Samoilov","Adam Hagara","Kyrylo Marsak",
-          "Jason Brown","Tomoki Hiwatashi","Daniel Martynov"
-        ],
-        "women": [
-          "Sabina Alieva","Nargiz Sueleymanova","Stefania Yakovleva","Eliska Brezinova","Nataly Langerbaur",
-          "Kristina Lisovskaja","Linnea Ceder","Iida Karhunen","Olivia Lisko","Anastasiia Gubanova",
-          "Sarah Marie Pesch","Elizabet Gervits","Mariia Seniuk","Anna Pezzetta","Rinka Watanabe",
-          "Amina Alexeyeva","Sofiya Farafonova","Russalina Shakrova","Seoyoung Kim","Haein Lee",
-          "Ahsun Yun","Heesue Han","Meda Variakojyte","Andrea Montesinos Cantu","Starr Andrews","Ava Marie Ziegler"
-        ],
-        "pairs": [
-          "Karina Akopova / Nikita Rakhmanin","Louise Ehrhard / Matthis Pellegris","Anastasiia Metelkina / Luka Berulava",
-          "Minerva Fabienne Hase / Nikita Volodin","Letizia Roscher / Luis Schuster","Lucrezia Beccari / Matteo Guarise",
-          "Daria Danilova / Michel Tsiba","Ioulia Chtchetinina / Michal Wozniak","Oxana Vouillamoz / Tom Bouvart",
-          "Emily Chan / Spencer Akira Howe","Ellie Kam / Danny O'Shea","Reagan Moss / Jakub Galbavy"
-        ],
-        "dance": [
-          "Kristina Dobroserdova / Alessandro Pellegrini","Holly Harris / Jason Chan","Samantha Ritter / Daniel Brykalov",
-          "Maxine Weatherby / Oleksandr Kolosovskyi","Natalia Pallu-Neves / Jayin Panesar","Angelina Kudryavtseva / Ilia Karankevich",
-          "Loicia Demougeot / Theo Le Mercier","Celina Fradji / Jean-Hans Fourneaux","Phebe Bekker / James Hernandez",
-          "Diana Davis / Gleb Smolkin","Maria Kazakova / Vladislav Kasinskij","Karla Maria Karl / Kai Hoferichter",
-          "Emese Csiszer / Mark Shapiro","Utana Yoshida / Masaya Morita","Sofiia Dovhal / Wiktor Kulesza","Zoe Larson / Andrii Kapran"
-        ]
-      }
-    },
-    {
-      "name": "Гран-при Франции 2025 (ISU)",
-      "city": "Анже",
-      "country": "Франция",
-      "start": "2025-10-17",
-      "end": "2025-10-19",
-      "participants": {
-        "men": [
-          "Mihhail Selevko","Luc Economides","Francois Pitot","Adam Siao Him Fa","Nika Egadze",
-          "Gabriele Frangipani","Kao Miura","Tatsuya Tsuboi","Lukas Britschgi","Ilia Malinin",
-          "Maxim Naumov","Andrew Torgashev"
-        ],
-        "women": [
-          "Niina Petrokina","Clemence Mayindu","Lorine Schild","Lea Serna","Ami Nakai","Kaori Sakamoto",
-          "Rion Sumiyoshi","Chaeyeon Kim","Young You","Livia Kaiser","Isabeau Levito","Elyce Lin-Gracey"
-        ],
-        "pairs": [
-          "Deanna Stellato-Dudek / Maxime Deschamps","Aurelie Faula / Theo Belle","Camille Kovalev / Pavel Kovalev",
-          "Megan Wessenberg / Denys Strekalin","Maria Pavlova / Alexei Sviatchenko","Riku Miura / Ryuichi Kihara",
-          "Katie McBeath / Daniil Parkman","Audrey Shin / Balazs Nagy"
-        ],
-        "dance": [
-          "Marie-Jade Lauriault / Romain Le Gac","Laurence Fournier Beaudry / Guillaume Cizeron",
-          "Celina Fradji / Jean-Hans Fourneaux","Natacha Lagouge / Arnaud Caffa","Lilah Fear / Lewis Gibson",
-          "Diana Davis / Gleb Smolkin","Charlene Guignard / Marco Fabbri","Allison Reed / Saulius Ambrulevicius",
-          "Emily Bratti / Ian Somerville","Eva Pate / Logan Bye"
-        ]
-      }
-    },
-    {
-      "name": "Гран-при Китая 2025 (ISU)",
-      "city": "Чунцин",
-      "country": "Китай",
-      "start": "2025-10-24",
-      "end": "2025-10-26",
-      "participants": {
-        "men": [
-          "Vladimir Litvintsev","Daiwei Dai","Boyang Jin","Zhiming Peng","Daniel Grassl",
-          "Shun Sato","Sota Yamamoto","Mikhail Shaidorov","Junhwan Cha","Deniss Vasiljevs",
-          "Camden Pulkinen","Jacob Sanchez"
-        ],
-        "women": [
-          "Xiangyi An","Ruiyang Zhang","Yi Zhu","Anastasiia Gubanova","Rino Matsuike","Rinka Watanabe",
-          "Hana Yoshida","Haein Lee","Jia Shin","Kimmy Repond","Amber Glenn","Alysa Liu"
-        ],
-        "pairs": [
-          "Wenjing Sui / Cong Han","Jiaxuan Zhang / Yihang Huang","Anastasiia Metelkina / Luka Berulava",
-          "Annika Hocke / Robert Kunkel","Lucrezia Beccari / Matteo Guarise","Sara Conti / Niccolo Macii",
-          "Rebecca Ghilardi / Filippo Ambrosini","Katie McBeath / Daniil Parkman"
-        ],
-        "dance": [
-          "Junfei Ren / Jianing Xing","Shiyue Wang / Xinyu Liu","Zixi Xiao / Linghao He",
-          "Olivia Smart / Tim Dieck","Loicia Demougeot / Theo Le Mercier","Evgeniia Lopareva / Geoffrey Brissaud",
-          "Hannah Lim / Ye Quan","Madison Chock / Evan Bates","Caroline Green / Michael Parsons","Emilea Zingas / Vadym Kolesnik"
-        ]
-      }
-    },
-    {
-      "name": "Гран-при Канады 2025 (ISU Skate Canada International)",
-      "city": "Саскатун",
-      "country": "Канада",
-      "start": "2025-10-31",
-      "end": "2025-11-02",
-      "participants": {
-        "men": [
-          "Stephen Gogolev","Aleksa Rakic","Roman Sadovsky","Aleksandr Selevko","Kevin Aymoz",
-          "Nika Egadze","Nikolaj Memola","Kao Miura","Kazuki Tomono","Vladimir Samoilov","Tomoki Hiwatashi","Ilia Malinin"
-        ],
-        "women": [
-          "Nina Pinzarrone","Sara-Maude Dupuis","Madeline Schizas","Uliana Shyryaeva","Lara Naki Gutmann",
-          "Yuna Aoki","Mone Chiba","Ami Nakai","Ahsun Yun","Sarah Everhardt","Isabeau Levito","Bradie Tennell"
-        ],
-        "pairs": [
-          "Kelly Ann Laurin / Loucas Ethier","Lia Pereira / Trennt Michaud","Deanna Stellato-Dudek / Maxime Deschamps",
-          "Anastasia Vaipan-Law / Luke Digby","Minerva Fabienne Hase / Nikita Volodin","Oxana Vouillamoz / Tom Bouvart","Ellie Kam / Danny O'Shea"
-        ],
-        "dance": [
-          "Piper Gilles / Paul Poirier","Marjorie Lajoie / Zachary Lagha","Marie-Jade Lauriault / Romain Le Gac",
-          "Katerina Mrazkova / Daniel Mrazek","Juulia Turkkila / Matthias Versluis","Jennifer Janse Van Rensburg / Benjamin Steffan",
-          "Allison Reed / Saulius Ambrulevicius","Emily Bratti / Ian Somerville","Christina Carreira / Anthony Ponomarenko","Leah Neset / Artem Markelov"
-        ]
-      }
-    },
-    {
-      "name": "Гран-при Японии 2025 (ISU NHK Trophy)",
-      "city": "Осака (Кадома)",
-      "country": "Япония",
-      "start": "2025-11-07",
-      "end": "2025-11-09",
-      "participants": {
-        "men": [
-          "Boyang Jin","Francois Pitot","Gabriele Frangipani","Matteo Rizzo","Yuma Kagiyama",
-          "Haru Kakiuchi","Shun Sato","Junhwan Cha","Lukas Britschgi","Adam Hagara","Jimmy Ma","Andrew Torgashev"
-        ],
-        "women": [
-          "Loena Hendrickx","Nina Pinzarrone","Katherine Medland Spence","Anna Pezzetta","Yuna Aoki",
-          "Wakaba Higuchi","Kaori Sakamoto","Sofia Samodelkina","Young You","Kimmy Repond","Sarah Everhardt","Elyce Lin-Gracey"
-        ],
-        "pairs": [
-          "Wenjing Sui / Cong Han","Camille Kovalev / Pavel Kovalev","Maria Pavlova / Alexei Sviatchenko",
-          "Sara Conti / Niccolo Macii","Yuna Nagaoka / Sumitada Moriguchi","Daria Danilova / Michel Tsiba",
-          "Emily Chan / Spencer Akira Howe","Alisa Efimova / Misha Mitrofanov"
-        ],
-        "dance": [
-          "Alicia Fabbri / Paul Ayer","Natalie Taschlerova / Filip Taschler","Yuka Orihara / Juho Pirinen",
-          "Lilah Fear / Lewis Gibson","Jennifer Janse Van Rensburg / Benjamin Steffan","Charlene Guignard / Marco Fabbri",
-          "Utana Yoshida / Masaya Morita","Caroline Green / Michael Parsons","Maia Shibutani / Alex Shibutani","Katarina Wolfkostin / Dimitry Tsarevski"
-        ]
-      }
-    },
-    {
-      "name": "Гран-при США 2025 (ISU Skate America)",
-      "city": "Лейк-Плэсид",
-      "country": "США",
-      "start": "2025-11-14",
-      "end": "2025-11-16",
-      "participants": {
-        "men": [
-          "Vladimir Litvintsev","Daiwei Dai","Kevin Aymoz","Luc Economides","Corey Circelli",
-          "Daniel Grassl","Nikolaj Memola","Kazuki Tomono","Tatsuya Tsuboi","Mikhail Shaidorov",
-          "Jason Brown","Liam Kapeikis"
-        ],
-        "women": [
-          "Lea Serna","Anastasiia Gubanova","Lara Naki Gutmann","Wakaba Higuchi","Rinka Watanabe",
-          "Hana Yoshida","Chaeyeon Kim","Haein Lee","Ekaterina Kurakova","Starr Andrews","Josephine Lee","Alysa Liu"
-        ],
-        "pairs": [
-          "Kelly Ann Laurin / Loucas Ethier","Anastasiia Metelkina / Luka Berulava","Annika Hocke / Robert Kunkel",
-          "Lucrezia Beccari / Matteo Guarise","Riku Miura / Ryuichi Kihara","Olivia Flores / Luke Wang",
-          "Valentina Plazas / Maximiliano Fernandez","Audrey Shin / Balazs Nagy"
-        ],
-        "dance": [
-          "Marjorie Lajoie / Zachary Lagha","Katerina Mrazkova / Daniel Mrazek","Loicia Demougeot / Theo Le Mercier",
-          "Celina Fradji / Jean-Hans Fourneaux","Evgeniia Lopareva / Geoffrey Brissaud","Phebe Bekker / James Hernandez",
-          "Noemi Maria Tali / Noah Lafornara","Oona Brown / Gage Brown","Christina Carreira / Anthony Ponomarenko","Madison Chock / Evan Bates"
-        ]
-      }
-    },
-    {
-      "name": "Гран-при Финляндии 2025 (ISU Finlandia Trophy)",
-      "city": "Хельсинки",
-      "country": "Финляндия",
-      "start": "2025-11-21",
-      "end": "2025-11-23",
-      "participants": {
-        "men": [
-          "Roman Sadovsky","Mihhail Selevko","Valtter Virtanen","Adam Siao Him Fa","Matteo Rizzo",
-          "Yuma Kagiyama","Sota Yamamoto","Deniss Vasiljevs","Andreas Nordeback","Lucas Broussard","Jason Brown","Jimmy Ma"
-        ],
-        "women": [
-          "Loena Hendrickx","Madeline Schizas","Niina Petrokina","Iida Karhunen","Olivia Lisko",
-          "Selma Valitalo","Lorine Schild","Mone Chiba","Rino Matsuike","Rion Sumiyoshi","Amber Glenn","Bradie Tennell"
-        ],
-        "pairs": [
-          "Lia Pereira / Trennt Michaud","Jiaxuan Zhang / Yihang Huang","Minerva Fabienne Hase / Nikita Volodin",
-          "Rebecca Ghilardi / Filippo Ambrosini","Yuna Nagaoka / Sumitada Moriguchi","Ioulia Chtchetinina / Michal Wozniak",
-          "Alisa Efimova / Misha Mitrofanov","Ellie Kam / Danny O'Shea"
-        ],
-        "dance": [
-          "Piper Gilles / Paul Poirier","Natalie Taschlerova / Filip Taschler","Olivia Smart / Tim Dieck",
-          "Yuka Orihara / Juho Pirinen","Juulia Turkkila / Matthias Versluis","Laurence Fournier Beaudry / Guillaume Cizeron",
-          "Diana Davis / Gleb Smolkin","Oona Brown / Gage Brown","Maia Shibutani / Alex Shibutani","Emilea Zingas / Vadym Kolesnik"
-        ]
-      }
-    },
-    {
-      "name": "Финал Гран-при 2025 (Нагойя)",
-      "city": "Нагойя",
-      "country": "Япония",
-      "start": "2025-12-04",
-      "end": "2025-12-07"
-    }
-  ],
-  "russian": []
+// Mini App v10 with i18n, transitions, participants page + Challenger support
+const TG = window.Telegram ? window.Telegram.WebApp : null;
+const app = document.getElementById('app');
+const backBtn = document.getElementById('backBtn');
+const splash = document.getElementById('splash');
+const langRu = document.getElementById('langRu');
+const langEn = document.getElementById('langEn');
+const greetEl = document.getElementById('greet');
+const tBack = document.getElementById('t_back');
+
+const NAV = [];
+const STATE = { lang: 'ru' };
+
+const I18N = {
+  ru: {
+    greet: "Привет, надеюсь, мы поможем тебе!)",
+    menu_calendar: "Календарь соревнований",
+    menu_rules: "Правила",
+    soon: "Скоро",
+    open_calendar: "Открыть календарь",
+    open: "Открыть",
+    calendar_select_title: "Календарь — выбери раздел",
+    intl: "Зарубежные старты",
+    rus: "Российские старты",
+    rules_soon: "Скоро тут будут правила и полезные материалы.",
+    back: "Назад",
+    official: "Официальная страница",
+    participants: "Состав участников",
+    men: "Мужчины", women: "Женщины", pairs: "Пары", dance: "Танцы на льду",
+    date: "Дата",
+    place: "Место",
+    gp: "Гран-при",
+    gpf: "Финал Гран-при",
+    cs: "Челленджер",
+    worlds: "Чемпионат мира",
+    euros: "Чемпионат Европы",
+    oly: "Олимпиада"
+  },
+  en: {
+    greet: "Hi, we hope to help you!",
+    menu_calendar: "Competition Calendar",
+    menu_rules: "Rules",
+    soon: "Coming soon",
+    open_calendar: "Open Calendar",
+    open: "Open",
+    calendar_select_title: "Calendar — choose a section",
+    intl: "International Events",
+    rus: "Russian Events",
+    rules_soon: "Rules and useful materials will be here soon.",
+    back: "Back",
+    official: "Official page",
+    participants: "Participants",
+    men: "Men", women: "Women", pairs: "Pairs", dance: "Ice Dance",
+    date: "Dates",
+    place: "Place",
+    gp: "Grand Prix",
+    gpf: "Grand Prix Final",
+    cs: "Challenger",
+    worlds: "World Championships",
+    euros: "European Championships",
+    oly: "Olympics"
+  }
+};
+
+function t(key){ return I18N[STATE.lang][key] || key; }
+
+function saveLang(){ try{ localStorage.setItem('lang', STATE.lang); }catch(e){} }
+function loadLang(){ try{ const v = localStorage.getItem('lang'); if(v) STATE.lang = v; }catch(e){} }
+
+function setLang(lang){
+  STATE.lang = lang;
+  langRu.classList.toggle('active', lang==='ru');
+  langEn.classList.toggle('active', lang==='en');
+  greetEl.textContent = t('greet');
+  tBack.textContent = t('back');
+  render();
+  saveLang();
 }
+
+// Navigation
+function go(view, params={}){
+  if(NAV.length===0 || NAV[NAV.length-1].view!==view || JSON.stringify(NAV[NAV.length-1].params)!==JSON.stringify(params)){
+    NAV.push({view, params});
+  }
+  render();
+}
+function back(){
+  NAV.pop();
+  render();
+}
+backBtn.addEventListener('click', back);
+langRu.addEventListener('click', ()=> setLang('ru'));
+langEn.addEventListener('click', ()=> setLang('en'));
+
+function fmtDateRange(a,b){
+  const opts = {day:'2-digit',month:'2-digit',year:'numeric'};
+  const da = new Date(a);
+  const db = new Date(b);
+  const sameDay = da.toDateString()===db.toDateString();
+  if(sameDay) return da.toLocaleDateString(STATE.lang==='ru'?'ru-RU':'en-GB',opts);
+  const sm = da.getMonth()===db.getMonth() && da.getFullYear()===db.getFullYear();
+  const d = (n)=> String(n).padStart(2,'0');
+  if(sm) return `${da.getDate()}–${db.getDate()}.${d(db.getMonth()+1)}.${db.getFullYear()}`;
+  const aS = da.toLocaleDateString(STATE.lang==='ru'?'ru-RU':'en-GB',{day:'2-digit',month:'2-digit'});
+  const bS = db.toLocaleDateString(STATE.lang==='ru'?'ru-RU':'en-GB',{day:'2-digit',month:'2-digit'});
+  return `${aS}–${bS}.${db.getFullYear()}`;
+}
+
+// Classify special events
+function classify(it){
+  const name = (it.name||'').toLowerCase();
+  const type = (it.type||'').toLowerCase();
+
+  if(type==='gpf') return 'gpf';
+  if(type==='gp') return 'gp';
+  if(type==='cs') return 'cs';
+  if(type==='worlds'||type==='world') return 'worlds';
+  if(type==='euros'||type==='europe') return 'euros';
+  if(type==='oly'||type==='olympics') return 'oly';
+
+  if(name.includes('grand prix final') || (name.includes('гран-при') && name.includes('финал'))) return 'gpf';
+  if(name.includes('grand prix') || name.includes('гран-при')) return 'gp';
+  if(name.includes('challenger') || name.includes('isu cs') || name.includes('(isu cs)')) return 'cs';
+  if(name.includes('world') || name.includes('мир')) return 'worlds';
+  if(name.includes('europe') || name.includes('европ')) return 'euros';
+  if(name.includes('olymp')) return 'oly';
+  return '';
+}
+function colorForClass(cls){
+  return cls==='gpf' ? '#2563eb'
+    : cls==='gp' ? '#0ea5e9'
+    : cls==='cs' ? '#9333ea'
+    : cls==='worlds' ? '#16a34a'
+    : cls==='euros' ? '#f59e0b'
+    : cls==='oly' ? '#ef4444'
+    : '#821130';
+}
+
+function chips(it){
+  const cls = classify(it);
+  const base = colorForClass(cls);
+  const light = base + 'cc';
+  const place = [it.city, it.country].filter(Boolean).join(', ');
+  return `
+    <div class="subtags">
+      <span class="subtag" style="background:${light}">📅 ${fmtDateRange(it.start,it.end)}</span>
+      ${place?`<span class="subtag" style="background:${light}">📍 ${place}</span>`:''}
+    </div>
+  `;
+}
+
+function listView(items, kind){
+  const sorted = items.slice().sort((a,b)=> new Date(a.start)-new Date(b.start));
+  return `
+    <div class="list">
+      ${sorted.map((it,i)=>{
+        const cls = classify(it);
+        const map = {gp:'is-gp', gpf:'is-gpf', cs:'is-cs', worlds:'is-worlds', euros:'is-euros', oly:'is-oly'};
+        const labelMap = {gp:t('gp'), gpf:t('gpf'), cs:t('cs'), worlds:t('worlds'), euros:t('euros'), oly:t('oly')};
+        const cssc = map[cls]||'';
+        const label = labelMap[cls]||'';
+        return `
+          <a class="event ${cssc}" data-kind="${kind}" data-idx="${i}">
+            <div><strong>${it.name}</strong> ${label?`<span class="subtag" style="background:${colorForClass(cls)}33;color:#000;border:1px solid ${colorForClass(cls)}55">${label}</span>`:''}</div>
+            <div class="emeta">${fmtDateRange(it.start,it.end)}</div>
+            ${chips(it)}
+          </a>
+        `;
+      }).join('')}
+    </div>
+  `;
+}
+
+function view_menu(){
+  backBtn.style.display = 'none';
+  return `
+    <div class="grid view">
+      <div class="card">
+        <div class="title">${t('menu_calendar')}</div>
+        <p class="muted">${STATE.lang==='ru'?'Выбери раздел и смотри даты, ссылки и составы.':'Choose a section to see dates, links and entries.'}</p>
+        <button class="btn primary" id="btnCalendar">${t('open_calendar')}</button>
+      </div>
+      <div class="card">
+        <div class="title">${t('menu_rules')}</div>
+        <p class="muted">${t('rules_soon')}</p>
+        <button class="btn" id="btnRules" disabled>${t('soon')}</button>
+      </div>
+    </div>
+  `;
+}
+
+function view_calendar_select(){
+  backBtn.style.display = 'inline-flex';
+  return `
+    <div class="card view">
+      <div class="title">${t('calendar_select_title')}</div>
+      <div class="grid" style="margin-top:10px">
+        <div class="card">
+          <div class="title">${t('intl')}</div>
+          <p class="muted">${STATE.lang==='ru'?'ISU: Гран-при, ЧМ, ЧЕ, Олимпиада и др.':'ISU: Grand Prix, Worlds, Euros, Olympics etc.'}</p>
+          <button class="btn primary" id="btnIntl">${t('open')}</button>
+        </div>
+        <div class="card">
+          <div class="title">${t('rus')}</div>
+          <p class="muted">${STATE.lang==='ru'?'Календарь ФФККР и всероссийские турниры':'FFKR calendar and national events'}</p>
+          <button class="btn primary" id="btnRus">${t('open')}</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function columnList(title, arr){
+  if(!arr || arr.length===0) return '';
+  return `
+    <div class="card" style="min-width:220px">
+      <div class="title">${title}</div>
+      <ul style="margin:8px 0 0 16px; padding:0">
+        ${arr.map(n=>`<li style="margin:6px 0">${n}</li>`).join('')}
+      </ul>
+    </div>
+  `;
+}
+
+function view_event_details(kind, idx){
+  backBtn.style.display = 'inline-flex';
+  const items = (kind==='international'? DATA.international : DATA.russian) || [];
+  const it = items[idx];
+  const cls = classify(it);
+  const topBorder = colorForClass(cls);
+  const p = it.participants || {men:[], women:[], pairs:[], dance:[]};
+  return `
+    <div class="card view" style="border-top:4px solid ${topBorder}">
+      <div class="title">${it.name}</div>
+      ${chips(it)}
+      <div style="margin-top:10px">
+        ${it.url?`<a class="btn" href="${it.url}" target="_blank" rel="noopener">🌐 ${t('official')}</a>`:''}
+        ${it.entries?` <a class="btn" href="${it.entries}" target="_blank" rel="noopener">📝 Entries</a>`:''}
+      </div>
+      <div class="grid" style="margin-top:12px">
+        ${columnList(t('men'), p.men)}
+        ${columnList(t('women'), p.women)}
+        ${columnList(t('pairs'), p.pairs)}
+        ${columnList(t('dance'), p.dance)}
+      </div>
+    </div>
+  `;
+}
+
+// Router
+function render(){
+  const top = NAV[NAV.length-1];
+  const view = top ? top.view : 'menu';
+  let html = '';
+  if(view==='menu') html = view_menu();
+  if(view==='calendar_select') html = view_calendar_select();
+  if(view==='calendar_list'){
+    const kind = top.params.kind;
+    const items = (kind==='international'? DATA.international : DATA.russian) || [];
+    html = `<div class="card view"><div class="title">${kind==='international'?t('intl'):t('rus')}</div>${listView(items, kind)}</div>`;
+  }
+  if(view==='event_details'){
+    html = view_event_details(top.params.kind, top.params.idx);
+  }
+  app.innerHTML = html;
+
+  if(view==='menu'){
+    document.getElementById('btnCalendar')?.addEventListener('click', ()=> go('calendar_select'));
+  }
+  if(view==='calendar_select'){
+    document.getElementById('btnIntl')?.addEventListener('click', ()=> go('calendar_list',{kind:'international'}));
+    document.getElementById('btnRus')?.addEventListener('click', ()=> go('calendar_list',{kind:'russian'}));
+  }
+  if(view==='calendar_list'){
+    document.querySelectorAll('.event').forEach(el=>{
+      el.addEventListener('click', ()=>{
+        const kind = el.getAttribute('data-kind');
+        const idx = Number(el.getAttribute('data-idx'));
+        go('event_details', {kind, idx});
+      });
+    });
+  }
+  backBtn.style.display = NAV.length>1 ? 'inline-flex' : 'none';
+  tBack.textContent = t('back');
+}
+
+// Data loading
+async function load(){
+  try{
+    const res = await fetch('calendar.json', {cache:'no-store'});
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const data = await res.json();
+    window.DATA = data;
+  }catch(e){
+    window.DATA = {season:"2025–2026", international:[], russian:[]};
+    console.warn('calendar.json load error; empty data used.', e);
+  }
+  render();
+}
+
+// Init
+loadLang();
+setLang(STATE.lang || 'ru');
+go('menu');
+load();
+
+// Apply Telegram theme if present
+(function applyThemeFromTelegram(){
+  if(!TG || !TG.themeParams) return;
+  const t = TG.themeParams;
+  const root = document.documentElement;
+  if(t.bg_color) root.style.setProperty('--bg', t.bg_color);
+  if(t.secondary_bg_color) root.style.setProperty('--card', t.secondary_bg_color);
+  if(t.text_color) root.style.setProperty('--text', t.text_color);
+  if(t.hint_color) root.style.setProperty('--muted', t.hint_color);
+  if(t.link_color) root.style.setProperty('--accent', t.link_color);
+  if(t.section_separator_color) root.style.setProperty('--border', t.section_separator_color);
+  try{ TG.onEvent && TG.onEvent('themeChanged', applyThemeFromTelegram); }catch(e){}
+})();
