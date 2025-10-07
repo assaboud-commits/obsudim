@@ -7,19 +7,15 @@
   <link rel="icon" href="data:," />
   <style>
     :root{
-      --bg:#ffffff;
-      --card:#f8f9fb;
-      --text:#111318;
-      --muted:#6b7280;
-      --accent:#821130;
-      --border:#e7e9ef;
-      --radius:16px;
+      --bg:#ffffff; --card:#f8f9fb; --text:#111318; --muted:#6b7280;
+      --accent:#821130; --border:#e7e9ef; --radius:16px;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Noto Sans',sans-serif;background:var(--bg);color:var(--text)}
     a{color:inherit;text-decoration:none}
     .container{max-width:980px;margin:0 auto;padding:16px 16px 72px}
+
     header.top{position:sticky;top:0;background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.86));backdrop-filter:saturate(140%) blur(6px);border-bottom:1px solid var(--border);z-index:20}
     header .row{display:flex;align-items:flex-end;justify-content:flex-end;gap:12px;padding:10px 16px;flex-direction:column}
     .brandwrap{display:flex;align-items:center;gap:8px;align-self:flex-end}
@@ -55,16 +51,32 @@
     @keyframes viewFade{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:translateY(0)}}
 
     .list{display:grid;grid-template-columns:1fr;gap:10px}
-    .event{border:1px solid var(--border);background:#fff;border-radius:14px;padding:14px;display:block}
+    .event{
+      border:1px solid var(--border);background:#fff;border-radius:14px;padding:14px;display:block;
+      cursor:pointer; transition:.15s ease;
+    }
+    .event:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(0,0,0,.06)}
     .emeta{font-size:14px;color:var(--muted);margin-top:6px}
     .subtags{margin-top:8px}
-    .subtag{display:inline-block;margin:4px 6px 0 0;padding:3px 10px;border-radius:999px;color:#fff;font-size:12px;font-weight:500;opacity:.85}
+    .subtag{display:inline-block;margin:4px 6px 0 0;padding:3px 10px;border-radius:999px;color:#fff;font-size:12px;font-weight:600;opacity:.95;background:#821130;border:1px solid #ffffff40;text-shadow:0 1px 1px #0004}
+
+    /* детали события (аккордеон) */
+    .details{margin-top:10px;border-top:1px dashed var(--border);padding-top:10px;animation:detailsIn .2s ease}
+    @keyframes detailsIn{from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)}}
+    .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+    .tab{padding:6px 10px;border:1px solid var(--border);border-radius:999px;background:#f8f9fb;font-size:12px;cursor:pointer}
+    .tab.active{background:#821130;color:#fff;border-color:#821130}
+    .plist{margin-top:8px}
+    .plist li{margin:2px 0}
+
+    /* цветные рамки */
     .is-gp{border-color:#0ea5e9}
     .is-gpf{border-color:#2563eb}
     .is-worlds{border-color:#16a34a}
     .is-euros{border-color:#f59e0b}
     .is-oly{border-color:#ef4444}
     .is-rus{border-color:#821130}
+    .is-cs{border-color:#a78bfa}
   </style>
 </head>
 <body>
