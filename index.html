@@ -26,7 +26,7 @@
       box-shadow: 0 0 10px rgba(255, 0, 100, 0.3);
     }
 
-    /* ✅ Круг с неоновыми краями и центрированным логотипом */
+    /* ✅ Круг с неоновыми краями */
     .logo-circle {
       width: 90px;
       height: 90px;
@@ -43,8 +43,7 @@
     .logo-circle img {
       width: 80%;
       height: 80%;
-      object-fit: contain; /* логотип полностью помещается */
-      border-radius: 0;
+      object-fit: contain;
     }
 
     h1 {
@@ -106,18 +105,43 @@
       gap: 10px;
     }
 
+    /* ✅ Эффект цветового блюра по флагу */
     .event {
+      position: relative;
       background: #222;
       border-radius: 12px;
-      padding: 12px;
+      padding: 12px 12px 12px 16px;
       text-decoration: none;
       color: #fff;
       border-left: 4px solid #ff0066;
-      transition: 0.2s;
+      transition: 0.3s;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .event::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 35%;
+      height: 100%;
+      background: var(--flag-grad, linear-gradient(90deg, #444, #222));
+      filter: blur(20px);
+      opacity: 0.45;
+      border-radius: 12px 0 0 12px;
+      transition: 0.3s ease;
+      z-index: 0;
+    }
+
+    .event:hover::before {
+      opacity: 0.7;
+      filter: blur(25px);
     }
 
     .event:hover {
-      background: #333;
+      transform: translateY(-2px);
+      box-shadow: 0 0 15px rgba(255, 0, 102, 0.4);
     }
 
     .subtag {
