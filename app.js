@@ -1,4 +1,4 @@
-// Mini App v11 — Чистая локализация, без дубля даты, новый логотип
+// Mini App v12 — Полная локализация + авто-транслитерация имён
 const TG = window.Telegram ? window.Telegram.WebApp : null;
 const app = document.getElementById('app');
 const backBtn = document.getElementById('backBtn');
@@ -10,6 +10,7 @@ const tBack = document.getElementById('t_back');
 const NAV = [];
 const STATE = { lang: 'ru' };
 
+// === Локализация ===
 const I18N = {
   ru: {
     greet: "Привет, надеюсь, мы поможем тебе!)",
@@ -36,8 +37,8 @@ const I18N = {
     open_calendar: "Open Calendar",
     open: "Open",
     calendar_select_title: "Calendar — choose a section",
-    intl: "International events",
-    rus: "Russian events",
+    intl: "International Events",
+    rus: "Russian Events",
     rules_soon: "Rules and useful materials will appear here soon.",
     back: "Back",
     official: "Official page",
@@ -65,6 +66,27 @@ function setLang(lang){
 langRu.addEventListener('click',()=>setLang('ru'));
 langEn.addEventListener('click',()=>setLang('en'));
 
+// === Транслитерация ===
+function translit(str){
+  if(!str) return '';
+  const map = {
+    А:'A',Б:'B',В:'V',Г:'G',Д:'D',Е:'E',Ё:'Yo',Ж:'Zh',З:'Z',И:'I',Й:'Y',
+    К:'K',Л:'L',М:'M',Н:'N',О:'O',П:'P',Р:'R',С:'S',Т:'T',У:'U',Ф:'F',
+    Х:'Kh',Ц:'Ts',Ч:'Ch',Ш:'Sh',Щ:'Sch',Ы:'Y',Э:'E',Ю:'Yu',Я:'Ya',
+    Ь:'',Ъ:'',Ь:'',  а:'a',б:'b',в:'v',г:'g',д:'d',е:'e',ё:'yo',ж:'zh',з:'z',и:'i',
+    й:'y',к:'k',л:'l',м:'m',н:'n',о:'o',п:'p',р:'r',с:'s',т:'t',у:'u',ф:'f',х:'kh',
+    ц:'ts',ч:'ch',ш:'sh',щ:'sch',ы:'y',э:'e',ю:'yu',я:'ya'
+  };
+  let result = '';
+  for (const ch of str) result += map[ch] ?? ch;
+  return result;
+}
+
+function maybeTranslit(name){
+  return STATE.lang === 'en' && /[А-Яа-яЁё]/.test(name) ? translit(name) : name;
+}
+
+// === Формат даты ===
 function fmtDateRange(a,b){
   const opts={day:'2-digit',month:'2-digit',year:'numeric'};
   const da=new Date(a),db=new Date(b);
@@ -78,6 +100,7 @@ function fmtDateRange(a,b){
   return`${aS}–${bS}.${db.getFullYear()}`;
 }
 
+// === Цвета турниров ===
 function classify(it){
   const n=(it.name||'').toLowerCase();
   if(n.includes('grand prix final')||n.includes('финал гран-при'))return'gpf';
@@ -91,6 +114,7 @@ function colorForClass(c){
   return c==='gpf'?'#2563eb':c==='gp'?'#0ea5e9':c==='worlds'?'#16a34a':c==='euros'?'#f59e0b':c==='oly'?'#ef4444':'#821130';
 }
 
+// === Отрисовка элементов ===
 function chips(it){
   const cls=classify(it),base=colorForClass(cls)+'cc';
   const place=[it.city,it.country].filter(Boolean).join(', ');
@@ -108,7 +132,7 @@ function listView(items,kind){
       const labelMap={gp:t('gp'),gpf:t('gpf'),worlds:t('worlds'),euros:t('euros'),oly:t('oly')};
       const label=labelMap[cls]||'';
       return `<a class="event ${cls?`is-${cls}`:''}" data-kind="${kind}" data-idx="${i}">
-        <div><strong>${it.name}</strong> ${label?`<span class="subtag" style="background:${colorForClass(cls)}33;color:#000;border:1px solid ${colorForClass(cls)}55">${label}</span>`:''}</div>
+        <div><strong>${maybeTranslit(it.name)}</strong> ${label?`<span class="subtag" style="background:${colorForClass(cls)}33;color:#000;border:1px solid ${colorForClass(cls)}55">${label}</span>`:''}</div>
         ${chips(it)}
       </a>`;
     }).join('')}
@@ -120,17 +144,19 @@ function columnList(title,arr){
   return `<div class="card" style="min-width:220px">
     <div class="title">${title}</div>
     <ul style="margin:8px 0 0 16px; padding:0">
-      ${arr.map(n=>`<li style="margin:6px 0">${n}</li>`).join('')}
+      ${arr.map(n=>`<li style="margin:6px 0">${maybeTranslit(n)}</li>`).join('')}
     </ul></div>`;
 }
 
+// === Представления ===
 function view_menu(){
   backBtn.style.display='none';
   return `<div class="grid view">
     <div class="card">
       <div class="title">${t('menu_calendar')}</div>
       <p class="muted">${STATE.lang==='ru'
-        ?'Выбери раздел и смотри даты, ссылки и составы.':'Choose a section to view dates, links and entries.'}</p>
+        ?'Выбери раздел и смотри даты, ссылки и составы.'
+        :'Choose a section to view dates, links and entries.'}</p>
       <button class="btn primary" id="btnCalendar">${t('open_calendar')}</button>
     </div>
     <div class="card">
@@ -149,13 +175,15 @@ function view_calendar_select(){
       <div class="card">
         <div class="title">${t('intl')}</div>
         <p class="muted">${STATE.lang==='ru'
-          ?'ISU: Гран-при, ЧМ, ЧЕ, Олимпиада и др.':'ISU: Grand Prix, Worlds, Euros, Olympics etc.'}</p>
+          ?'ISU: Гран-при, ЧМ, ЧЕ, Олимпиада и др.'
+          :'ISU: Grand Prix, Worlds, Euros, Olympics etc.'}</p>
         <button class="btn primary" id="btnIntl">${t('open')}</button>
       </div>
       <div class="card">
         <div class="title">${t('rus')}</div>
         <p class="muted">${STATE.lang==='ru'
-          ?'Календарь ФФККР и всероссийские турниры':'FFKR calendar and national events'}</p>
+          ?'Календарь ФФККР и всероссийские турниры'
+          :'FFKR calendar and national events'}</p>
         <button class="btn primary" id="btnRus">${t('open')}</button>
       </div>
     </div>
@@ -170,7 +198,7 @@ function view_event_details(kind,idx){
   const topBorder=colorForClass(cls);
   const p=it.participants||{men:[],women:[],pairs:[],dance:[]};
   return `<div class="card view" style="border-top:4px solid ${topBorder}">
-    <div class="title">${it.name}</div>
+    <div class="title">${maybeTranslit(it.name)}</div>
     ${chips(it)}
     <div style="margin-top:10px">
       ${it.url?`<a class="btn" href="${it.url}" target="_blank">🌐 ${t('official')}</a>`:''}
@@ -185,6 +213,7 @@ function view_event_details(kind,idx){
   </div>`;
 }
 
+// === Router ===
 function render(){
   const top=NAV[NAV.length-1];
   const view=top?top.view:'menu';
@@ -202,4 +231,49 @@ function render(){
   if(view==='menu')document.getElementById('btnCalendar')?.addEventListener('click',()=>go('calendar_select'));
   if(view==='calendar_select'){
     document.getElementById('btnIntl')?.addEventListener('click',()=>go('calendar_list',{kind:'international'}));
-    document
+    document.getElementById('btnRus')?.addEventListener('click',()=>go('calendar_list',{kind:'russian'}));
+  }
+  if(view==='calendar_list'){
+    document.querySelectorAll('.event').forEach(el=>{
+      el.addEventListener('click',()=>{
+        const kind=el.getAttribute('data-kind');
+        const idx=+el.getAttribute('data-idx');
+        go('event_details',{kind,idx});
+      });
+    });
+  }
+
+  backBtn.style.display = NAV.length>1?'inline-flex':'none';
+  tBack.textContent = t('back');
+}
+
+// === Загрузка данных ===
+async function load(){
+  try{
+    const res=await fetch('calendar.json',{cache:'no-store'});
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    window.DATA=await res.json();
+  }catch(e){
+    window.DATA={season:"2025–2026",international:[],russian:[]};
+  }
+  render();
+}
+
+// === Инициализация ===
+loadLang();
+setLang(STATE.lang||'ru');
+go('menu');
+load();
+
+// === Telegram-тема ===
+(function applyTheme(){
+  if(!TG||!TG.themeParams) return;
+  const t=TG.themeParams, r=document.documentElement;
+  if(t.bg_color) r.style.setProperty('--bg',t.bg_color);
+  if(t.secondary_bg_color) r.style.setProperty('--card',t.secondary_bg_color);
+  if(t.text_color) r.style.setProperty('--text',t.text_color);
+  if(t.hint_color) r.style.setProperty('--muted',t.hint_color);
+  if(t.link_color) r.style.setProperty('--accent',t.link_color);
+  if(t.section_separator_color) r.style.setProperty('--border',t.section_separator_color);
+  try{TG.onEvent&&TG.onEvent('themeChanged',applyTheme);}catch(e){}
+})();
