@@ -1,4 +1,4 @@
-// Mini App v13 — авто-транслитерация, кликабельные карточки, чистая локализация
+// Mini App v14 — стабильная версия с кликами и авто-транслитерацией
 const TG = window.Telegram ? window.Telegram.WebApp : null;
 const app = document.getElementById('app');
 const backBtn = document.getElementById('backBtn');
@@ -59,8 +59,9 @@ function setLang(lang){
   langEn.classList.toggle('active',lang==='en');
   greetEl.textContent=t('greet');
   tBack.textContent=t('back');
-  render();
   saveLang();
+  // Перерисовываем только если уже открыт экран
+  if (NAV.length) render();
 }
 
 langRu.addEventListener('click',()=>setLang('ru'));
@@ -278,8 +279,9 @@ async function load(){
 
 // === Инициализация ===
 loadLang();
-setLang(STATE.lang||'ru');
-go('menu');
+STATE.lang = STATE.lang || 'ru';
+setLang(STATE.lang);
+NAV.push({view:'menu',params:{}});
 load();
 
 // === Telegram-тема ===
