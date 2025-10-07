@@ -1,39 +1,19 @@
 let currentView = "menu";
 let calendarData = null;
-let currentLang = "ru";
 
 const app = document.getElementById("app");
 const backBtn = document.getElementById("backBtn");
 
-// ====== переключение языка ======
-const langRu = document.getElementById("langRu");
-const langEn = document.getElementById("langEn");
-
-langRu.addEventListener("click", () => { currentLang = "ru"; updateLangButtons(); showMainMenu(); });
-langEn.addEventListener("click", () => { currentLang = "en"; updateLangButtons(); showMainMenu(); });
-
-function updateLangButtons() {
-  langRu.classList.toggle("active", currentLang === "ru");
-  langEn.classList.toggle("active", currentLang === "en");
-}
-
-// ====== утилита имени ======
-function getName(item) {
-  if (!item) return "";
-  if (typeof item === "string") return item;
-  return currentLang === "ru" ? (item.ru || item.en) : (item.en || item.ru);
-}
-
-// ====== главное меню ======
+// главное меню
 function showMainMenu() {
   currentView = "menu";
   backBtn.style.display = "none";
   app.innerHTML = `
     <div class="card" style="text-align:center;">
-      <h2>${currentLang === "ru" ? "Главное меню" : "Main Menu"}</h2>
+      <h2>Главное меню</h2>
       <div style="display:flex;flex-direction:column;gap:12px;margin-top:12px;">
-        <button class="btn" id="calendarButton">📅 ${currentLang === "ru" ? "Календарь соревнований" : "Competition Calendar"}</button>
-        <button class="btn" id="rulesButton">📖 ${currentLang === "ru" ? "Правила" : "Rules"}</button>
+        <button class="btn" id="calendarButton">📅 Календарь соревнований</button>
+        <button class="btn" id="rulesButton">📖 Правила</button>
       </div>
     </div>
   `;
@@ -41,19 +21,20 @@ function showMainMenu() {
   document.getElementById("rulesButton").addEventListener("click", showRules);
 }
 
-// ====== страница правил ======
+// правила
 function showRules() {
   currentView = "rules";
   backBtn.style.display = "inline-flex";
   app.innerHTML = `
-    <div class="card view">
-      <h2>${currentLang === "ru" ? "Правила соревнований" : "Competition Rules"}</h2>
-      <p>${currentLang === "ru" ? "Основные правила и регламенты соревнований по фигурному катанию." : "Main figure skating competition regulations."}</p>
+    <div class="card">
+      <h2>Правила соревнований</h2>
+      <p>Здесь будут основные правила и регламенты соревнований по фигурному катанию.</p>
+      <p>Позже можно добавить ссылки на документы ISU и ФФКР.</p>
     </div>
   `;
 }
 
-// ====== календарь ======
+// календарь
 async function showCalendar() {
   currentView = "calendar";
   backBtn.style.display = "inline-flex";
@@ -68,23 +49,19 @@ async function showCalendar() {
     }
   }
 
-  let html = `<div class="view"><h2>${currentLang === "ru" ? "Календарь соревнований" : "Competition Calendar"}</h2>`;
+  let html = `<div class="card"><h2>Календарь соревнований</h2>`;
   const intl = calendarData.international || [];
   const rus = calendarData.russian || [];
 
-  // Международные
   if (intl.length > 0) {
-    html += `<h3>🌍 ${currentLang === "ru" ? "Международные" : "International"}</h3><div class="list">`;
+    html += `<h3>🌍 Международные</h3><div class="list">`;
     intl.forEach(ev => {
       const tag = ev.type || "";
       const tagClass = tag === "GP" ? "is-gp" : tag === "GPF" ? "is-gpf" : tag === "CS" ? "is-cs" : "";
-      const name = currentLang === "ru" ? (ev.name_ru || ev.name) : (ev.name_en || ev.name);
-      const city = currentLang === "ru" ? (ev.city_ru || ev.city) : (ev.city_en || ev.city);
-      const country = currentLang === "ru" ? (ev.country_ru || ev.country) : (ev.country_en || ev.country);
       html += `
         <div class="event ${tagClass}">
-          <div class="title">${name}</div>
-          <div class="emeta">${city}, ${country}</div>
+          <div class="title">${ev.name}</div>
+          <div class="emeta">${ev.city}, ${ev.country}</div>
           <div class="emeta">${ev.start} — ${ev.end}</div>
           <div class="subtags"><span class="subtag">${tag || "—"}</span></div>
         </div>`;
@@ -92,16 +69,13 @@ async function showCalendar() {
     html += `</div>`;
   }
 
-  // Российские
   if (rus.length > 0) {
-    html += `<h3>🇷🇺 ${currentLang === "ru" ? "Российские старты" : "Russian Competitions"}</h3><div class="list">`;
+    html += `<h3>🇷🇺 Российские</h3><div class="list">`;
     rus.forEach(ev => {
-      const name = currentLang === "ru" ? ev.name_ru : ev.name_en;
-      const city = currentLang === "ru" ? ev.city_ru : ev.city_en;
       html += `
         <div class="event is-rus">
-          <div class="title">${name}</div>
-          <div class="emeta">${city}</div>
+          <div class="title">${ev.name}</div>
+          <div class="emeta">${ev.city}</div>
           <div class="emeta">${ev.start} — ${ev.end}</div>
           <div class="subtags"><span class="subtag">RUS</span></div>
         </div>`;
@@ -113,10 +87,10 @@ async function showCalendar() {
   app.innerHTML = html;
 }
 
-// ====== кнопка Назад ======
+// назад
 backBtn.addEventListener("click", () => {
   if (currentView !== "menu") showMainMenu();
 });
 
-// ====== запуск ======
+// запуск
 document.addEventListener("DOMContentLoaded", showMainMenu);
