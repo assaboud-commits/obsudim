@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ФК — мини-приложение</title>
+  <title>ФК — мини‑приложение</title>
   <link rel="icon" href="data:," />
   <style>
     :root{
@@ -23,11 +23,13 @@
     header.top{position:sticky;top:0;background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.86));backdrop-filter:saturate(140%) blur(6px);border-bottom:1px solid var(--border);z-index:20}
     header .row{display:flex;align-items:flex-end;justify-content:flex-end;gap:12px;padding:10px 16px;flex-direction:column}
     .brandwrap{display:flex;align-items:center;gap:8px;align-self:flex-end}
-    .logo{max-width:120px;height:auto;display:block}
+    .logo{max-width:120px;height:auto;display:block} /* оригинальные пропорции, без округления */
     .backTop{margin-top:6px;align-self:flex-end}
+    /* Language toggle */
     .lang{display:inline-flex;gap:6px;border:1px solid var(--border);border-radius:999px;padding:6px 8px;background:#fff}
     .lang button{border:0;background:transparent;padding:4px 8px;border-radius:999px;cursor:pointer}
     .lang button.active{background:linear-gradient(180deg, var(--accent)12, var(--accent)22);border:1px solid var(--accent)66}
+    /* Glossy neon buttons */
     .btn{
       display:inline-flex;align-items:center;justify-content:center;gap:8px;
       padding:12px 14px;border:1px solid #82113080;border-radius:999px;
@@ -43,18 +45,33 @@
     @media(min-width:720px){.grid{grid-template-columns:1fr 1fr}}
     .title{font-weight:700;font-size:18px}
     .muted{color:var(--muted)}
+    /* Splash */
+    .splash{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:100;animation: fadeOut 1s ease 2s forwards}
+    .splash h1{font-size:22px;padding:16px 20px;border-radius:14px;border:1px solid var(--border);background:#fff;box-shadow:0 8px 20px rgba(0,0,0,.06)}
+    @keyframes fadeOut{to{opacity:0;visibility:hidden}}
+    /* View transitions */
+    .view{animation: viewFade .4s ease both}
+    @keyframes viewFade{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:translateY(0)}}
+    /* Event list */
     .list{display:grid;grid-template-columns:1fr;gap:10px}
-    .event{border:1px solid var(--border);background:#fff;border-radius:14px;padding:14px}
+    .event{border:1px solid var(--border);background:#fff;border-radius:14px;padding:14px;display:block}
     .emeta{font-size:14px;color:var(--muted);margin-top:6px}
     .subtags{margin-top:8px}
-    .subtag{display:inline-block;margin:4px 6px 0 0;padding:3px 10px;border-radius:999px;color:#fff;font-size:12px;font-weight:500;opacity:.85;background:#821130;border:1px solid #ffffff40;text-shadow:0 1px 1px #0004}
+    .subtag{display:inline-block;margin:4px 6px 0 0;padding:3px 10px;border-radius:999px;color:#fff;font-size:12px;font-weight:500;opacity:.85}
+    /* Special color classes */
     .is-gp{border-color:#0ea5e9}
     .is-gpf{border-color:#2563eb}
-    .is-cs{border-color:#a78bfa}
-    .is-rus{border-color:#821130}
+    .is-worlds{border-color:#16a34a}
+    .is-euros{border-color:#f59e0b}
+    .is-oly{border-color:#ef4444}
   </style>
 </head>
 <body>
+  <!-- Splash -->
+  <div id="splash" class="splash">
+    <h1 id="greet">Привет, надеюсь, мы поможем тебе!)</h1>
+  </div>
+
   <header class="top">
     <div class="row">
       <div class="brandwrap">
@@ -73,9 +90,9 @@
   </header>
 
   <div class="container">
-    <div id="app"></div>
+    <div id="app" class="view"></div>
   </div>
 
-  <script src="./app.js"></script>
+<script src="./app.js"></script>
 </body>
 </html>
