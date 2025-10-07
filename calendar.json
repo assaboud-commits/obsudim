@@ -1477,75 +1477,125 @@
     }
   ],
   "russian": [
-    {
-      "name": "Этап Кубка России — Магнитогорск 2025",
-      "type": "RUS",
-      "city": "Магнитогорск",
-      "country": "Россия",
-      "start": "2025-10-24",
-      "end": "2025-10-27",
-      "name_ru": "Этап Кубка России — Магнитогорск 2025",
-      "name_en": "Этап Кубка России — Магнитогорск 2025",
-      "city_ru": "Магнитогорск",
-      "country_ru": "Россия",
-      "city_en": "Magnitogorsk",
-      "country_en": "Russia"
-    },
-    {
-      "name": "Этап Кубка России — Красноярск 2025",
-      "type": "RUS",
-      "city": "Красноярск",
-      "country": "Россия",
-      "start": "2025-10-31",
-      "end": "2025-11-03",
-      "name_ru": "Этап Кубка России — Красноярск 2025",
-      "name_en": "Этап Кубка России — Красноярск 2025",
-      "city_ru": "Красноярск",
-      "country_ru": "Россия",
-      "city_en": "Krasnoyarsk",
-      "country_en": "Russia"
-    },
-    {
-      "name": "Этап Кубка России — Казань 2025",
-      "type": "RUS",
-      "city": "Казань",
-      "country": "Россия",
-      "start": "2025-11-07",
-      "end": "2025-11-10",
-      "name_ru": "Этап Кубка России — Казань 2025",
-      "name_en": "Этап Кубка России — Казань 2025",
-      "city_ru": "Казань",
-      "country_ru": "Россия",
-      "city_en": "Kazan",
-      "country_en": "Russia"
-    },
-    {
-      "name": "Этап Кубка России — Москва 2025",
-      "type": "RUS",
-      "city": "Москва",
-      "country": "Россия",
-      "start": "2025-11-14",
-      "end": "2025-11-17",
-      "name_ru": "Этап Кубка России — Москва 2025",
-      "name_en": "Этап Кубка России — Москва 2025",
-      "city_ru": "Москва",
-      "country_ru": "Россия",
-      "city_en": "Moscow",
-      "country_en": "Russia"
-    },
-    {
-      "name": "Этап Кубка России — Омск 2025",
-      "type": "RUS",
-      "city": "Омск",
-      "country": "Россия",
-      "start": "2025-11-21",
-      "end": "2025-11-24",
-      "name_ru": "Этап Кубка России — Омск 2025",
-      "name_en": "Этап Кубка России — Омск 2025",
-      "city_ru": "Омск",
-      "country_ru": "Россия",
-      "city_en": "Omsk",
-      "country_en": "Russia"
+  {
+    "name_ru": "Этап Кубка России — Магнитогорск",
+    "name_en": "Russian Cup Stage — Magnitogorsk",
+    "type": "RUS",
+    "city_ru": "Магнитогорск",
+    "city_en": "Magnitogorsk",
+    "country_ru": "Россия",
+    "country_en": "Russia",
+    "start": "2025-10-24",
+    "end": "2025-10-27",
+    "participants": {
+      "men": [
+        { "ru": "Марк Кондратюк", "en": "Mark Kondratiuk" },
+        { "ru": "Роман Савосин", "en": "Roman Savosin" }
+      ],
+      "women": [
+        { "ru": "Аделия Петросян", "en": "Adeliya Petrosyan" },
+        { "ru": "Ксения Гущина", "en": "Kseniya Gushchina" },
+        { "ru": "Анна Фролова", "en": "Anna Frolova" }
+      ],
+      "pairs": [],
+      "dance": [
+        { "ru": "Шевченко/Ежлов", "en": "Shevchenko/Ezhlov" },
+        { "ru": "Пасечник/Чиризано", "en": "Pasechnik/Chirizano" },
+        { "ru": "Кагановская/Некрасов", "en": "Kaganovskaya/Nekrasov" },
+        { "ru": "Леонтьева/Горелкин", "en": "Leontieva/Gorelkin" }
+      ]
     }
-  ]
-}
+  },
+  {
+    "name_ru": "Этап Кубка России — Красноярск",
+    "name_en": "Russian Cup Stage — Krasnoyarsk",
+    "type": "RUS",
+    "city_ru": "Красноярск",
+    "city_en": "Krasnoyarsk",
+    "country_ru": "Россия",
+    "country_en": "Russia",
+    "start": "2025-10-31",
+    "end": "2025-11-03",
+    "participants": {
+      "men": [],
+      "women": [
+        { "ru": "Вероника Яметова", "en": "Veronika Yametova" },
+        { "ru": "Алина Горбачева", "en": "Alina Gorbacheva" }
+      ],
+      "pairs": [],
+      "dance": [
+        { "ru": "Миронова/Устенко", "en": "Mironova/Ustenko" },
+        { "ru": "Щербакова/Гончаров", "en": "Shcherbakova/Goncharov" },
+        { "ru": "Кагановская/Некрасов", "en": "Kaganovskaya/Nekrasov" }
+      ]
+    }
+  },
+  {
+    "name_ru": "Этап Кубка России — Казань",
+    "name_en": "Russian Cup Stage — Kazan",
+    "type": "RUS",
+    "city_ru": "Казань",
+    "city_en": "Kazan",
+    "country_ru": "Россия",
+    "country_en": "Russia",
+    "start": "2025-11-07",
+    "end": "2025-11-10",
+    "participants": {
+      "men": [
+        { "ru": "Владислав Дикиджи", "en": "Vladislav Dikidji" }
+      ],
+      "women": [],
+      "pairs": [],
+      "dance": []
+    }
+  },
+  {
+    "name_ru": "Этап Кубка России — Москва",
+    "name_en": "Russian Cup Stage — Moscow",
+    "type": "RUS",
+    "city_ru": "Москва",
+    "city_en": "Moscow",
+    "country_ru": "Россия",
+    "country_en": "Russia",
+    "start": "2025-11-14",
+    "end": "2025-11-17",
+    "participants": {
+      "men": [
+        { "ru": "Роман Савосин", "en": "Roman Savosin" }
+      ],
+      "women": [
+        { "ru": "Вероника Яметова", "en": "Veronika Yametova" },
+        { "ru": "Ксения Гущина", "en": "Kseniya Gushchina" },
+        { "ru": "Алина Горбачева", "en": "Alina Gorbacheva" }
+      ],
+      "pairs": [],
+      "dance": [
+        { "ru": "Шевченко/Ежлов", "en": "Shevchenko/Ezhlov" },
+        { "ru": "Леонтьева/Горелкин", "en": "Leontieva/Gorelkin" }
+      ]
+    }
+  },
+  {
+    "name_ru": "Этап Кубка России — Омск",
+    "name_en": "Russian Cup Stage — Omsk",
+    "type": "RUS",
+    "city_ru": "Омск",
+    "city_en": "Omsk",
+    "country_ru": "Россия",
+    "country_en": "Russia",
+    "start": "2025-11-21",
+    "end": "2025-11-24",
+    "participants": {
+      "men": [
+        { "ru": "Владислав Дикиджи", "en": "Vladislav Dikidji" }
+      ],
+      "women": [],
+      "pairs": [],
+      "dance": [
+        { "ru": "Миронова/Устенко", "en": "Mironova/Ustenko" },
+        { "ru": "Пасечник/Чиризано", "en": "Pasechnik/Chirizano" },
+        { "ru": "Щербакова/Гончаров", "en": "Shcherbakova/Goncharov" }
+      ]
+    }
+  }
+]
