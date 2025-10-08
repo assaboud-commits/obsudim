@@ -1,364 +1,363 @@
 {
-  "name": "Trialeti Trophy 2025 (ISU CS)",
-  "type": "CS",
-  "city": "Тбилиси",
-  "country": "Грузия",
-  "start": "2025-10-08",
-  "end": "2025-10-11",
-  "participants": {
-    "men": [
-      "🇦🇿 Владимир Литвинцев",
-      "🇷🇺 Георгий Рещенко",
-      "🇪🇸 Пабло Гарсия",
-      "🇪🇪 Арлет Леванди",
-      "🇪🇪 Александр Селевко",
-      "🇬🇪 Ника Эгадзе",
-      "🇩🇪 Никита Старостин",
-      "🇯🇵 Сота Ямамото",
-      "🇷🇺 Никита Кривошеев",
-      "🇰🇷 Сихён Ли",
-      "🇨🇦 Даниэль Корабельник",
-      "🇲🇽 Донован Каррильо",
-      "🇷🇺 Владимир Самойлов",
-      "🇸🇰 Адам Хагара",
-      "🇺🇦 Кирилл Марсак",
-      "🇺🇸 Джейсон Браун",
-      "🇺🇸 Томоки Хиватаси",
-      "🇺🇸 Даниэль Мартынов"
-    ],
-    "women": [
-      "🇦🇿 Сабина Алиева",
-      "🇦🇿 Наргиз Сулейманова",
-      "🇷🇺 Стефания Яковлева",
-      "🇨🇿 Элишка Бржезинова",
-      "🇪🇪 Натали Лангербаур",
-      "🇪🇪 Кристина Лисовская",
-      "🇫🇮 Линнеа Седер",
-      "🇫🇮 Иида Кархунен",
-      "🇫🇮 Оливия Лиско",
-      "🇬🇪 Анастасия Губанова",
-      "🇩🇪 Сара Мари Пеш",
-      "🇪🇪 Элизабет Гервиц",
-      "🇺🇦 Мария Сенюк",
-      "🇮🇹 Анна Пеццетта",
-      "🇯🇵 Ринка Ватанабэ",
-      "🇰🇿 Амина Алексеева",
-      "🇷🇺 София Фарафонова",
-      "🇷🇺 Русалина Шакрова",
-      "🇰🇷 Соён Ким",
-      "🇰🇷 Хэин Ли",
-      "🇰🇷 Ахсун Юн",
-      "🇰🇷 Хисю Хан",
-      "🇱🇹 Меда Варякойте",
-      "🇲🇽 Андреа Монтеcинос Канту",
-      "🇺🇸 Старр Эндрюс",
-      "🇺🇸 Ава Мари Зиглер"
-    ],
-    "pairs": [
-      "🇷🇺 Карина Акопова / Никита Рахманин",
-      "🇫🇷 Луиза Эрхард / Матис Пеллегрис",
-      "🇬🇪 Анастасия Метелкина / Лука Берулава",
-      "🇩🇪 Минерва Фабиен Хазе / Никита Володин",
-      "🇩🇪 Летиция Рошер / Луис Шустер",
-      "🇮🇹 Лукреция Беккари / Маттео Гуаризе",
-      "🇳🇱 Дарья Данилова / Михел Циба",
-      "🇨🇭 Юлия Щетинина / Михал Возняк",
-      "🇨🇭 Оксана Вуйямо / Том Бувар",
-      "🇺🇸 Эмили Чан / Спенсер Акира Хау",
-      "🇺🇸 Элли Кам / Дэнни О’Ши",
-      "🇸🇰 Рейган Мосс / Якуб Гальбави"
-    ],
-    "dance": [
-      "🇮🇹 Кристина Добросердова / Алессандро Пеллегрини",
-      "🇦🇺 Холли Харрис / Джейсон Чан",
-      "🇩🇪 Саманта Риттер / Даниэль Брыкалов",
-      "🇺🇦 Максин Везерби / Александр Колосовский",
-      "🇧🇷 Наталия Палью-Невес / Джейн Панесар",
-      "🇨🇾 Ангелина Кудрявцева / Илья Каранкевич",
-      "🇫🇷 Лоисия Демужо / Тео Ле Мерсье",
-      "🇫🇷 Селина Фраджи / Жан-Анс Фурно",
-      "🇬🇧 Фиби Беккер / Джеймс Эрнандес",
-      "🇷🇺 Диана Дэвис / Глеб Смолкин",
-      "🇬🇪 Мария Казакова / Владислав Касинский",
-      "🇩🇪 Карла Мария Карль / Кай Хоферихтер",
-      "🇭🇺 Эмеше Чсишер / Марк Шапиро",
-      "🇯🇵 Утана Ёсида / Масаё Морита",
-      "🇺🇦 София Довгаль / Виктор Кулеша",
-      "🇺🇸 Зои Ларсон / Андрей Капран"
-    ]
-  }
+  "season": "2025–2026",
+  "international": [
+    {
+      "name_ru": "Трофи Триалети 2025 (ISU CS)",
+      "name_en": "Trialeti Trophy 2025 (ISU Challenger Series)",
+      "type": "CS",
+      "city_ru": "Тбилиси",
+      "city_en": "Tbilisi",
+      "country_ru": "Грузия",
+      "country_en": "Georgia",
+      "start": "2025-10-08",
+      "end": "2025-10-11",
+      "participants": {
+        "men": [
+          { "ru": "Владимир Литвинцев", "en": "Vladimir Litvintsev" },
+          { "ru": "Георгий Решетников", "en": "Georgii Reshtenko" },
+          { "ru": "Пабло Гарсия", "en": "Pablo Garcia" },
+          { "ru": "Арлет Леванди", "en": "Arlet Levandi" },
+          { "ru": "Александр Селевко", "en": "Aleksandr Selevko" },
+          { "ru": "Ника Егадзе", "en": "Nika Egadze" },
+          { "ru": "Никита Старостин", "en": "Nikita Starostin" },
+          { "ru": "Сота Ямамото", "en": "Sota Yamamoto" },
+          { "ru": "Никита Кривошеев", "en": "Nikita Krivosheyev" },
+          { "ru": "Сихён Ли", "en": "Sihyeong Lee" },
+          { "ru": "Даниэль Корабельник", "en": "Daniel Korabelnik" },
+          { "ru": "Донован Каррильо", "en": "Donovan Carrillo" },
+          { "ru": "Владимир Самойлов", "en": "Vladimir Samoilov" },
+          { "ru": "Адам Хагара", "en": "Adam Hagara" },
+          { "ru": "Кирилл Марсак", "en": "Kyrylo Marsak" },
+          { "ru": "Джейсон Браун", "en": "Jason Brown" },
+          { "ru": "Томоки Хиватаси", "en": "Tomoki Hiwatashi" },
+          { "ru": "Даниэль Мартынов", "en": "Daniel Martynov" }
+        ],
+        "women": [
+          { "ru": "Сабина Алиева", "en": "Sabina Alieva" },
+          { "ru": "Наргиз Сулейманова", "en": "Nargiz Sueleymanova" },
+          { "ru": "Стефания Яковлева", "en": "Stefania Yakovleva" },
+          { "ru": "Элишка Брезинова", "en": "Eliska Brezinova" },
+          { "ru": "Натали Лангербаур", "en": "Nataly Langerbaur" },
+          { "ru": "Кристина Лисовска", "en": "Kristina Lisovskaja" },
+          { "ru": "Линнеа Седер", "en": "Linnea Ceder" },
+          { "ru": "Иида Кархунен", "en": "Iida Karhunen" },
+          { "ru": "Оливия Лиско", "en": "Olivia Lisko" },
+          { "ru": "Анастасия Губанова", "en": "Anastasiia Gubanova" },
+          { "ru": "Сара Мари Пеш", "en": "Sarah Marie Pesch" },
+          { "ru": "Элизабет Гервитс", "en": "Elizabet Gervits" },
+          { "ru": "Мария Сенюк", "en": "Mariia Seniuk" },
+          { "ru": "Анна Пеццетта", "en": "Anna Pezzetta" },
+          { "ru": "Ринка Ватанабэ", "en": "Rinka Watanabe" },
+          { "ru": "Амина Алексеева", "en": "Amina Alexeyeva" },
+          { "ru": "Софья Фарафонова", "en": "Sofiya Farafonova" },
+          { "ru": "Русалина Шакрова", "en": "Russalina Shakrova" },
+          { "ru": "Соён Ким", "en": "Seoyoung Kim" },
+          { "ru": "Хэин Ли", "en": "Haein Lee" },
+          { "ru": "Асон Юн", "en": "Ahsun Yun" },
+          { "ru": "Хисю Хан", "en": "Heesue Han" },
+          { "ru": "Меда Варякойте", "en": "Meda Variakojyte" },
+          { "ru": "Андреа Монтеcинос Канту", "en": "Andrea Montesinos Cantu" },
+          { "ru": "Старр Эндрюс", "en": "Starr Andrews" },
+          { "ru": "Ава Мари Зиглер", "en": "Ava Marie Ziegler" }
+        ],
+        "pairs": [
+          { "ru": "Карина Акопова / Никита Рахманин", "en": "Karina Akopova / Nikita Rakhmanin" },
+          { "ru": "Луиза Эрхард / Матис Пеллегрис", "en": "Louise Ehrhard / Matthis Pellegris" },
+          { "ru": "Анастасия Метелкина / Лука Берулава", "en": "Anastasiia Metelkina / Luka Berulava" },
+          { "ru": "Минерва Фабиен Хазе / Никита Володин", "en": "Minerva Fabienne Hase / Nikita Volodin" },
+          { "ru": "Летиция Роше / Луис Шустер", "en": "Letizia Roscher / Luis Schuster" },
+          { "ru": "Лукреция Беккари / Маттео Гуаризе", "en": "Lucrezia Beccari / Matteo Guarise" },
+          { "ru": "Дарья Данилова / Михель Циба", "en": "Daria Danilova / Michel Tsiba" },
+          { "ru": "Юлия Щетинина / Михал Возняк", "en": "Ioulia Chtchetinina / Michal Wozniak" },
+          { "ru": "Оксана Вуйамо / Том Бувар", "en": "Oxana Vouillamoz / Tom Bouvart" },
+          { "ru": "Эмили Чан / Спенсер Акира Хау", "en": "Emily Chan / Spencer Akira Howe" },
+          { "ru": "Элли Кэм / Дэнни О'Ши", "en": "Ellie Kam / Danny O'Shea" },
+          { "ru": "Рейган Мосс / Якуб Галбавы", "en": "Reagan Moss / Jakub Galbavy" }
+        ],
+        "dance": [
+          { "ru": "Кристина Добросердова / Алессандро Пеллегрини", "en": "Kristina Dobroserdova / Alessandro Pellegrini" },
+          { "ru": "Холли Харрис / Джейсон Чан", "en": "Holly Harris / Jason Chan" },
+          { "ru": "Саманта Риттер / Даниэль Брыкалов", "en": "Samantha Ritter / Daniel Brykalov" },
+          { "ru": "Максин Уэзерби / Александр Колосовский", "en": "Maxine Weatherby / Oleksandr Kolosovskyi" },
+          { "ru": "Наталия Паллу-Невес / Джаин Панесар", "en": "Natalia Pallu-Neves / Jayin Panesar" },
+          { "ru": "Ангелина Кудрявцева / Илья Каранкевич", "en": "Angelina Kudryavtseva / Ilia Karankevich" },
+          { "ru": "Лоисия Демуже / Тео Ле Мерсье", "en": "Loicia Demougeot / Theo Le Mercier" },
+          { "ru": "Селина Фраджи / Жан-Ханс Фурно", "en": "Celina Fradji / Jean-Hans Fourneaux" },
+          { "ru": "Фиби Беккер / Джеймс Эрнандес", "en": "Phebe Bekker / James Hernandez" },
+          { "ru": "Диана Дэвис / Глеб Смолкин", "en": "Diana Davis / Gleb Smolkin" },
+          { "ru": "Мария Казакова / Владислав Касинский", "en": "Maria Kazakova / Vladislav Kasinskij" },
+          { "ru": "Карла-Мария Карл / Кай Хоферихтер", "en": "Karla Maria Karl / Kai Hoferichter" },
+          { "ru": "Эмеше Чишер / Марк Шапиро", "en": "Emese Csiszer / Mark Shapiro" },
+          { "ru": "Утана Ёсида / Масая Морита", "en": "Utana Yoshida / Masaya Morita" },
+          { "ru": "София Довгаль / Виктор Кулеша", "en": "Sofiia Dovhal / Wiktor Kulesza" },
+          { "ru": "Зои Ларсон / Андрей Капран", "en": "Zoe Larson / Andrii Kapran" }
+        ]
+      }
+    },
+    {
+      "name_ru": "Гран-при Франции 2025 (ISU)",
+      "name_en": "Grand Prix de France 2025 (ISU)",
+      "type": "GP",
+      "city_ru": "Анже",
+      "city_en": "Angers",
+      "country_ru": "Франция",
+      "country_en": "France",
+      "start": "2025-10-17",
+      "end": "2025-10-19"
+    }
+  ]
 }
-{
-  "name": "Гран-при Франции 2025 (ISU)",
-  "type": "GP",
-  "city": "Анже",
-  "country": "Франция",
-  "start": "2025-10-17",
-  "end": "2025-10-19",
-  "participants": {
-    "men": [
-      "🇪🇪 Михаил Селевко",
-      "🇫🇷 Люк Экономидес",
-      "🇫🇷 Франсуа Пито",
-      "🇫🇷 Адам Сяо Хим Фа",
-      "🇬🇪 Ника Эгадзе",
-      "🇮🇹 Габриэле Франджипани",
-      "🇯🇵 Као Миура",
-      "🇯🇵 Тацуя Цубои",
-      "🇨🇭 Лукас Бритшги",
-      "🇺🇸 Илья Малинин",
-      "🇺🇸 Максим Наумов",
-      "🇺🇸 Эндрю Торгашев"
-    ],
-    "women": [
-      "🇪🇪 Ниина Петрокина",
-      "🇫🇷 Клеманс Майинду",
-      "🇫🇷 Лорин Шильд",
-      "🇫🇷 Леа Серна",
-      "🇯🇵 Ами Накаи",
-      "🇯🇵 Каори Сакамото",
-      "🇯🇵 Рион Сумийоси",
-      "🇰🇷 Чхэён Ким",
-      "🇰🇷 Ён Ю",
-      "🇨🇭 Ливия Кайзер",
-      "🇺🇸 Изабо Левито",
-      "🇺🇸 Элис Лин-Грейси"
-    ],
-    "pairs": [
-      "🇨🇦 Деанна Стеллато-Дудек / Максим Дешам",
-      "🇫🇷 Орели Фаула / Тео Белль",
-      "🇫🇷 Камиль Ковалёв / Павел Ковалёв",
-      "🇫🇷 Меган Весенберг / Денис Стрекалин",
-      "🇨🇭 Мария Павлова / Алексей Святченко",
-      "🇯🇵 Рику Миура / Рюити Кихара",
-      "🇺🇸 Кейти Макбис / Даниил Паркман",
-      "🇺🇸 Одри Шин / Балаж Надь"
-    ],
-    "dance": [
-      "🇫🇷 Мари-Жад Лорио / Ромен Ле Гак",
-      "🇨🇦 Лоранс Фурнье-Бодри / Гийом Сизерон",
-      "🇫🇷 Селина Фраджи / Жан-Анс Фурно",
-      "🇫🇷 Наташа Лагуж / Арно Каффа",
-      "🇬🇧 Лайла Фир / Льюис Гибсон",
-      "🇷🇺 Диана Дэвис / Глеб Смолкин",
-      "🇮🇹 Шарлен Гиньяр / Марко Фаббри",
-      "🇱🇹 Эллисон Рид / Саулиус Амбрулевичюс",
-      "🇺🇸 Эмили Братти / Иэн Сомервилл",
-      "🇺🇸 Ева Пейт / Логан Бай"
-    ]
-  }
-}
-{
-  "name": "Гран-при Китая 2025 (ISU)",
-  "type": "GP",
-  "city": "Чунцин",
-  "country": "Китай",
-  "start": "2025-10-31",
-  "end": "2025-11-02",
-  "participants": {
-    "men": [
-      "🇨🇦 Конрад Орзел",
-      "🇨🇳 Цзиньюй Сюэ",
-      "🇨🇳 Ю Дже",
-      "🇨🇳 Чэнь Юньяо",
-      "🇫🇷 Кевин Аймо",
-      "🇩🇪 Пол Фенц",
-      "🇯🇵 Юма Кагияма",
-      "🇯🇵 Сёма Уно",
-      "🇰🇷 Джунхван Ча",
-      "🇺🇸 Камден Пулкинен",
-      "🇺🇸 Илья Малинин",
-      "🇺🇸 Даниэль Грейссел"
-    ],
-    "women": [
-      "🇨🇦 Мэдди Скизас",
-      "🇨🇳 Ань Чэнь",
-      "🇨🇳 Чэнь Хунъи",
-      "🇨🇳 Анни Чэнь",
-      "🇫🇮 Янелле Лундин",
-      "🇫🇷 Лорин Мэдлен Шильд",
-      "🇯🇵 Михо Такахаси",
-      "🇯🇵 Рион Сумийоси",
-      "🇯🇵 Мао Симада",
-      "🇰🇷 Чхэён Ким",
-      "🇺🇸 Элис Лин-Грейси",
-      "🇺🇸 Изабо Левито"
-    ],
-    "pairs": [
-      "🇨🇳 Чэн Пэн / Ян Цзинь",
-      "🇨🇳 Ван Лисян / Чжу Яньхань",
-      "🇨🇳 Юй Цзяюй / Чэнь Хунъянь",
-      "🇩🇪 Минерва Фабиен Хазе / Никита Володин",
-      "🇮🇹 Ребекка Гилоди / Филиппо Амброзини",
-      "🇯🇵 Рику Миура / Рюити Кихара",
-      "🇰🇷 Хеён Джи / Джей Вон Сео",
-      "🇺🇸 Кэти Макбис / Даниил Паркман",
-      "🇺🇸 Эмили Чан / Спенсер Акира Хау"
-    ],
-    "dance": [
-      "🇨🇳 Ван Шуэй / Лю Синью",
-      "🇨🇳 Чжан Юэ / Хоу Синь",
-      "🇨🇦 Пайпер Гиллес / Поль Пуарье",
-      "🇫🇷 Мари-Жад Лорио / Ромен Ле Гак",
-      "🇬🇧 Лайла Фир / Льюис Гибсон",
-      "🇯🇵 Канон Такахаши / Сёто Накахара",
-      "🇰🇷 Хан Юра / Лим Минью",
-      "🇺🇸 Эмили Братти / Иэн Сомервилл",
-      "🇺🇸 Каролина Грин / Майкл Парсонс"
-    ]
-  }
-}
-{
-  "name": "Гран-при Канады 2025 (ISU)",
-  "type": "GP",
-  "city": "Калгари",
-  "country": "Канада",
-  "start": "2025-10-24",
-  "end": "2025-10-26",
-  "participants": {
-    "men": [
-      "🇨🇦 Стивен Гогоолев",
-      "🇨🇦 Конрад Орзел",
-      "🇨🇦 Уэсли Чу",
-      "🇫🇷 Адам Сяо Хим Фа",
-      "🇮🇹 Маттео Риццо",
-      "🇯🇵 Сота Ямамото",
-      "🇯🇵 Као Миура",
-      "🇰🇷 Джунхван Ча",
-      "🇨🇭 Лукас Бритшги",
-      "🇺🇸 Илья Малинин"
-    ],
-    "women": [
-      "🇨🇦 Мэдди Скизас",
-      "🇫🇮 Янелле Лундин",
-      "🇮🇹 Анна Пеццетта",
-      "🇯🇵 Каори Сакамото",
-      "🇯🇵 Рион Сумийоси",
-      "🇰🇷 Чхэён Ким",
-      "🇰🇷 Ён Ю",
-      "🇺🇸 Изабо Левито",
-      "🇺🇸 Ава Мари Зиглер"
-    ],
-    "pairs": [
-      "🇨🇦 Деанна Стеллато-Дудек / Максим Дешам",
-      "🇨🇦 Брук МакИнтош / Бенджамин Мимс",
-      "🇩🇪 Минерва Фабиен Хазе / Никита Володин",
-      "🇮🇹 Лукреция Беккари / Маттео Гуаризе",
-      "🇯🇵 Рику Миура / Рюити Кихара",
-      "🇺🇸 Элли Кам / Дэнни О’Ши",
-      "🇺🇸 Кейти Макбис / Даниил Паркман"
-    ],
-    "dance": [
-      "🇨🇦 Пайпер Гиллес / Поль Пуарье",
-      "🇨🇦 Лоранс Фурнье-Бодри / Николас Соренсен",
-      "🇮🇹 Шарлен Гиньяр / Марко Фаббри",
-      "🇫🇷 Мари-Жад Лорио / Ромен Ле Гак",
-      "🇯🇵 Канон Такахаши / Сёто Накахара",
-      "🇺🇸 Каролина Грин / Майкл Парсонс",
-      "🇺🇸 Ева Пейт / Логан Бай"
-    ]
-  }
+"name_ru": "Гран-при Канады 2025 (ISU Skate Canada International)",
+      "name_en": "Skate Canada International 2025 (ISU Grand Prix)",
+      "type": "GP",
+      "city_ru": "Саскатун",
+      "city_en": "Saskatoon",
+      "country_ru": "Канада",
+      "country_en": "Canada",
+      "start": "2025-10-31",
+      "end": "2025-11-02",
+      "participants": {
+        "men": [
+          { "ru": "Стивен Гоголев", "en": "Stephen Gogolev" },
+          { "ru": "Алекса Ракич", "en": "Aleksa Rakic" },
+          { "ru": "Роман Садовски", "en": "Roman Sadovsky" },
+          { "ru": "Александр Селевко", "en": "Aleksandr Selevko" },
+          { "ru": "Кевин Аэмоз", "en": "Kevin Aymoz" },
+          { "ru": "Ника Егадзе", "en": "Nika Egadze" },
+          { "ru": "Николай Мемола", "en": "Nikolaj Memola" },
+          { "ru": "Каа Миура", "en": "Kao Miura" },
+          { "ru": "Кадзуки Томоно", "en": "Kazuki Tomono" },
+          { "ru": "Владимир Самойлов", "en": "Vladimir Samoilov" },
+          { "ru": "Томоки Хиватаси", "en": "Tomoki Hiwatashi" },
+          { "ru": "Илья Малинин", "en": "Ilia Malinin" }
+        ],
+        "women": [
+          { "ru": "Нина Пинцарроне", "en": "Nina Pinzarrone" },
+          { "ru": "Сара-Мод Дюпюи", "en": "Sara-Maude Dupuis" },
+          { "ru": "Мэдлин Шизас", "en": "Madeline Schizas" },
+          { "ru": "Ульяна Ширяева", "en": "Uliana Shyryaeva" },
+          { "ru": "Лара Наки Гутманн", "en": "Lara Naki Gutmann" },
+          { "ru": "Юна Аоки", "en": "Yuna Aoki" },
+          { "ru": "Моне Чиба", "en": "Mone Chiba" },
+          { "ru": "Ами Накай", "en": "Ami Nakai" },
+          { "ru": "Асон Юн", "en": "Ahsun Yun" },
+          { "ru": "Сара Эверхардт", "en": "Sarah Everhardt" },
+          { "ru": "Изабо Левито", "en": "Isabeau Levito" },
+          { "ru": "Брэдди Теннелл", "en": "Bradie Tennell" }
+        ],
+        "pairs": [
+          { "ru": "Келли Энн Лорен / Лукас Этиер", "en": "Kelly Ann Laurin / Loucas Ethier" },
+          { "ru": "Лия Перейра / Трент Мишо", "en": "Lia Pereira / Trennt Michaud" },
+          { "ru": "Деанна Стилаато-Дудек / Максим Дешампс", "en": "Deanna Stellato-Dudek / Maxime Deschamps" },
+          { "ru": "Анастасия Вайпан-Лоу / Люк Дигби", "en": "Anastasia Vaipan-Law / Luke Digby" },
+          { "ru": "Минерва Фабиен Хазе / Никита Володин", "en": "Minerva Fabienne Hase / Nikita Volodin" },
+          { "ru": "Оксана Вуйамо / Том Бувар", "en": "Oxana Vouillamoz / Tom Bouvart" },
+          { "ru": "Элли Кэм / Дэнни О'Ши", "en": "Ellie Kam / Danny O'Shea" }
+        ],
+        "dance": [
+          { "ru": "Пайпер Гиллс / Поль Пуарье", "en": "Piper Gilles / Paul Poirier" },
+          { "ru": "Мажори Лажуа / Закари Лага", "en": "Marjorie Lajoie / Zachary Lagha" },
+          { "ru": "Мари-Жад Лорио / Ромен Ле Гак", "en": "Marie-Jade Lauriault / Romain Le Gac" },
+          { "ru": "Катерина Мразкова / Даниэль Мразек", "en": "Katerina Mrazkova / Daniel Mrazek" },
+          { "ru": "Юлия Турккила / Маттиас Верслуис", "en": "Juulia Turkkila / Matthias Versluis" },
+          { "ru": "Дженнифер Янс ван Ренсбург / Бенджамин Штеффан", "en": "Jennifer Janse Van Rensburg / Benjamin Steffan" },
+          { "ru": "Эллисон Рид / Саулиус Амбрулевичус", "en": "Allison Reed / Saulius Ambrulevicius" },
+          { "ru": "Эмили Братти / Иэн Сомервилл", "en": "Emily Bratti / Ian Somerville" },
+          { "ru": "Кристина Каррейра / Энтони Пономаренко", "en": "Christina Carreira / Anthony Ponomarenko" },
+          { "ru": "Лия Несет / Артём Маркелов", "en": "Leah Neset / Artem Markelov" }
+        ]
+      }
+    },
+    {
+      "name_ru": "Гран-при Японии 2025 (ISU NHK Trophy)",
+      "name_en": "NHK Trophy 2025 (ISU Grand Prix Japan)",
+      "type": "GP",
+      "city_ru": "Осака (Кадома)",
+      "city_en": "Osaka (Kadoma)",
+      "country_ru": "Япония",
+      "country_en": "Japan",
+      "start": "2025-11-07",
+      "end": "2025-11-09",
+      "participants": {
+        "men": [
+          { "ru": "Боянг Цзинь", "en": "Boyang Jin" },
+          { "ru": "Франсуа Пито", "en": "Francois Pitot" },
+          { "ru": "Габриэле Франджипани", "en": "Gabriele Frangipani" },
+          { "ru": "Маттео Риццо", "en": "Matteo Rizzo" },
+          { "ru": "Юма Кагияма", "en": "Yuma Kagiyama" },
+          { "ru": "Хару Какиучи", "en": "Haru Kakiuchi" },
+          { "ru": "Шун Сато", "en": "Shun Sato" },
+          { "ru": "Чжонхван Ча", "en": "Junhwan Cha" },
+          { "ru": "Лукас Бритшги", "en": "Lukas Britschgi" },
+          { "ru": "Адам Хагара", "en": "Adam Hagara" },
+          { "ru": "Джимми Ма", "en": "Jimmy Ma" },
+          { "ru": "Эндрю Торгашев", "en": "Andrew Torgashev" }
+        ],
+        "women": [
+          { "ru": "Луна Хендрикс", "en": "Loena Hendrickx" },
+          { "ru": "Нина Пинцарроне", "en": "Nina Pinzarrone" },
+          { "ru": "Кэтрин Медланд Спенс", "en": "Katherine Medland Spence" },
+          { "ru": "Анна Пеццетта", "en": "Anna Pezzetta" },
+          { "ru": "Юна Аоки", "en": "Yuna Aoki" },
+          { "ru": "Вакаба Хигути", "en": "Wakaba Higuchi" },
+          { "ru": "Каори Сакамото", "en": "Kaori Sakamoto" },
+          { "ru": "Софья Самоделкина", "en": "Sofia Samodelkina" },
+          { "ru": "Ён Ю", "en": "Young You" },
+          { "ru": "Кимми Репонд", "en": "Kimmy Repond" },
+          { "ru": "Сара Эверхардт", "en": "Sarah Everhardt" },
+          { "ru": "Элис Лин-Грейси", "en": "Elyce Lin-Gracey" }
+        ],
+        "pairs": [
+          { "ru": "Суй Вэньцзин / Хань Цун", "en": "Wenjing Sui / Cong Han" },
+          { "ru": "Камий Коваль / Павел Коваль", "en": "Camille Kovalev / Pavel Kovalev" },
+          { "ru": "Мария Павлова / Алексей Святченко", "en": "Maria Pavlova / Alexei Sviatchenko" },
+          { "ru": "Сара Конти / Никколо Мачии", "en": "Sara Conti / Niccolo Macii" },
+          { "ru": "Юна Нагаока / Сумитада Моригучи", "en": "Yuna Nagaoka / Sumitada Moriguchi" },
+          { "ru": "Дарья Данилова / Михель Циба", "en": "Daria Danilova / Michel Tsiba" },
+          { "ru": "Эмили Чан / Спенсер Акира Хау", "en": "Emily Chan / Spencer Akira Howe" },
+          { "ru": "Алиса Ефимова / Миша Митрофанов", "en": "Alisa Efimova / Misha Mitrofanov" }
+        ],
+        "dance": [
+          { "ru": "Алисия Фаббри / Поль Айер", "en": "Alicia Fabbri / Paul Ayer" },
+          { "ru": "Натали Ташлерова / Филип Ташлер", "en": "Natalie Taschlerova / Filip Taschler" },
+          { "ru": "Юка Орихара / Юхо Пиринен", "en": "Yuka Orihara / Juho Pirinen" },
+          { "ru": "Лайла Фир / Льюис Гибсон", "en": "Lilah Fear / Lewis Gibson" },
+          { "ru": "Дженнифер Янс ван Ренсбург / Бенджамин Штеффан", "en": "Jennifer Janse Van Rensburg / Benjamin Steffan" },
+          { "ru": "Шарлен Гиньяр / Марко Фаббри", "en": "Charlene Guignard / Marco Fabbri" },
+          { "ru": "Утана Ёсида / Масая Морита", "en": "Utana Yoshida / Masaya Morita" },
+          { "ru": "Каролин Грин / Майкл Парсонс", "en": "Caroline Green / Michael Parsons" },
+          { "ru": "Майя Шибутани / Алекс Шибутани", "en": "Maia Shibutani / Alex Shibutani" },
+          { "ru": "Катарина Вулфкостин / Дмитрий Царевский", "en": "Katarina Wolfkostin / Dimitry Tsarevski" }
+        ]
+      }
+    }
+  ]
 }{
-  "name": "Skate America 2025 (ISU)",
-  "type": "GP",
-  "city": "Лас-Вегас",
-  "country": "США",
-  "start": "2025-10-17",
-  "end": "2025-10-19",
-  "participants": {
-    "men": [
-      "🇺🇸 Илья Малинин",
-      "🇺🇸 Камден Пулкинен",
-      "🇺🇸 Эндрю Торгашев",
-      "🇨🇦 Стивен Гогоолев",
-      "🇨🇦 Конрад Орзел",
-      "🇫🇷 Адам Сяо Хим Фа",
-      "🇯🇵 Юма Кагияма",
-      "🇰🇷 Джунхван Ча",
-      "🇨🇭 Лукас Бритшги",
-      "🇩🇪 Никита Старостин"
-    ],
-    "women": [
-      "🇺🇸 Изабо Левито",
-      "🇺🇸 Ава Мари Зиглер",
-      "🇺🇸 Одри Шин",
-      "🇨🇦 Мэдди Скизас",
-      "🇫🇷 Леа Серна",
-      "🇯🇵 Каори Сакамото",
-      "🇰🇷 Чхэён Ким",
-      "🇨🇭 Ливия Кайзер",
-      "🇺🇦 Анастасия Губанова",
-      "🇮🇹 Анна Пеццетта"
-    ],
-    "pairs": [
-      "🇺🇸 Элли Кам / Дэнни О’Ши",
-      "🇺🇸 Кейти Макбис / Даниил Паркман",
-      "🇺🇸 Эмили Чан / Спенсер Акира Хау",
-      "🇨🇦 Деанна Стеллато-Дудек / Максим Дешам",
-      "🇩🇪 Минерва Фабиен Хазе / Никита Володин",
-      "🇮🇹 Лукреция Беккари / Маттео Гуаризе",
-      "🇯🇵 Рику Миура / Рюити Кихара"
-    ],
-    "dance": [
-      "🇺🇸 Каролина Грин / Майкл Парсонс",
-      "🇺🇸 Ева Пейт / Логан Бай",
-      "🇺🇸 Эмили Братти / Иэн Сомервилл",
-      "🇨🇦 Пайпер Гиллес / Поль Пуарье",
-      "🇮🇹 Шарлен Гиньяр / Марко Фаббри",
-      "🇫🇷 Мари-Жад Лорио / Ромен Ле Гак",
-      "🇯🇵 Канон Такахаши / Сёто Накахара"
-    ]
-  }
-}
-
-{
-  "name": "NHK Trophy 2025 (ISU)",
-  "type": "GP",
-  "city": "Осака",
-  "country": "Япония",
-  "start": "2025-11-07",
-  "end": "2025-11-09",
-  "participants": {
-    "men": [
-      "🇯🇵 Юма Кагияма",
-      "🇯🇵 Сота Ямамото",
-      "🇯🇵 Тацуя Цубои",
-      "🇨🇦 Стивен Гогоолев",
-      "🇫🇷 Адам Сяо Хим Фа",
-      "🇮🇹 Маттео Риццо",
-      "🇺🇸 Илья Малинин",
-      "🇺🇸 Камден Пулкинен",
-      "🇨🇭 Лукас Бритшги",
-      "🇰🇷 Джунхван Ча"
-    ],
-    "women": [
-      "🇯🇵 Каори Сакамото",
-      "🇯🇵 Мао Симада",
-      "🇯🇵 Рион Сумийоси",
-      "🇯🇵 Михо Такахаси",
-      "🇨🇦 Мэдди Скизас",
-      "🇫🇮 Янелле Лундин",
-      "🇰🇷 Чхэён Ким",
-      "🇺🇸 Изабо Левито",
-      "🇺🇸 Ава Мари Зиглер",
-      "🇮🇹 Анна Пеццетта"
-    ],
-    "pairs": [
-      "🇯🇵 Рику Миура / Рюити Кихара",
-      "🇩🇪 Минерва Фабиен Хазе / Никита Володин",
-      "🇮🇹 Лукреция Беккари / Маттео Гуаризе",
-      "🇨🇦 Деанна Стеллато-Дудек / Максим Дешам",
-      "🇺🇸 Элли Кам / Дэнни О’Ши",
-      "🇺🇸 Кейти Макбис / Даниил Паркман"
-    ],
-    "dance": [
-      "🇯🇵 Канон Такахаши / Сёто Накахара",
-      "🇨🇦 Пайпер Гиллес / Поль Пуарье",
-      "🇮🇹 Шарлен Гиньяр / Марко Фаббри",
-      "🇫🇷 Мари-Жад Лорио / Ромен Ле Гак",
-      "🇺🇸 Каролина Грин / Майкл Парсонс",
-      "🇺🇸 Ева Пейт / Логан Бай",
-      "🇰🇷 Хан Юра / Лим Минью"
-    ]
-  }
+  "international": [
+    {
+      "name_ru": "Гран-при Канады 2025 (ISU Skate Canada International)",
+      "name_en": "Skate Canada International 2025 (ISU Grand Prix)",
+      "type": "GP",
+      "city_ru": "Саскатун",
+      "city_en": "Saskatoon",
+      "country_ru": "Канада",
+      "country_en": "Canada",
+      "start": "2025-10-31",
+      "end": "2025-11-02",
+      "participants": {
+        "men": [
+          { "ru": "Стивен Гоголев", "en": "Stephen Gogolev" },
+          { "ru": "Алекса Ракич", "en": "Aleksa Rakic" },
+          { "ru": "Роман Садовски", "en": "Roman Sadovsky" },
+          { "ru": "Александр Селевко", "en": "Aleksandr Selevko" },
+          { "ru": "Кевин Аэмоз", "en": "Kevin Aymoz" },
+          { "ru": "Ника Егадзе", "en": "Nika Egadze" },
+          { "ru": "Николай Мемола", "en": "Nikolaj Memola" },
+          { "ru": "Каа Миура", "en": "Kao Miura" },
+          { "ru": "Кадзуки Томоно", "en": "Kazuki Tomono" },
+          { "ru": "Владимир Самойлов", "en": "Vladimir Samoilov" },
+          { "ru": "Томоки Хиватаси", "en": "Tomoki Hiwatashi" },
+          { "ru": "Илья Малинин", "en": "Ilia Malinin" }
+        ],
+        "women": [
+          { "ru": "Нина Пинцарроне", "en": "Nina Pinzarrone" },
+          { "ru": "Сара-Мод Дюпюи", "en": "Sara-Maude Dupuis" },
+          { "ru": "Мэдлин Шизас", "en": "Madeline Schizas" },
+          { "ru": "Ульяна Ширяева", "en": "Uliana Shyryaeva" },
+          { "ru": "Лара Наки Гутманн", "en": "Lara Naki Gutmann" },
+          { "ru": "Юна Аоки", "en": "Yuna Aoki" },
+          { "ru": "Моне Чиба", "en": "Mone Chiba" },
+          { "ru": "Ами Накай", "en": "Ami Nakai" },
+          { "ru": "Асон Юн", "en": "Ahsun Yun" },
+          { "ru": "Сара Эверхардт", "en": "Sarah Everhardt" },
+          { "ru": "Изабо Левито", "en": "Isabeau Levito" },
+          { "ru": "Брэдди Теннелл", "en": "Bradie Tennell" }
+        ],
+        "pairs": [
+          { "ru": "Келли Энн Лорен / Лукас Этиер", "en": "Kelly Ann Laurin / Loucas Ethier" },
+          { "ru": "Лия Перейра / Трент Мишо", "en": "Lia Pereira / Trennt Michaud" },
+          { "ru": "Деанна Стилаато-Дудек / Максим Дешампс", "en": "Deanna Stellato-Dudek / Maxime Deschamps" },
+          { "ru": "Анастасия Вайпан-Лоу / Люк Дигби", "en": "Anastasia Vaipan-Law / Luke Digby" },
+          { "ru": "Минерва Фабиен Хазе / Никита Володин", "en": "Minerva Fabienne Hase / Nikita Volodin" },
+          { "ru": "Оксана Вуйамо / Том Бувар", "en": "Oxana Vouillamoz / Tom Bouvart" },
+          { "ru": "Элли Кэм / Дэнни О'Ши", "en": "Ellie Kam / Danny O'Shea" }
+        ],
+        "dance": [
+          { "ru": "Пайпер Гиллс / Поль Пуарье", "en": "Piper Gilles / Paul Poirier" },
+          { "ru": "Мажори Лажуа / Закари Лага", "en": "Marjorie Lajoie / Zachary Lagha" },
+          { "ru": "Мари-Жад Лорио / Ромен Ле Гак", "en": "Marie-Jade Lauriault / Romain Le Gac" },
+          { "ru": "Катерина Мразкова / Даниэль Мразек", "en": "Katerina Mrazkova / Daniel Mrazek" },
+          { "ru": "Юлия Турккила / Маттиас Верслуис", "en": "Juulia Turkkila / Matthias Versluis" },
+          { "ru": "Дженнифер Янс ван Ренсбург / Бенджамин Штеффан", "en": "Jennifer Janse Van Rensburg / Benjamin Steffan" },
+          { "ru": "Эллисон Рид / Саулиус Амбрулевичус", "en": "Allison Reed / Saulius Ambrulevicius" },
+          { "ru": "Эмили Братти / Иэн Сомервилл", "en": "Emily Bratti / Ian Somerville" },
+          { "ru": "Кристина Каррейра / Энтони Пономаренко", "en": "Christina Carreira / Anthony Ponomarenko" },
+          { "ru": "Лия Несет / Артём Маркелов", "en": "Leah Neset / Artem Markelov" }
+        ]
+      }
+    },
+    {
+      "name_ru": "Гран-при Японии 2025 (ISU NHK Trophy)",
+      "name_en": "NHK Trophy 2025 (ISU Grand Prix Japan)",
+      "type": "GP",
+      "city_ru": "Осака (Кадома)",
+      "city_en": "Osaka (Kadoma)",
+      "country_ru": "Япония",
+      "country_en": "Japan",
+      "start": "2025-11-07",
+      "end": "2025-11-09",
+      "participants": {
+        "men": [
+          { "ru": "Боянг Цзинь", "en": "Boyang Jin" },
+          { "ru": "Франсуа Пито", "en": "Francois Pitot" },
+          { "ru": "Габриэле Франджипани", "en": "Gabriele Frangipani" },
+          { "ru": "Маттео Риццо", "en": "Matteo Rizzo" },
+          { "ru": "Юма Кагияма", "en": "Yuma Kagiyama" },
+          { "ru": "Хару Какиучи", "en": "Haru Kakiuchi" },
+          { "ru": "Шун Сато", "en": "Shun Sato" },
+          { "ru": "Чжонхван Ча", "en": "Junhwan Cha" },
+          { "ru": "Лукас Бритшги", "en": "Lukas Britschgi" },
+          { "ru": "Адам Хагара", "en": "Adam Hagara" },
+          { "ru": "Джимми Ма", "en": "Jimmy Ma" },
+          { "ru": "Эндрю Торгашев", "en": "Andrew Torgashev" }
+        ],
+        "women": [
+          { "ru": "Луна Хендрикс", "en": "Loena Hendrickx" },
+          { "ru": "Нина Пинцарроне", "en": "Nina Pinzarrone" },
+          { "ru": "Кэтрин Медланд Спенс", "en": "Katherine Medland Spence" },
+          { "ru": "Анна Пеццетта", "en": "Anna Pezzetta" },
+          { "ru": "Юна Аоки", "en": "Yuna Aoki" },
+          { "ru": "Вакаба Хигути", "en": "Wakaba Higuchi" },
+          { "ru": "Каори Сакамото", "en": "Kaori Sakamoto" },
+          { "ru": "Софья Самоделкина", "en": "Sofia Samodelkina" },
+          { "ru": "Ён Ю", "en": "Young You" },
+          { "ru": "Кимми Репонд", "en": "Kimmy Repond" },
+          { "ru": "Сара Эверхардт", "en": "Sarah Everhardt" },
+          { "ru": "Элис Лин-Грейси", "en": "Elyce Lin-Gracey" }
+        ],
+        "pairs": [
+          { "ru": "Суй Вэньцзин / Хань Цун", "en": "Wenjing Sui / Cong Han" },
+          { "ru": "Камий Коваль / Павел Коваль", "en": "Camille Kovalev / Pavel Kovalev" },
+          { "ru": "Мария Павлова / Алексей Святченко", "en": "Maria Pavlova / Alexei Sviatchenko" },
+          { "ru": "Сара Конти / Никколо Мачии", "en": "Sara Conti / Niccolo Macii" },
+          { "ru": "Юна Нагаока / Сумитада Моригучи", "en": "Yuna Nagaoka / Sumitada Moriguchi" },
+          { "ru": "Дарья Данилова / Михель Циба", "en": "Daria Danilova / Michel Tsiba" },
+          { "ru": "Эмили Чан / Спенсер Акира Хау", "en": "Emily Chan / Spencer Akira Howe" },
+          { "ru": "Алиса Ефимова / Миша Митрофанов", "en": "Alisa Efimova / Misha Mitrofanov" }
+        ],
+        "dance": [
+          { "ru": "Алисия Фаббри / Поль Айер", "en": "Alicia Fabbri / Paul Ayer" },
+          { "ru": "Натали Ташлерова / Филип Ташлер", "en": "Natalie Taschlerova / Filip Taschler" },
+          { "ru": "Юка Орихара / Юхо Пиринен", "en": "Yuka Orihara / Juho Pirinen" },
+          { "ru": "Лайла Фир / Льюис Гибсон", "en": "Lilah Fear / Lewis Gibson" },
+          { "ru": "Дженнифер Янс ван Ренсбург / Бенджамин Штеффан", "en": "Jennifer Janse Van Rensburg / Benjamin Steffan" },
+          { "ru": "Шарлен Гиньяр / Марко Фаббри", "en": "Charlene Guignard / Marco Fabbri" },
+          { "ru": "Утана Ёсида / Масая Морита", "en": "Utana Yoshida / Masaya Morita" },
+          { "ru": "Каролин Грин / Майкл Парсонс", "en": "Caroline Green / Michael Parsons" },
+          { "ru": "Майя Шибутани / Алекс Шибутани", "en": "Maia Shibutani / Alex Shibutani" },
+          { "ru": "Катарина Вулфкостин / Дмитрий Царевский", "en": "Katarina Wolfkostin / Dimitry Tsarevski" }
+        ]
+      }
+    }
+  ]
 }
