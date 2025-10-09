@@ -5,12 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ФК — мини-приложение</title>
   <link rel="icon" href="data:," />
-
-  <!-- Шрифты -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Unbounded:wght@700&display=swap" rel="stylesheet">
 
   <style>
+    /* === Светлая тема === */
     :root {
       --accent:#821130;
       --accent-light:#ffbfd0;
@@ -23,13 +22,25 @@
       --radius:18px;
     }
 
+    /* === ТЁМНАЯ ТЕМА === */
+    [data-theme="dark"] {
+      --accent:#d23a5b;
+      --accent-light:#ffcedd;
+      --bg1:#12060a;
+      --bg2:#220b14;
+      --card-bg:rgba(30,15,20,0.75);
+      --border:#3f1a25;
+      --text:#f5f5f5;
+      --muted:#c4b3b8;
+    }
+
     *{box-sizing:border-box;margin:0;padding:0}
     html,body{height:100%}
     body{
       font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,sans-serif;
       background:linear-gradient(180deg,var(--bg1)0%,var(--bg2)100%);
       color:var(--text);
-      -webkit-font-smoothing:antialiased;
+      transition:background .4s ease,color .4s ease;
       line-height:1.4;
     }
 
@@ -43,61 +54,58 @@
       border-bottom:1px solid #ffd7e0;
       z-index:20;
       box-shadow:0 1px 12px rgba(130,17,48,0.08);
+      transition:background .4s,border .4s,box-shadow .4s;
     }
+    [data-theme="dark"] header.top{
+      background:rgba(24,10,15,0.85);
+      border-bottom:1px solid rgba(255,255,255,0.15);
+      box-shadow:0 0 12px rgba(210,58,91,0.25);
+    }
+
     header .row{
       display:flex;align-items:center;justify-content:space-between;
       padding:10px 16px;
     }
 
-    .logo{
-      width:90px;
-      height:auto;
-      object-fit:contain;
-      filter:drop-shadow(0 0 6px #82113055);
-      transition:transform .25s ease;
-    }
+    .logo{width:90px;height:auto;object-fit:contain;filter:drop-shadow(0 0 6px rgba(130,17,48,0.4));transition:transform .25s;}
     .logo:hover{transform:scale(1.06)}
 
-    /* --- Кнопки с неоновым свечением --- */
+    /* 🌗 Кнопка переключения темы */
+    .theme-toggle{
+      border:1px solid var(--border);
+      background:var(--card-bg);
+      border-radius:999px;
+      padding:6px 10px;
+      cursor:pointer;
+      font-size:14px;
+      color:var(--text);
+      box-shadow:0 0 6px rgba(0,0,0,0.05);
+      transition:background .3s,color .3s,border .3s;
+    }
+    .theme-toggle:hover{
+      background:var(--accent);
+      color:#fff;
+      border-color:var(--accent);
+    }
+
     .btn{
-      position:relative;
       display:inline-flex;align-items:center;justify-content:center;gap:8px;
       padding:12px 18px;
       border-radius:999px;
       font-weight:500;
       background:linear-gradient(180deg,#fff,#ffe9f0);
       border:1px solid #ffb7c7;
-      box-shadow:inset 0 1px 2px rgba(255,255,255,0.9),
-                 0 0 10px 2px rgba(130,17,48,0.25);
-      transition:box-shadow .25s, transform .1s;
-      overflow:hidden;
-      margin-top:12px; /* ✅ Отступ от заголовка */
+      box-shadow:inset 0 1px 2px rgba(255,255,255,0.9),0 0 10px 2px rgba(130,17,48,0.25);
+      transition:box-shadow .25s,transform .1s,background .3s;
+      margin-top:12px;
     }
-    .btn::before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      border-radius:inherit;
-      background:radial-gradient(circle at 50% 50%, rgba(255,181,206,0.5) 0%, transparent 70%);
-      opacity:0;
-      transition:opacity .3s ease;
-      z-index:0;
+    [data-theme="dark"] .btn{
+      background:linear-gradient(180deg,#2b1117,#3b1a22);
+      border:1px solid var(--accent);
+      color:#fff;
+      box-shadow:0 0 10px rgba(210,58,91,0.25);
     }
-    .btn:hover::before{opacity:1}
-    .btn:hover{
-      box-shadow:inset 0 1px 3px rgba(255,255,255,0.9),
-                 0 0 16px 4px rgba(255,160,190,0.5),
-                 0 0 6px 2px rgba(130,17,48,0.4);
-      transform:translateY(-1px);
-    }
-    .btn.primary{
-      background:linear-gradient(180deg,#fff7f9,#ffe1ea);
-      border-color:#fbb6c5;
-    }
-    .btn:active{
-      transform:scale(0.98);
-      box-shadow:0 0 14px 4px rgba(130,17,48,0.4) inset;
-    }
+    .btn:hover{box-shadow:0 0 14px 3px var(--accent);transform:translateY(-1px)}
 
     .card{
       background:var(--card-bg);
@@ -106,96 +114,70 @@
       padding:20px;
       backdrop-filter:blur(12px) saturate(160%);
       box-shadow:0 4px 30px rgba(130,17,48,0.08);
-      transition:transform .25s ease, box-shadow .25s ease;
+      transition:background .4s,border .4s,box-shadow .4s;
     }
-    .card:hover{
-      transform:translateY(-2px);
-      box-shadow:0 8px 28px rgba(130,17,48,0.15),
-                 0 0 12px rgba(255,160,190,0.35);
+    [data-theme="dark"] .card{
+      box-shadow:0 6px 20px rgba(210,58,91,0.25);
     }
 
     .grid{display:grid;grid-template-columns:1fr;gap:14px}
     @media(min-width:720px){.grid{grid-template-columns:1fr 1fr}}
 
-    .title{font-family:'Unbounded',sans-serif;font-weight:700;font-size:18px;color:var(--accent)}
-    .muted{color:var(--muted)}
+    .title{font-family:'Unbounded',sans-serif;font-weight:700;font-size:18px;color:var(--accent);transition:color .4s;}
+    .muted{color:var(--muted);transition:color .4s;}
 
-    /* Splash */
     .splash{
       position:fixed;inset:0;
       display:flex;flex-direction:column;align-items:center;justify-content:center;
-      background:linear-gradient(180deg,#fff5f8 0%,#ffe7ef 100%);
-      z-index:100;
-      animation:fadeOut 1s ease 2s forwards;
+      background:linear-gradient(180deg,var(--bg1) 0%, var(--bg2) 100%);
+      z-index:100;animation:fadeOut 1s ease 2s forwards;
+      transition:background .4s;
     }
     .splash h1{
-      font-size:22px;
-      text-align:center;
-      background:#fff;
+      font-size:22px;text-align:center;
+      background:var(--card-bg);
       padding:16px 20px;
       border-radius:16px;
-      border:1px solid #ffd4de;
+      border:1px solid var(--border);
       box-shadow:0 4px 14px rgba(130,17,48,0.1);
-      color:#2b0e15;
+      color:var(--text);
+      transition:background .4s,border .4s,color .4s;
     }
     .splash p{
       margin-top:8px;
       font-size:15px;
-      font-family:'Unbounded',sans-serif;
-      font-weight:700;
+      font-family:'Unbounded',sans-serif;font-weight:700;
       color:var(--accent);
-      text-shadow:0 0 6px rgba(130,17,48,0.3), 0 0 10px rgba(255,160,190,0.4);
-      letter-spacing:0.3px;
+      text-shadow:0 0 6px rgba(130,17,48,0.3);
     }
     @keyframes fadeOut{to{opacity:0;visibility:hidden}}
-
-    .view{animation:viewFade .4s ease both}
-    @keyframes viewFade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
     .list{display:grid;grid-template-columns:1fr;gap:10px}
     .event{
       border:1px solid var(--border);
-      background:rgba(255,255,255,0.8);
+      background:var(--card-bg);
       border-radius:16px;
       padding:14px;
       display:block;
       box-shadow:0 2px 10px rgba(130,17,48,0.05);
-      transition:transform .15s ease, box-shadow .15s ease;
-      position:relative;
-      overflow:hidden;
+      transition:transform .15s, box-shadow .15s, background .4s;
     }
-    .event::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      border-radius:inherit;
-      background:radial-gradient(circle at 50% 50%, rgba(255,180,200,0.25) 0%, transparent 70%);
-      opacity:0;
-      transition:opacity .3s ease;
-      z-index:0;
+    [data-theme="dark"] .event{
+      box-shadow:0 2px 12px rgba(210,58,91,0.25);
     }
-    .event:hover::after{opacity:1}
     .event:hover{
       transform:translateY(-1px);
-      box-shadow:0 4px 18px rgba(130,17,48,0.15),
-                 0 0 12px rgba(255,160,190,0.4);
+      box-shadow:0 4px 18px rgba(210,58,91,0.35);
     }
 
     .emeta{font-size:14px;color:var(--muted);margin-top:6px}
-    .subtags{margin-top:8px}
     .subtag{
       display:inline-block;margin:4px 6px 0 0;padding:4px 10px;
       border-radius:999px;font-size:12px;font-weight:500;
-      background:rgba(130,17,48,0.8);
-      color:#fff; /* ✅ Белый текст */
-      text-shadow:0 1px 2px rgba(0,0,0,0.25); /* ✅ Контраст */
+      background:var(--accent);
+      color:#fff;text-shadow:0 1px 2px rgba(0,0,0,0.25);
       box-shadow:0 0 4px rgba(130,17,48,0.15);
     }
-    .is-gp{border-color:#0ea5e9}
-    .is-gpf{border-color:#2563eb}
-    .is-worlds{border-color:#16a34a}
-    .is-euros{border-color:#f59e0b}
-    .is-oly{border-color:#ef4444}
   </style>
 </head>
 
@@ -207,9 +189,10 @@
 
   <header class="top">
     <div class="row">
-      <a href="https://t.me/obsudiim_fk" target="_blank" rel="noopener" title="Канал">
+      <a href="https://t.me/obsudiim_fk" target="_blank" rel="noopener">
         <img class="logo" src="./brand.png" alt="Brand"/>
       </a>
+      <button id="themeToggle" class="theme-toggle">🌙</button>
       <button id="backBtn" class="btn" style="display:none">← <span id="t_back">Назад</span></button>
     </div>
   </header>
@@ -219,5 +202,19 @@
   </div>
 
   <script src="./app.js"></script>
+  <script>
+  // 🌗 Переключатель темы
+  const toggle=document.getElementById('themeToggle');
+  const saved=localStorage.getItem('theme')||'light';
+  document.documentElement.setAttribute('data-theme',saved);
+  toggle.textContent=saved==='dark'?'☀️':'🌙';
+  toggle.addEventListener('click',()=>{
+    const current=document.documentElement.getAttribute('data-theme');
+    const next=current==='dark'?'light':'dark';
+    document.documentElement.setAttribute('data-theme',next);
+    toggle.textContent=next==='dark'?'☀️':'🌙';
+    localStorage.setItem('theme',next);
+  });
+  </script>
 </body>
 </html>
