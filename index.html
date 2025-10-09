@@ -175,6 +175,8 @@
       display:block;
       box-shadow:0 2px 10px rgba(130,17,48,0.05);
       transition:transform .15s, box-shadow .15s, background .4s;
+      position:relative;
+      overflow:hidden;
     }
     [data-theme="dark"] .event{
       box-shadow:0 2px 12px rgba(217,76,102,0.2);
@@ -193,45 +195,100 @@
       box-shadow:0 0 4px rgba(130,17,48,0.15);
     }
 
-    /* 🇷🇺 Лёгкий триколор для "Российские старты" */
-    .card.russian::before {
+    /* 🌍 Мягкие цветные пятна по странам (blur effect) */
+    .event[class*="flag-"]::before {
       content: "";
       position: absolute;
-      inset: 0;
-      left: -30%;
-      width: 60%;
-      background: linear-gradient(
-        90deg,
-        rgba(255,255,255,0.5) 0%,
-        rgba(0,70,200,0.35) 40%,
-        rgba(220,0,0,0.25) 100%
-      );
-      filter: blur(20px);
-      opacity: 0.55;
+      top: -20%;
+      left: -10%;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      filter: blur(50px);
+      opacity: 0.5;
       pointer-events: none;
-      transition: opacity .4s ease;
+      transition: opacity .4s ease, transform .4s ease;
     }
-    .card.russian:hover::before { opacity: 0.75; }
+    .event[class*="flag-"]:hover::before {
+      opacity: 0.7;
+      transform: scale(1.05);
+    }
 
-    /* 🌍 Голубой градиент для "Зарубежные старты" */
-    .card.international::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      left: -25%;
-      width: 60%;
-      background: linear-gradient(
-        90deg,
-        rgba(200,230,255,0.55) 0%,
-        rgba(120,180,255,0.35) 50%,
-        rgba(255,255,255,0.15) 100%
-      );
-      filter: blur(18px);
-      opacity: 0.45;
-      pointer-events: none;
-      transition: opacity .4s ease;
+    /* 🇯🇵 Япония */
+    .flag-japan::before {
+      background: radial-gradient(circle at left,
+        rgba(255,255,255,0.8) 0%,
+        rgba(180,0,0,0.5) 70%);
     }
-    .card.international:hover::before { opacity: 0.7; }
+
+    /* 🇫🇷 Франция */
+    .flag-france::before {
+      background: radial-gradient(circle at left,
+        rgba(0,70,200,0.6) 0%,
+        rgba(255,255,255,0.6) 40%,
+        rgba(220,0,0,0.4) 80%);
+    }
+
+    /* 🇨🇦 Канада */
+    .flag-canada::before {
+      background: radial-gradient(circle at left,
+        rgba(255,255,255,0.6) 0%,
+        rgba(200,0,0,0.5) 80%);
+    }
+
+    /* 🇺🇸 США */
+    .flag-usa::before {
+      background: radial-gradient(circle at left,
+        rgba(0,60,180,0.5) 0%,
+        rgba(255,255,255,0.5) 40%,
+        rgba(200,0,0,0.45) 80%);
+    }
+
+    /* 🇮🇹 Италия */
+    .flag-italy::before {
+      background: radial-gradient(circle at left,
+        rgba(0,150,70,0.5) 0%,
+        rgba(255,255,255,0.6) 40%,
+        rgba(200,0,0,0.45) 80%);
+    }
+
+    /* 🇫🇮 Финляндия */
+    .flag-finland::before {
+      background: radial-gradient(circle at left,
+        rgba(255,255,255,0.7) 0%,
+        rgba(0,70,200,0.5) 80%);
+    }
+
+    /* 🇨🇳 Китай */
+    .flag-china::before {
+      background: radial-gradient(circle at left,
+        rgba(200,0,0,0.55) 0%,
+        rgba(255,230,90,0.4) 70%);
+    }
+
+    /* 🇩🇪 Германия */
+    .flag-germany::before {
+      background: radial-gradient(circle at left,
+        rgba(0,0,0,0.4) 0%,
+        rgba(200,0,0,0.4) 50%,
+        rgba(255,210,0,0.4) 90%);
+    }
+
+    /* 🇬🇧 Великобритания */
+    .flag-uk::before, .flag-great-britain::before, .flag-united-kingdom::before {
+      background: radial-gradient(circle at left,
+        rgba(0,60,180,0.4) 0%,
+        rgba(255,255,255,0.5) 40%,
+        rgba(200,0,0,0.4) 80%);
+    }
+
+    /* 🇷🇺 Россия */
+    .flag-russia::before {
+      background: radial-gradient(circle at left,
+        rgba(255,255,255,0.6) 0%,
+        rgba(0,70,200,0.45) 50%,
+        rgba(220,0,0,0.35) 90%);
+    }
   </style>
 </head>
 
