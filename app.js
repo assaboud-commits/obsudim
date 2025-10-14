@@ -108,10 +108,9 @@ function view_menu() {
     currentBlocks = currents.map(ev => {
       const kind = DATA.international.includes(ev) ? "international" : "russian";
       const idx = DATA[kind].indexOf(ev);
-      const place = [ev.city, ev.country].filter(Boolean).join(", ");
       return `
         <div class="card current clickable" data-kind="${kind}" data-idx="${idx}">
-          <div style="display:flex;align-items:center;gap:8px;">
+          <div style="display:flex;align-items:center;gap:10px;">
             <span class="pulse"></span>
             <div class="title">Сейчас идёт</div>
           </div>
@@ -124,7 +123,7 @@ function view_menu() {
     const idx = DATA[kind].indexOf(next);
     currentBlocks = `
       <div class="card upcoming clickable" data-kind="${kind}" data-idx="${idx}">
-        <div style="display:flex;align-items:center;gap:8px;">
+        <div style="display:flex;align-items:center;gap:10px;">
           <span class="pulse upcoming"></span>
           <div class="title">Ближайший старт</div>
         </div>
@@ -134,7 +133,7 @@ function view_menu() {
   }
 
   return `
-    <div class="grid view fade-in" style="gap:36px;">
+    <div class="grid view fade-in" style="gap:38px;">
       ${currentBlocks}
       <div class="card">
         <div class="title">Календарь соревнований</div>
@@ -153,7 +152,6 @@ function view_menu() {
       </div>
     </div>`;
 }
-// --- Выбор календаря ---
 function view_calendar_select() {
   backBtn.style.display = "inline-flex";
   return `
@@ -172,7 +170,6 @@ function view_calendar_select() {
     </div>`;
 }
 
-// --- Карточки соревнований ---
 function listView(items, kind) {
   return `
     <div class="event-grid fade-in">
@@ -192,7 +189,6 @@ function listView(items, kind) {
     </div>`;
 }
 
-// --- Страница "Мерч" ---
 function view_merch() {
   backBtn.style.display = "inline-flex";
   return `
@@ -216,16 +212,9 @@ function view_merch() {
           <span style="font-weight:800;">ПРО!КАТ ЖИЗНИ</span>
         </div>
         <a href="https://t.me/obsudiim_fk/15054" target="_blank"
-           style="
-             display:inline-block;
-             background:#8A1538;
-             color:#fff;
-             text-decoration:none;
-             font-family:'Unbounded',sans-serif;
-             font-weight:700;
-             padding:14px 26px;
-             border-radius:12px;
-             transition:0.3s;">
+           style="display:inline-block;background:#8A1538;color:#fff;
+                  text-decoration:none;font-family:'Unbounded',sans-serif;
+                  font-weight:700;padding:14px 26px;border-radius:12px;transition:0.3s;">
            Перейти к игре
         </a>
       </div>
@@ -236,112 +225,121 @@ function columnList(title, arr) {
   if (!arr?.length) return "";
   return `<div class="card">
     <div class="title category">${title}</div>
-    <ul style="margin:8px 0 0 16px;padding:0;">
-      ${arr.map(n=>`<li style="margin:6px 0">${n}</li>`).join("")}
+    <ul style="margin:8px 0 0 16px; padding:0;">
+      ${arr.map(n => `<li style="margin:6px 0">${n}</li>`).join("")}
     </ul>
   </div>`;
 }
 
 function view_event_details(kind, idx) {
-  const items = kind==="international" ? DATA.international : DATA.russian;
+  const items = kind === "international" ? DATA.international : DATA.russian;
   const it = items[idx];
-  if (!it) return `<div class="card"><div class="title">Ошибка загрузки</div></div>`;
-  const p = it.participants || { men:[], women:[], pairs:[], dance:[] };
+  if (!it) return `<div class="card"><div class="title">Ошибка загрузки события</div></div>`;
+  const p = it.participants || { men: [], women: [], pairs: [], dance: [] };
   backBtn.style.display = "inline-flex";
   return `<div class="card view fade-in" style="border-top:4px solid var(--accent);">
     <div class="title" style="margin-bottom:12px;">${it.name}</div>
     ${chips(it)}
     <div class="grid" style="margin-top:28px;gap:36px;">
-      ${columnList("Мужчины",p.men)}
-      ${columnList("Женщины",p.women)}
-      ${columnList("Пары",p.pairs)}
-      ${columnList("Танцы на льду",p.dance)}
+      ${columnList("Мужчины", p.men)}
+      ${columnList("Женщины", p.women)}
+      ${columnList("Пары", p.pairs)}
+      ${columnList("Танцы на льду", p.dance)}
     </div>
   </div>`;
 }
 
 // --- Рендер и навигация ---
 function render() {
-  const top = NAV.at(-1) || {view:"intro"};
-  let html="";
-  if (top.view==="intro") html=view_intro();
-  if (top.view==="menu") html=view_menu();
-  if (top.view==="calendar_select") html=view_calendar_select();
-  if (top.view==="calendar_list") {
+  const top = NAV.at(-1) || { view: "intro" };
+  let html = "";
+
+  if (top.view === "intro") html = view_intro();
+  if (top.view === "menu") html = view_menu();
+  if (top.view === "calendar_select") html = view_calendar_select();
+  if (top.view === "calendar_list") {
     const kind = top.params.kind;
-    const items = kind==="international"?DATA.international:DATA.russian;
+    const items = kind === "international" ? DATA.international : DATA.russian;
     html = `<div class="card view fade-in" style="padding-bottom:24px;">
       <div class="title" style="margin-bottom:18px;">
-        ${kind==="international"?"Зарубежные старты":"Российские старты"}
+        ${kind === "international" ? "Зарубежные старты" : "Российские старты"}
       </div>
-      ${listView(items,kind)}
+      ${listView(items, kind)}
     </div>`;
   }
-  if (top.view==="event_details") html=view_event_details(top.params.kind,top.params.idx);
-  if (top.view==="merch") html=view_merch();
+  if (top.view === "event_details") html = view_event_details(top.params.kind, top.params.idx);
+  if (top.view === "merch") html = view_merch();
 
   app.innerHTML = html;
 
-  // обработчики
-  if (top.view==="menu") {
-    document.getElementById("btnCalendar")?.addEventListener("click",()=>go("calendar_select"));
-    document.getElementById("btnMerch")?.addEventListener("click",()=>go("merch"));
-    document.querySelectorAll(".card.clickable").forEach(c=>{
-      c.addEventListener("click",()=>{
-        const kind=c.dataset.kind, idx=+c.dataset.idx;
-        go("event_details",{kind,idx});
-      });
-    });
+  // --- Обработчики ---
+  if (top.view === "menu") {
+    document.getElementById("btnCalendar")?.addEventListener("click", () => go("calendar_select"));
+    document.getElementById("btnMerch")?.addEventListener("click", () => go("merch"));
+    document.querySelectorAll(".card.clickable").forEach(c =>
+      c.addEventListener("click", () => {
+        const kind = c.dataset.kind;
+        const idx = +c.dataset.idx;
+        go("event_details", { kind, idx });
+      })
+    );
   }
-  if (top.view==="calendar_select") {
-    document.getElementById("btnRus")?.addEventListener("click",()=>go("calendar_list",{kind:"russian"}));
-    document.getElementById("btnIntl")?.addEventListener("click",()=>go("calendar_list",{kind:"international"}));
+
+  if (top.view === "calendar_select") {
+    document.getElementById("btnRus")?.addEventListener("click", () => go("calendar_list", { kind: "russian" }));
+    document.getElementById("btnIntl")?.addEventListener("click", () => go("calendar_list", { kind: "international" }));
   }
-  if (top.view==="calendar_list")
-    document.querySelectorAll(".event-card").forEach(e=>
-      e.addEventListener("click",()=>go("event_details",{kind:e.dataset.kind,idx:+e.dataset.idx}))
+
+  if (top.view === "calendar_list")
+    document.querySelectorAll(".event-card").forEach(e =>
+      e.addEventListener("click", () =>
+        go("event_details", { kind: e.dataset.kind, idx: +e.dataset.idx })
+      )
     );
 
-  backBtn.style.display = NAV.length>1 ? "inline-flex" : "none";
+  backBtn.style.display = NAV.length > 1 ? "inline-flex" : "none";
+  tBack.textContent = "←";
 }
 // --- Пульсирующий кружок ---
 const stylePulse = document.createElement("style");
 stylePulse.textContent = `
 .pulse {
-  width:10px;height:10px;border-radius:50%;
-  animation:glow 1.4s ease-in-out infinite;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: 1px;
+  animation: glow 1.4s ease-in-out infinite;
 }
 @keyframes glow {
-  0% {box-shadow:0 0 0 rgba(138,21,56,0);opacity:0.7;}
-  50% {box-shadow:0 0 10px rgba(138,21,56,0.6);opacity:1;}
-  100% {box-shadow:0 0 0 rgba(138,21,56,0);opacity:0.7;}
+  0% { box-shadow: 0 0 0 rgba(138,21,56,0); opacity: 0.7; }
+  50% { box-shadow: 0 0 10px rgba(138,21,56,0.6); opacity: 1; }
+  100% { box-shadow: 0 0 0 rgba(138,21,56,0); opacity: 0.7; }
 }
-[data-theme="light"] .pulse{background:#8A1538;}
-[data-theme="dark"] .pulse{background:#fff;}
-[data-theme="light"] .pulse.upcoming{background:#bfbfbf;}
-[data-theme="dark"] .pulse.upcoming{background:#888;}
-.fade-in{animation:fadeIn .8s ease-in-out;}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-.subtag{
-  display:inline-block;margin-right:8px;padding:3px 10px;
-  border-radius:10px;font-size:13px;font-weight:500;white-space:nowrap;
-}
-[data-theme="light"] .subtag{background:#8A1538;color:#fff;}
-[data-theme="dark"] .subtag{background:#fff;color:#8A1538;}
-.grid{display:flex;flex-direction:column;gap:36px;}
+[data-theme="light"] .pulse { background: #8A1538; }
+[data-theme="dark"] .pulse { background: #fff; }
+[data-theme="light"] .pulse.upcoming { background: #bfbfbf; }
+[data-theme="dark"] .pulse.upcoming { background: #888; }
+.fade-in { animation: fadeIn .8s ease-in-out; }
+@keyframes fadeIn { from {opacity:0; transform:translateY(10px);} to {opacity:1; transform:translateY(0);} }
 `;
 document.head.appendChild(stylePulse);
 
 // --- Загрузка и запуск ---
 async function load() {
   try {
-    const r = await fetch("calendar.json",{cache:"no-store"});
+    const r = await fetch("calendar.json", { cache: "no-store" });
     window.DATA = await r.json();
-  } catch { window.DATA = {international:[],russian:[]}; }
+  } catch {
+    window.DATA = { international: [], russian: [] };
+  }
 }
 
-(async ()=> {
+(async () => {
   await load();
-  go("intro"); render();
-  setTimeout(()=>{ go("menu"); }, 2000);
+  go("intro");
+  render();
+  setTimeout(() => { go("menu"); }, 2000);
 })();
