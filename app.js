@@ -1,4 +1,6 @@
 // --- Мини-приложение "Фигурное катание" ---
+// Управление страницами, переходами и отображением данных
+
 const app = document.getElementById("app");
 const backBtn = document.getElementById("backBtn");
 const tBack = document.getElementById("t_back");
@@ -32,6 +34,23 @@ function fmtDateRange(a, b) {
   return `${da.getDate()} ${m[da.getMonth()]} ${da.getFullYear()} – ${db.getDate()} ${m[db.getMonth()]} ${db.getFullYear()}`;
 }
 
+function classify(it) {
+  const n = (it.name || "").toLowerCase();
+  if (n.includes("финал гран-при")) return "gpf";
+  if (n.includes("гран-при")) return "gp";
+  if (n.includes("мир")) return "worlds";
+  if (n.includes("европ")) return "euros";
+  if (n.includes("олимп")) return "oly";
+  return "";
+}
+
+function colorForClass(cls) {
+  return {
+    gpf: "#2563eb", gp: "#0ea5e9", worlds: "#16a34a",
+    euros: "#f59e0b", oly: "#ef4444"
+  }[cls] || "#821130";
+}
+
 function normalizeCountry(n) {
   const map = {
     "япония": "japan", "франция": "france", "канада": "canada", "сша": "usa",
@@ -45,41 +64,11 @@ function flagEmoji(code) {
   const map = {
     japan: "🇯🇵", france: "🇫🇷", canada: "🇨🇦", usa: "🇺🇸",
     italy: "🇮🇹", finland: "🇫🇮", china: "🇨🇳", germany: "🇩🇪",
-    uk: "🇬🇧", georgia: "🇬🇪", russia: "🇷🇺"
+    uk: "🇬🇧", georgia: "🇬🇪"
   };
   return map[code] || "";
 }
-// --- Приветствие ---
-function view_intro() {
-  backBtn.style.display = "none";
-  return `
-    <div style="
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      height:70vh;
-      text-align:center;
-      animation:fadeIn 1s;
-      gap:28px;
-    ">
-      <img src="./brand.png" style="width:90px;height:auto;opacity:0.95;">
-      <div class="intro-box">Привет! Будем рады тебе помочь</div>
-      <div class="intro-team">Команда <b>О!БСУДИМ</b></div>
-    </div>
-  `;
-}
-
-/* --- Мини-плашки --- */
-function chips(it) {
-  const place = [it.city, it.country].filter(Boolean).join(", ");
-  return `
-    <div class="subtags" style="margin-top:10px;">
-      <span class="subtag">📅 ${fmtDateRange(it.start, it.end)}</span>
-      ${place ? `<span class="subtag">📍 ${place}</span>` : ""}
-    </div>
-  `;
-}
+// --- Поиск текущих и ближайших стартов ---
 function findCurrentEvents() {
   const today = new Date();
   const all = [...(DATA.international || []), ...(DATA.russian || [])];
@@ -97,43 +86,55 @@ function findNextEvent() {
   return future.sort((a, b) => new Date(a.start) - new Date(b.start))[0] || null;
 }
 
+// --- Главная страница ---
 function view_menu() {
   backBtn.style.display = "none";
+
   const currents = findCurrentEvents();
   const next = currents.length === 0 ? findNextEvent() : null;
 
   let currentBlocks = "";
 
   if (currents.length > 0) {
-    currentBlocks = currents.map(ev => {
-      const kind = DATA.international.includes(ev) ? "international" : "russian";
-      const idx = DATA[kind].indexOf(ev);
-      return `
-        <div class="card current clickable" data-kind="${kind}" data-idx="${idx}">
-          <div style="display:flex;align-items:center;gap:10px;">
-            <span class="pulse"></span>
-            <div class="title">Сейчас идёт</div>
+    currentBlocks = currents
+      .map(ev => {
+        const kind = DATA.international.includes(ev) ? "international" : "russian";
+        const idx = DATA[kind].indexOf(ev);
+        const place = [ev.city, ev.country].filter(Boolean).join(", ");
+        return `
+          <div class="card current clickable" data-kind="${kind}" data-idx="${idx}">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span class="pulse"></span>
+              <div class="title">Сейчас идёт</div>
+            </div>
+            <div style="font-weight:600;margin:6px 0 4px;color:var(--accent);">
+              ${ev.name}
+            </div>
+            <p class="muted">${place}<br>${fmtDateRange(ev.start, ev.end)}</p>
           </div>
-          <div style="font-weight:600;margin:6px 0 4px;color:var(--accent);">${ev.name}</div>
-          ${chips(ev)}
-        </div>`;
-    }).join("");
+        `;
+      })
+      .join("");
   } else if (next) {
     const kind = DATA.international.includes(next) ? "international" : "russian";
     const idx = DATA[kind].indexOf(next);
+    const place = [next.city, next.country].filter(Boolean).join(", ");
     currentBlocks = `
       <div class="card upcoming clickable" data-kind="${kind}" data-idx="${idx}">
-        <div style="display:flex;align-items:center;gap:10px;">
+        <div style="display:flex;align-items:center;gap:8px;">
           <span class="pulse upcoming"></span>
           <div class="title">Ближайший старт</div>
         </div>
-        <div style="font-weight:600;margin:6px 0 4px;color:var(--accent);">${next.name}</div>
-        ${chips(next)}
-      </div>`;
+        <div style="font-weight:600;margin:6px 0 4px;color:var(--accent);">
+          ${next.name}
+        </div>
+        <p class="muted">${place}<br>${fmtDateRange(next.start, next.end)}</p>
+      </div>
+    `;
   }
 
   return `
-    <div class="grid view fade-in" style="gap:38px;">
+    <div class="grid view fade-in">
       ${currentBlocks}
       <div class="card">
         <div class="title">Календарь соревнований</div>
@@ -152,49 +153,63 @@ function view_menu() {
       </div>
     </div>`;
 }
+// --- Страница выбора календаря ---
 function view_calendar_select() {
   backBtn.style.display = "inline-flex";
   return `
     <div class="card view fade-in">
       <div class="title">Календарь соревнований</div>
-      <div class="grid" style="margin-top:24px;gap:32px;">
+      <div class="grid" style="margin-top:20px;gap:36px;">
         <div class="card clickable" id="btnRus" style="padding:22px 16px;">
           <div class="title">🇷🇺 Российские старты</div>
           <p class="muted">Календарь ФФККР и всероссийские турниры</p>
         </div>
         <div class="card clickable" id="btnIntl" style="padding:22px 16px;">
           <div class="title">🌍 Зарубежные старты</div>
-          <p class="muted">ISU — Гран-при, чемпионаты, Олимпиада</p>
+          <p class="muted">ISU: Гран-при, Чемпионаты, Олимпиада</p>
         </div>
       </div>
-    </div>`;
+    </div>
+  `;
+}
+
+// --- Списки соревнований ---
+function chips(it) {
+  const place = [it.city, it.country].filter(Boolean).join(", ");
+  return `<div class="subtags" style="margin-top:8px;">
+    <span class="subtag">📅 ${fmtDateRange(it.start, it.end)}</span>
+    ${place ? `<span class="subtag">📍 ${place}</span>` : ""}
+  </div>`;
 }
 
 function listView(items, kind) {
-  return `
-    <div class="event-grid fade-in">
-      ${items
-        .sort((a,b)=>new Date(a.start)-new Date(b.start))
-        .map((it,i)=>{
-          const flag = normalizeCountry(it.country);
-          const flagEmojiHTML = flagEmoji(flag);
-          return `
-            <div class="event-card clickable" data-kind="${kind}" data-idx="${i}">
-              <div class="flag-bg">${flagEmojiHTML}</div>
-              <div class="event-title"><strong>${it.name}</strong></div>
-              ${chips(it)}
-            </div>`;
-        })
-        .join("")}
-    </div>`;
+  return `<div class="list">
+    ${items
+      .sort((a, b) => new Date(a.start) - new Date(b.start))
+      .map((it, i) => {
+        const flag = normalizeCountry(it.country);
+        return `
+          <div class="event-card flag-${flag}" data-kind="${kind}" data-idx="${i}">
+            <div class="event-title"><strong>${it.name}</strong></div>
+            ${chips(it)}
+            ${
+              (kind === "international" && flag) || kind === "russian"
+                ? `<div class="flag-bg">${kind === "russian" ? "🇷🇺" : flagEmoji(flag)}</div>`
+                : ""
+            }
+          </div>`;
+      })
+      .join("")}
+  </div>`;
 }
 
+// --- Страница "Мерч" ---
 function view_merch() {
   backBtn.style.display = "inline-flex";
   return `
-    <div class="card view fade-in" style="padding:32px 20px;text-align:center;">
+    <div class="card view" style="padding:32px 20px; text-align:center; animation:fadeIn 0.8s;">
       <div style="
-        background:var(--card-bg);
+        background:#fff;
         border-radius:18px;
         padding:40px 20px;
         box-shadow:0 4px 14px rgba(130,17,48,0.1);
@@ -205,28 +220,40 @@ function view_merch() {
           font-weight:700;
           font-size:22px;
           line-height:1.4;
-          color:var(--accent);
+          color:var(--accent,#8A1538);
           margin-bottom:24px;
         ">
           Настольная игра<br>
-          <span style="font-weight:800;">ПРО!КАТ ЖИЗНИ</span>
+          <span style="font-weight:800;">ПРО!КАТ&nbsp;ЖИЗНИ</span>
         </div>
         <a href="https://t.me/obsudiim_fk/15054" target="_blank"
-           style="display:inline-block;background:#8A1538;color:#fff;
-                  text-decoration:none;font-family:'Unbounded',sans-serif;
-                  font-weight:700;padding:14px 26px;border-radius:12px;transition:0.3s;">
-           Перейти к игре
+          style="
+            display:inline-block;
+            background:#8A1538;
+            color:#fff;
+            text-decoration:none;
+            font-family:'Unbounded',sans-serif;
+            font-weight:700;
+            padding:14px 26px;
+            border-radius:12px;
+            transition:0.3s;
+          "
+          onmouseover="this.style.background='#a71a44'"
+          onmouseout="this.style.background='#8A1538'"
+        >
+          Перейти к игре
         </a>
       </div>
-    </div>`;
+    </div>
+  `;
 }
-// --- Детали соревнования ---
+// --- Отображение деталей соревнования ---
 function columnList(title, arr) {
   if (!arr?.length) return "";
-  return `<div class="card">
+  return `<div class="card" style="min-width:220px">
     <div class="title category">${title}</div>
     <ul style="margin:8px 0 0 16px; padding:0;">
-      ${arr.map(n => `<li style="margin:6px 0">${n}</li>`).join("")}
+      ${arr.map(n=>`<li style="margin:6px 0">${n}</li>`).join("")}
     </ul>
   </div>`;
 }
@@ -236,10 +263,12 @@ function view_event_details(kind, idx) {
   const it = items[idx];
   if (!it) return `<div class="card"><div class="title">Ошибка загрузки события</div></div>`;
   const p = it.participants || { men: [], women: [], pairs: [], dance: [] };
+  const c = colorForClass(classify(it));
   backBtn.style.display = "inline-flex";
-  return `<div class="card view fade-in" style="border-top:4px solid var(--accent);">
-    <div class="title" style="margin-bottom:12px;">${it.name}</div>
-    ${chips(it)}
+  return `<div class="card view fade-in" style="border-top:4px solid ${c};">
+    <div class="title" style="margin-bottom:18px;">${it.name}</div>
+    <div style="margin-bottom:8px;">📅 ${fmtDateRange(it.start, it.end)}</div>
+    <div class="muted">📍 ${[it.city, it.country].filter(Boolean).join(", ")}</div>
     <div class="grid" style="margin-top:28px;gap:36px;">
       ${columnList("Мужчины", p.men)}
       ${columnList("Женщины", p.women)}
@@ -248,6 +277,41 @@ function view_event_details(kind, idx) {
     </div>
   </div>`;
 }
+
+// --- Приветствие ---
+function view_intro() {
+  backBtn.style.display = "none";
+  return `
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;
+      height:70vh;text-align:center;animation:fadeIn 1s;">
+      <img src="./brand.png" style="width:80px;height:auto;margin-bottom:20px;opacity:0.95;">
+      <div style="font-family:'Unbounded',sans-serif;font-weight:700;font-size:20px;color:var(--accent);">
+        Привет! Будем рады тебе помочь<br><span style="font-size:16px;">Команда О!БСУДИМ</span>
+      </div>
+    </div>
+  `;
+}
+
+// --- Стили и анимации ---
+const stylePulse = document.createElement("style");
+stylePulse.textContent = `
+.pulse {
+  width:10px;height:10px;border-radius:50%;
+  animation:pulse 1.6s infinite;
+}
+@keyframes pulse {
+  0%{transform:scale(0.9);opacity:0.8;}
+  50%{transform:scale(1.2);opacity:1;}
+  100%{transform:scale(0.9);opacity:0.8;}
+}
+body.light .pulse{background:#8A1538;}
+body.dark .pulse{background:#fff;}
+body.light .pulse.upcoming{background:#bfbfbf;}
+body.dark .pulse.upcoming{background:#888;}
+.fade-in{animation:fadeIn .8s ease-in-out;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+`;
+document.head.appendChild(stylePulse);
 
 // --- Рендер и навигация ---
 function render() {
@@ -264,7 +328,7 @@ function render() {
       <div class="title" style="margin-bottom:18px;">
         ${kind === "international" ? "Зарубежные старты" : "Российские старты"}
       </div>
-      ${listView(items, kind)}
+      <div style="margin-top:18px;">${listView(items, kind)}</div>
     </div>`;
   }
   if (top.view === "event_details") html = view_event_details(top.params.kind, top.params.idx);
@@ -298,36 +362,10 @@ function render() {
     );
 
   backBtn.style.display = NAV.length > 1 ? "inline-flex" : "none";
-  tBack.textContent = "←";
+  tBack.textContent = "Назад";
 }
-// --- Пульсирующий кружок ---
-const stylePulse = document.createElement("style");
-stylePulse.textContent = `
-.pulse {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  display: inline-block;
-  vertical-align: middle;
-  margin-top: 1px;
-  animation: glow 1.4s ease-in-out infinite;
-}
-@keyframes glow {
-  0% { box-shadow: 0 0 0 rgba(138,21,56,0); opacity: 0.7; }
-  50% { box-shadow: 0 0 10px rgba(138,21,56,0.6); opacity: 1; }
-  100% { box-shadow: 0 0 0 rgba(138,21,56,0); opacity: 0.7; }
-}
-[data-theme="light"] .pulse { background: #8A1538; }
-[data-theme="dark"] .pulse { background: #fff; }
-[data-theme="light"] .pulse.upcoming { background: #bfbfbf; }
-[data-theme="dark"] .pulse.upcoming { background: #888; }
-.fade-in { animation: fadeIn .8s ease-in-out; }
-@keyframes fadeIn { from {opacity:0; transform:translateY(10px);} to {opacity:1; transform:translateY(0);} }
-`;
-document.head.appendChild(stylePulse);
 
-// --- Загрузка и запуск ---
+// --- Загрузка календаря и запуск ---
 async function load() {
   try {
     const r = await fetch("calendar.json", { cache: "no-store" });
@@ -339,7 +377,17 @@ async function load() {
 
 (async () => {
   await load();
+  if (!DATA.international) DATA.international = [];
+  if (!DATA.russian) DATA.russian = [];
+
+  const header = document.querySelector("header.top");
+  header.classList.remove("visible");
+
   go("intro");
   render();
-  setTimeout(() => { go("menu"); }, 2000);
+
+  setTimeout(() => {
+    go("menu");
+    header.classList.add("visible");
+  }, 2000);
 })();

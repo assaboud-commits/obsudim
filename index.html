@@ -1,204 +1,239 @@
 <!doctype html>
-<html lang="ru" data-theme="light">
+<html lang="ru">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Фигурное катание — мини-приложение</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Unbounded:wght@600;700&display=swap" rel="stylesheet">
+  <title>ФК — мини-приложение</title>
+  <link rel="icon" href="data:," />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Unbounded:wght@700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --accent: #8A1538;
-      --bg: #fff;
-      --text: #222;
-      --border: rgba(0,0,0,0.1);
-      --card-bg: #fff;
+      --accent:#821130;
+      --accent-light:#ffbfd0;
+      --bg1:#fff7fa;
+      --bg2:#ffeaf1;
+      --card-bg:rgba(255,255,255,0.75);
+      --border:#f4c7d3;
+      --text:#201014;
+      --muted:#705860;
+      --radius:18px;
     }
+
     [data-theme="dark"] {
-      --bg: #111;
-      --text: #eee;
-      --border: rgba(255,255,255,0.15);
-      --card-bg: #1a1a1a;
-    }
-    body {
-      margin: 0;
-      font-family: "Inter", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      transition: background 0.3s, color 0.3s;
+      --accent:#d94c66;
+      --accent-light:#ffc9d7;
+      --bg1:#2b161b;
+      --bg2:#3b1c24;
+      --card-bg:rgba(255,255,255,0.08);
+      --border:rgba(255,255,255,0.25);
+      --text:#f8f5f6;
+      --muted:#d4c1c7;
     }
 
-    /* ---------- HEADER ---------- */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    html {
+      scroll-behavior:smooth;
+      -webkit-font-smoothing:antialiased;
+    }
+    body{
+      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,sans-serif;
+      background:linear-gradient(180deg,var(--bg1)0%,var(--bg1)5%,var(--bg2)100%);
+      background-attachment:fixed;
+      color:var(--text);
+      transition:background .4s,color .4s;
+      line-height:1.4;
+    }
+
+    a{color:inherit;text-decoration:none}
+    .container{max-width:980px;margin:0 auto;padding:16px 16px 72px}
+
     header.top {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: var(--bg);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      z-index: 100;
-      height: 60px;
+      position:sticky;
+      top:0;
+      background:rgba(255,255,255,0.8);
+      backdrop-filter:saturate(180%) blur(10px);
+      border-bottom:1px solid #ffd7e0;
+      z-index:20;
+      box-shadow:0 1px 12px rgba(130,17,48,0.08);
+      opacity:0;
+      transition:opacity 0.4s ease-in-out;
     }
+    header.top.visible { opacity:1; }
+
+    [data-theme="dark"] header.top {
+      background:rgba(43,22,27,0.85);
+      border-bottom:1px solid rgba(255,255,255,0.2);
+      box-shadow:0 0 16px rgba(217,76,102,0.25);
+    }
+
     header .row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 100%;
-      padding: 0 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:10px 16px;
     }
+
     .logo {
-      width: 44px;
-      height: 44px;
-      object-fit: contain;
-      display: block;
+      width:60px;
+      height:auto;
+      object-fit:contain;
+      filter:drop-shadow(0 0 4px rgba(130,17,48,0.35));
+      transition:transform .25s;
     }
+    .logo:hover{transform:scale(1.06)}
 
-    /* --- Тумблер и стрелка "Назад" --- */
-    .theme-toggle,
-    #backBtn {
-      width: 52px;
-      height: 28px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid var(--border);
-      background: var(--card-bg);
-      color: var(--text);
-      cursor: pointer;
-      transition: 0.3s;
+    .theme-toggle {
+      border:1px solid var(--border);
+      background:var(--card-bg);
+      border-radius:999px;
+      padding:6px 10px;
+      cursor:pointer;
+      font-size:14px;
+      color:var(--text);
+      box-shadow:0 0 6px rgba(0,0,0,0.05);
+      transition:.3s;
     }
-    .theme-toggle:hover,
-    #backBtn:hover {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent);
-    }
-
-    /* сам тумблер */
-    .theme-toggle label {
-      width: 36px;
-      height: 18px;
-      background: rgba(130,17,48,0.25);
-      border-radius: 18px;
-      position: relative;
-      transition: 0.3s;
-      cursor: pointer;
-    }
-    .theme-toggle input { display: none; }
-    .theme-toggle label::after {
-      content: "";
-      position: absolute;
-      top: 2px;
-      left: 2px;
-      width: 14px;
-      height: 14px;
-      background: #fff;
-      border-radius: 50%;
-      transition: 0.3s;
-    }
-    .theme-toggle input:checked + label {
-      background: var(--accent);
-    }
-    .theme-toggle input:checked + label::after {
-      transform: translateX(16px);
-    }
-
-    /* --- Толстая стрелка Назад --- */
-    #backBtn span {
-      font-size: 20px;
-      font-weight: 700;
-      line-height: 1;
-      border: 2px solid currentColor;
-      border-radius: 5px;
-      padding: 1px 4px 2px 6px;
-    }
-
-    main {
-      padding: 80px 16px 40px;
-      max-width: 900px;
-      margin: 0 auto;
-      box-sizing: border-box;
-    }
-
-    .grid {
-      display: flex;
-      flex-direction: column;
-      gap: 36px;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border-radius: 16px;
-      padding: 20px;
-      border: 1px solid var(--border);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      transition: 0.3s;
-    }
-    .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
-    }
-
-    .title {
-      font-weight: 600;
-      font-size: 16px;
-      margin-bottom: 6px;
-      font-family: "Unbounded", sans-serif;
-      color: var(--accent);
-    }
-
-    .muted {
-      font-size: 14px;
-      opacity: 0.8;
-      margin: 0;
+    .theme-toggle:hover {
+      background:var(--accent);
+      color:#fff;
+      border-color:var(--accent);
     }
 
     .btn {
-      display: inline-block;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 10px 18px;
-      cursor: pointer;
-      font-weight: 500;
-      transition: 0.3s;
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      padding:12px 18px;
+      border-radius:999px;
+      font-weight:500;
+      background:linear-gradient(180deg,#fff,#ffe9f0);
+      border:1px solid #ffb7c7;
+      box-shadow:inset 0 1px 2px rgba(255,255,255,0.9),0 0 10px 2px rgba(130,17,48,0.25);
+      margin-top:12px;
+      transition:.25s;
     }
-    .btn:hover { background: #a71a44; }
+    [data-theme="dark"] .btn {
+      background:linear-gradient(180deg,#ffffffee,#f4f4f4dd);
+      border:1px solid var(--accent);
+      color:#2b161b;
+      box-shadow:0 0 10px rgba(217,76,102,0.25);
+    }
+    .btn:hover{box-shadow:0 0 14px 3px var(--accent);transform:translateY(-1px)}
 
-    /* --- Мини-плашки (чипсы) --- */
+    .card {
+      background:var(--card-bg);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:20px;
+      backdrop-filter:blur(12px) saturate(160%);
+      box-shadow:0 4px 30px rgba(130,17,48,0.08);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .title {
+      font-family:'Unbounded',sans-serif;
+      font-weight:700;
+      font-size:18px;
+      color:var(--accent);
+    }
+    .muted{color:var(--muted)}
+
+    .grid.view{gap:36px}
+    .view .grid{gap:36px}
+    .view .grid .card{margin-bottom:20px}
+    .list{display:grid;gap:14px}
+
+    /* --- Карточки турниров (светлая тема) --- */
+    .event-card {
+      background: #fff;
+      color: #821130;
+      border: 1px solid rgba(130,17,48,0.2);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      backdrop-filter: blur(10px) saturate(160%);
+      box-shadow: 0 4px 16px rgba(130,17,48,0.1);
+      transition: all .25s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .event-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(130,17,48,0.25);
+    }
+
+    /* --- Карточки в тёмной теме --- */
+    [data-theme="dark"] .event-card {
+      background: rgba(217,76,102,0.15);
+      border: 1px solid rgba(217,76,102,0.45);
+      color: #fff;
+      box-shadow: 0 0 10px rgba(217,76,102,0.25);
+    }
+    [data-theme="dark"] .event-card:hover {
+      background: rgba(217,76,102,0.25);
+      box-shadow: 0 0 14px rgba(217,76,102,0.4);
+    }
+
+    .event-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    /* --- Светлые плашки 📅 и 📍 в светлой теме --- */
     .subtag {
       display: inline-block;
-      margin-right: 10px;
-      padding: 2px 8px;
-      border-radius: 8px;
-      font-size: 12.5px;
+      margin: 6px 8px 0 0;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 13px;
       font-weight: 500;
-      white-space: nowrap;
-      line-height: 1.3;
+      background: rgba(255,255,255,0.7);
+      color: #821130;
+      border: 1px solid rgba(130,17,48,0.25);
+      backdrop-filter: blur(6px) saturate(160%);
+      transition: all .25s ease;
     }
-    .subtags {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    [data-theme="light"] .subtag {
-      background: #8A1538;
-      color: #fff;
-    }
-    [data-theme="dark"] .subtag {
-      background: #fff;
-      color: #8A1538;
+    .subtag:hover {
+      background: rgba(255,255,255,0.85);
     }
 
-    .fade-in {
-      animation: fadeIn 0.8s ease-in-out;
+    [data-theme="dark"] .subtag {
+      background: rgba(217,76,102,0.45);
+      color: #fff;
+      border: 1px solid rgba(217,76,102,0.6);
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    [data-theme="dark"] .subtag:hover {
+      background: rgba(217,76,102,0.55);
+    }
+
+    .title.category {
+      font-size: 16px;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+    [data-theme="dark"] .title.category {
+      color: #d6baff;
+    }
+
+    /* --- Размытый фон-флаг в плашках стартов --- */
+    .event-card .flag-bg {
+      position: absolute;
+      bottom: 8px;
+      right: 12px;
+      font-size: 60px;
+      opacity: 0.22;
+      filter: blur(2px) saturate(140%);
+      pointer-events: none;
+      user-select: none;
+      line-height: 1;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .event-card:hover .flag-bg {
+      opacity: 0.3;
+      transform: scale(1.05);
     }
   </style>
 </head>
@@ -206,32 +241,30 @@
 <body>
   <header class="top">
     <div class="row">
-      <!-- Тумблер темы слева -->
-      <div class="theme-toggle">
-        <input type="checkbox" id="themeSwitch">
-        <label for="themeSwitch"></label>
-      </div>
-
-      <!-- Логотип по центру -->
-      <img src="./brand.png" class="logo" alt="Логотип">
-
-      <!-- Кнопка Назад справа -->
-      <button id="backBtn" style="display:none;">
-        <span id="t_back">←</span>
-      </button>
+      <a href="https://t.me/obsudiim_fk" target="_blank" rel="noopener">
+        <img class="logo" src="./brand.png" alt="Brand"/>
+      </a>
+      <button id="themeToggle" class="theme-toggle">🌙</button>
+      <button id="backBtn" class="btn" style="display:none">← <span id="t_back">Назад</span></button>
     </div>
   </header>
 
-  <main id="app"></main>
+  <div class="container">
+    <div id="app" class="view"></div>
+  </div>
 
   <script src="./app.js"></script>
   <script>
-    // Переключение темы
-    const themeSwitch = document.getElementById("themeSwitch");
-    themeSwitch.addEventListener("change", () => {
-      const html = document.documentElement;
-      if (themeSwitch.checked) html.setAttribute("data-theme", "dark");
-      else html.setAttribute("data-theme", "light");
+    const toggle=document.getElementById('themeToggle');
+    const saved=localStorage.getItem('theme')||'light';
+    document.documentElement.setAttribute('data-theme',saved);
+    toggle.textContent=saved==='dark'?'☀️':'🌙';
+    toggle.addEventListener('click',()=>{
+      const current=document.documentElement.getAttribute('data-theme');
+      const next=current==='dark'?'light':'dark';
+      document.documentElement.setAttribute('data-theme',next);
+      toggle.textContent=next==='dark'?'☀️':'🌙';
+      localStorage.setItem('theme',next);
     });
   </script>
 </body>
