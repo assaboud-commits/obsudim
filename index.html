@@ -4,9 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Фигурное катание — мини-приложение</title>
-  <link rel="icon" href="data:," />
-  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700&family=Inter:wght@400;500;600&family=Unbounded:wght@600;700&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Unbounded:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --accent: #8A1538;
@@ -15,124 +13,88 @@
       --border: rgba(0,0,0,0.1);
       --card-bg: #fff;
     }
-
     [data-theme="dark"] {
       --bg: #111;
       --text: #eee;
       --border: rgba(255,255,255,0.15);
       --card-bg: #1a1a1a;
     }
-
     body {
       margin: 0;
       font-family: "Inter", sans-serif;
       background: var(--bg);
       color: var(--text);
       transition: background 0.3s, color 0.3s;
-      -webkit-tap-highlight-color: transparent;
     }
 
     /* ---------- HEADER ---------- */
     header.top {
-      width: 100%;
       position: fixed;
       top: 0;
       left: 0;
+      width: 100%;
       background: var(--bg);
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
       z-index: 100;
-      opacity: 0;
-      transform: translateY(-10px);
-      animation: fadeDown 0.8s ease forwards;
+      height: 60px;
     }
-
-    @keyframes fadeDown {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
     header .row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 16px;
-      height: 60px;
-      box-sizing: border-box;
+      height: 100%;
+      padding: 0 16px;
     }
-
-    header .row > * {
-      display: flex;
-      align-items: center;
-    }
-
     .logo {
       width: 42px;
       height: 42px;
       object-fit: contain;
       display: block;
     }
-
-    #backBtn {
+    .theme-toggle, #backBtn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       border: 1px solid var(--border);
       background: var(--card-bg);
       color: var(--text);
-      font-family: "Inter", sans-serif;
-      font-weight: 500;
-      font-size: 14px;
-      padding: 6px 14px;
-      border-radius: 999px;
       cursor: pointer;
       transition: 0.3s;
       box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
-
-    #backBtn:hover {
+    .theme-toggle:hover, #backBtn:hover {
       background: var(--accent);
       color: #fff;
       border-color: var(--accent);
     }
-
-    .theme-toggle {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
     .theme-toggle label {
-      display: block;
-      width: 40px;
-      height: 22px;
+      width: 28px;
+      height: 14px;
+      background: rgba(130,17,48,0.25);
       border-radius: 20px;
-      background: rgba(130,17,48,0.2);
       position: relative;
-      cursor: pointer;
       transition: 0.3s;
     }
-
-    .theme-toggle input {
-      display: none;
-    }
-
+    .theme-toggle input { display: none; }
     .theme-toggle label::after {
       content: "";
       position: absolute;
-      top: 3px;
-      left: 3px;
-      width: 16px;
-      height: 16px;
+      top: 2px;
+      left: 2px;
+      width: 10px;
+      height: 10px;
       background: #fff;
       border-radius: 50%;
       transition: 0.3s;
     }
-
     .theme-toggle input:checked + label {
       background: var(--accent);
     }
-
     .theme-toggle input:checked + label::after {
-      transform: translateX(18px);
+      transform: translateX(14px);
     }
 
     main {
@@ -140,12 +102,6 @@
       max-width: 900px;
       margin: 0 auto;
       box-sizing: border-box;
-    }
-
-    .grid {
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
     }
 
     .card {
@@ -156,12 +112,10 @@
       box-shadow: 0 2px 10px rgba(0,0,0,0.05);
       transition: 0.3s;
     }
-
     .card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
     }
-
     .title {
       font-weight: 600;
       font-size: 16px;
@@ -169,13 +123,7 @@
       font-family: "Unbounded", sans-serif;
       color: var(--accent);
     }
-
-    .muted {
-      font-size: 14px;
-      opacity: 0.8;
-      margin: 0;
-    }
-
+    .muted { font-size: 14px; opacity: 0.8; margin: 0; }
     .btn {
       display: inline-block;
       background: var(--accent);
@@ -186,17 +134,42 @@
       cursor: pointer;
       font-weight: 500;
       transition: 0.3s;
-      font-family: "Inter", sans-serif;
     }
+    .btn:hover { background: #a71a44; }
 
-    .btn:hover {
-      background: #a71a44;
+    /* --- Event cards --- */
+    .event-grid {
+      display: grid;
+      gap: 18px;
+    }
+    .event-card {
+      position: relative;
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 18px 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .event-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    }
+    .flag-bg {
+      position: absolute;
+      right: 8px;
+      bottom: 8px;
+      font-size: 40px;
+      opacity: 0.25;
+      filter: blur(3px);
+      user-select: none;
+      pointer-events: none;
     }
 
     .fade-in {
       animation: fadeIn 0.8s ease-in-out;
     }
-
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
@@ -207,21 +180,25 @@
 <body>
   <header class="top">
     <div class="row">
-      <button id="backBtn" style="display:none;">
-        <span id="t_back">Назад</span>
-      </button>
-      <img src="./brand.png" class="logo" alt="Логотип">
+      <!-- Тумблер темы слева -->
       <div class="theme-toggle">
         <input type="checkbox" id="themeSwitch">
         <label for="themeSwitch"></label>
       </div>
+
+      <!-- Логотип по центру -->
+      <img src="./brand.png" class="logo" alt="Логотип">
+
+      <!-- Кнопка Назад справа -->
+      <button id="backBtn" style="display:none;">
+        <span id="t_back">←</span>
+      </button>
     </div>
   </header>
 
   <main id="app"></main>
 
   <script src="./app.js"></script>
-
   <script>
     // Переключение темы
     const themeSwitch = document.getElementById("themeSwitch");
