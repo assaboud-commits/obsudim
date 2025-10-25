@@ -141,7 +141,7 @@ function view_menu() {
     }).join("");
   }
 
-     // --- возвращаем разметку ---
+  // --- возвращаем разметку ---
   return `
     <div class="grid view fade-in">
       ${currentBlocks}
@@ -166,7 +166,7 @@ function view_menu() {
       </a>
 
       <!-- ❤️ Поддержать канал (Tinkoff) -->
-      <div class="card clickable" id="btnSupport"
+      <div class="card" id="btnSupport"
            style="text-align:center;padding:24px;border:1px solid var(--accent);
                   background:linear-gradient(180deg,#fff,#ffe5ec);
                   box-shadow:0 4px 20px rgba(130,17,48,0.15); cursor:pointer;">
