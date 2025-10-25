@@ -30,6 +30,7 @@ function fmtDateRange(a, b) {
     return `${da.getDate()} ${m[da.getMonth()]} – ${db.getDate()} ${m[db.getMonth()]} ${db.getFullYear()}`;
   return `${da.getDate()} ${m[da.getMonth()]} ${da.getFullYear()} – ${db.getDate()} ${m[db.getMonth()]} ${db.getFullYear()}`;
 }
+
 function classify(it) {
   const n = (it.name || "").toLowerCase();
   if (n.includes("финал гран-при")) return "gpf";
@@ -67,14 +68,49 @@ function findNextEvent() {
 function view_menu() {
   backBtn.style.display = "none";
   const currents = findCurrentEvents();
-  const next = currents.length === 0 ? findNextEvent() : null;
+  const nextEvents = [];
+
+  const today = new Date();
+  const all = [...(DATA.international || []), ...(DATA.russian || [])];
+  const future = all.filter(ev => new Date(ev.start) > today)
+                    .sort((a, b) => new Date(a.start) - new Date(b.start));
+  nextEvents.push(...future.slice(0, 2)); // два ближайших старта
+
   let currentBlocks = "";
 
+  // функция определения, что сейчас идёт по расписанию
+  function getCurrentScheduleText(ev) {
+    if (!ev.schedule_text) return null;
+    const now = new Date();
+    const nowHM = now.getHours() * 60 + now.getMinutes();
+    for (const day of ev.schedule_text) {
+      for (const item of day.items) {
+        const match = item.match(/^(\d{1,2}):(\d{2})/);
+        if (match) {
+          const startM = +match[1] * 60 + +match[2];
+          const endMatch = item.match(/–\s*(\d{1,2}):(\d{2})/);
+          if (endMatch) {
+            const endM = +endMatch[1] * 60 + +endMatch[2];
+            if (nowHM >= startM && nowHM <= endM) {
+              return `${day.date}: ${item.split("—").pop().trim()}`;
+            }
+          }
+        }
+      }
+    }
+    return null;
+  }
+
+  // 🔹 Если сейчас идут соревнования
   if (currents.length > 0) {
     currentBlocks = currents.map(ev => {
       const kind = DATA.international.includes(ev) ? "international" : "russian";
       const idx = DATA[kind].indexOf(ev);
       const place = [ev.city, ev.country].filter(Boolean).join(", ");
+      const currentItem = getCurrentScheduleText(ev);
+      const subtitle = currentItem
+        ? `Сейчас идёт: ${currentItem}`
+        : "Сейчас идёт старт";
       return `
         <div class="card current clickable" data-kind="${kind}" data-idx="${idx}">
           <div style="display:flex;align-items:center;gap:8px;">
@@ -83,106 +119,112 @@ function view_menu() {
           </div>
           <div style="font-weight:600;margin:6px 0 4px;color:var(--accent);">${ev.name}</div>
           <p class="muted">${place}<br>${fmtDateRange(ev.start, ev.end)}</p>
+          <div style="margin-top:6px;font-size:14px;color:var(--accent);font-weight:500;">${subtitle}</div>
         </div>`;
     }).join("");
-  } else if (next) {
-    const kind = DATA.international.includes(next) ? "international" : "russian";
-    const idx = DATA[kind].indexOf(next);
-    const place = [next.city, next.country].filter(Boolean).join(", ");
-    currentBlocks = `
-      <div class="card upcoming clickable" data-kind="${kind}" data-idx="${idx}">
-        <div style="display:flex;align-items:center;gap:8px;">
-          <span class="pulse upcoming"></span>
-          <div class="title">Ближайший старт</div>
-        </div>
-        <div style="font-weight:600;margin:6px 0 4px;color:var(--accent);">${next.name}</div>
-        <p class="muted">${place}<br>${fmtDateRange(next.start, next.end)}</p>
-      </div>`;
+  } 
+  // 🔹 Если ничего не идёт — показываем два ближайших
+  else if (nextEvents.length > 0) {
+    currentBlocks = nextEvents.map(next => {
+      const kind = DATA.international.includes(next) ? "international" : "russian";
+      const idx = DATA[kind].indexOf(next);
+      const place = [next.city, next.country].filter(Boolean).join(", ");
+      return `
+        <div class="card upcoming clickable" data-kind="${kind}" data-idx="${idx}">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span class="pulse upcoming"></span>
+            <div class="title">Ближайший старт</div>
+          </div>
+          <div style="font-weight:600;margin:6px 0 4px;color:var(--accent);">${next.name}</div>
+          <p class="muted">${place}<br>${fmtDateRange(next.start, next.end)}</p>
+        </div>`;
+    }).join("");
   }
 
+  // --- возвращаем разметку ---
   return `
     <div class="grid view fade-in">
       ${currentBlocks}
+
       <div class="card">
         <div class="title">Календарь соревнований</div>
         <p class="muted" style="margin-bottom:18px;">Выбери раздел и смотри даты, ссылки и составы</p>
         <button class="btn" id="btnCalendar">Открыть</button>
       </div>
+
       <div class="card">
-        <div class="title">Правила</div>
-        <p class="muted" style="margin-bottom:18px;">Скоро тут будут правила и полезные материалы</p>
-        <button class="btn" disabled>Скоро</button>
-      </div>
-      <div class="card">
-        <div class="title">Мерч</div>
-        <p class="muted" style="margin-bottom:18px;">Наши эксклюзивные вещи и настольные игры</p>
+        <div class="title">Настольная игра</div>
+        <p class="muted" style="margin-bottom:18px;">ПРО!КАТ ЖИЗНИ — игра о честных разговорах</p>
         <button class="btn" id="btnMerch">Открыть</button>
       </div>
+
+      <!-- ❤️ Поддержать канал -->
+      <a href="#" target="_blank" class="card clickable" id="btnSupport"
+         style="text-align:center;padding:24px;border:1px solid var(--accent);
+                background:linear-gradient(180deg,#fff,#ffe5ec);
+                box-shadow:0 4px 20px rgba(130,17,48,0.15);">
+        <div style="font-size:36px;margin-bottom:8px;color:var(--accent);">❤️</div>
+        <div class="title" style="font-size:18px;">Поддержать канал</div>
+        <p class="muted" style="font-size:14px;">Нажми, чтобы сделать доброе дело</p>
+      </a>
     </div>`;
 }
-
-// --- Календарь и списки ---
+// --- Страница выбора календаря соревнований ---
 function view_calendar_select() {
   backBtn.style.display = "inline-flex";
   return `
-    <div class="card view fade-in">
-      <div class="title">Календарь соревнований</div>
-      <div class="grid" style="margin-top:20px;gap:36px;">
-        <div class="card clickable" id="btnRus" style="padding:22px 16px;">
-          <div class="title">🇷🇺 Российские старты</div>
-          <p class="muted">Календарь ФФККР и всероссийские турниры</p>
+    <div class="card view fade-in" style="text-align:center; padding:40px 20px;">
+      <div class="title" style="margin-bottom:18px;">📅 Календарь соревнований</div>
+      <p class="muted" style="margin-bottom:24px;">
+        Выбери раздел и смотри даты, составы и ссылки на результаты
+      </p>
+
+      <div class="grid" style="gap:24px;justify-content:center;">
+        <div id="btnIntl" class="card clickable"
+             style="cursor:pointer; padding:26px 18px; text-align:center;">
+          <div class="title" style="margin-bottom:8px;">🌍 Зарубежные старты</div>
+          <p class="muted" style="font-size:14px;">Этапы Гран-при и международные турниры ISU</p>
         </div>
-        <div class="card clickable" id="btnIntl" style="padding:22px 16px;">
-          <div class="title">🌍 Зарубежные старты</div>
-          <p class="muted">ISU: Гран-при, Чемпионаты, Олимпиада</p>
+
+        <div id="btnRus" class="card clickable"
+             style="cursor:pointer; padding:26px 18px; text-align:center;">
+          <div class="title" style="margin-bottom:8px;">🇷🇺 Российские старты</div>
+          <p class="muted" style="font-size:14px;">Этапы Кубка России и внутренние соревнования</p>
         </div>
       </div>
     </div>`;
 }
-function chips(it) {
-  const place = [it.city, it.country].filter(Boolean).join(", ");
-  return `<div class="subtags" style="margin-top:8px;">
-    <span class="subtag">📅 ${fmtDateRange(it.start, it.end)}</span>
-    ${place ? `<span class="subtag">📍 ${place}</span>` : ""}
-  </div>`;
-}
-function listView(items, kind) {
-  return `<div class="list">
-    ${items.sort((a, b) => new Date(a.start) - new Date(b.start))
-      .map((it, i) => {
-        return `
-          <div class="event-card" data-kind="${kind}" data-idx="${i}">
-            <div class="event-title"><strong>${it.name}</strong></div>
-            ${chips(it)}
-          </div>`;
-      }).join("")}
-  </div>`;
-}
 
-// --- Мерч ---
-function view_merch() {
+// --- Список стартов (плашки турниров) ---
+function view_calendar_list(kind) {
   backBtn.style.display = "inline-flex";
+  const arr = DATA[kind] || [];
+  if (!arr.length) {
+    return `<div class="card view fade-in"><div class="title">Нет данных</div></div>`;
+  }
+
+  const title = kind === "international" ? "Международные старты" : "Российские старты";
+
+  const events = arr.map((it, idx) => {
+    const color = colorForClass(classify(it));
+    return `
+      <div class="event-card clickable" data-kind="${kind}" data-idx="${idx}"
+           style="border-top:4px solid ${color}; text-align:left;">
+        <div class="title" style="margin-bottom:6px;">${it.name}</div>
+        <div class="muted" style="margin-bottom:4px;">📍 ${it.city}, ${it.country}</div>
+        <div class="muted" style="font-size:14px;">📅 ${fmtDateRange(it.start, it.end)}</div>
+      </div>`;
+  }).join("");
+
   return `
-    <div class="card view" style="padding:32px 20px; text-align:center; animation:fadeIn 0.8s;">
-      <div style="background:#fff;border-radius:18px;padding:40px 20px;
-                  box-shadow:0 4px 14px rgba(130,17,48,0.1);border:1px solid var(--border);">
-        <div style="font-family:'Unbounded',sans-serif;font-weight:700;font-size:22px;line-height:1.4;
-                    color:var(--accent,#8A1538);margin-bottom:24px;">
-          Настольная игра<br><span style="font-weight:800;">ПРО!КАТ&nbsp;ЖИЗНИ</span>
-        </div>
-        <a href="https://t.me/obsudiim_fk/15054" target="_blank"
-          style="display:inline-block;background:#8A1538;color:#fff;text-decoration:none;
-                 font-family:'Unbounded',sans-serif;font-weight:700;padding:14px 26px;
-                 border-radius:12px;transition:0.3s;"
-          onmouseover="this.style.background='#a71a44'"
-          onmouseout="this.style.background='#8A1538'">
-          Перейти к игре
-        </a>
-      </div>
+    <div class="card view fade-in" style="padding-bottom:24px;">
+      <div class="title" style="margin-bottom:18px;">${title}</div>
+      <div class="grid" style="margin-top:16px;">${events}</div>
     </div>`;
 }
 
-// --- Участники + кнопки результатов ---
+
+// --- Участники + результаты ---
 function columnList(title, arr, kind, idx) {
   if (!arr?.length) return "";
   const catKey = title.toLowerCase();
@@ -201,7 +243,6 @@ function columnList(title, arr, kind, idx) {
       </ul>
     </div>`;
 }
-
 // --- Страница результатов ---
 function view_results(kind, idx, category) {
   backBtn.style.display = "inline-flex";
@@ -220,18 +261,83 @@ function view_results(kind, idx, category) {
            style="min-width:240px; text-decoration:none; cursor:${shortUrl ? "pointer" : "default"};"
            ${shortUrl ? `href="${shortUrl}" target="_blank"` : ""}>
           <div class="title category" style="font-size:16px;">Короткая программа</div>
-          ${!shortUrl ? `<p class="muted" style="font-size:14px;">Нет ссылки</p>` : ""}
+          ${!shortUrl ? `<p class="muted" style="font-size:14px;">⏳ Нет ссылки</p>` : ""}
         </a>
         <a class="results-card ${freeUrl ? "clickable" : "disabled"}"
            style="min-width:240px; text-decoration:none; cursor:${freeUrl ? "pointer" : "default"};"
            ${freeUrl ? `href="${freeUrl}" target="_blank"` : ""}>
           <div class="title category" style="font-size:16px;">Произвольная программа</div>
-          ${!freeUrl ? `<p class="muted" style="font-size:14px;">Нет ссылки</p>` : ""}
+          ${!freeUrl ? `<p class="muted" style="font-size:14px;">⏳ Нет ссылки</p>` : ""}
         </a>
       </div>
     </div>`;
 }
 
+// --- Страница расписания ---
+function view_schedule(kind, idx) {
+  const items = kind === "international" ? DATA.international : DATA.russian;
+  const it = items[idx];
+  backBtn.style.display = "inline-flex";
+  const schedule = it.schedule;
+  const scheduleText = it.schedule_text;
+
+  if (scheduleText?.length) {
+    return `
+      <div class="card view fade-in" style="text-align:center;">
+        <div class="title" style="margin-bottom:16px;">${it.name}</div>
+        <div class="muted" style="margin-bottom:20px;">🕒 Расписание соревнований</div>
+        <div class="grid" style="gap:20px;justify-content:center;max-width:600px;margin:0 auto;">
+          ${scheduleText.map(day => `
+            <div class="card" style="background:var(--card-bg);border:1px solid var(--border);
+              border-radius:18px;padding:18px 20px;box-shadow:0 4px 16px rgba(130,17,48,0.1);
+              text-align:left;">
+              <div class="title" style="font-size:16px;margin-bottom:10px;">${day.date}</div>
+              <ul style="list-style:none;padding:0;margin:0;">
+                ${day.items.map(t => `
+                  <li style="margin:6px 0;padding:8px 12px;
+                             background:rgba(138,17,56,0.05);
+                             border-radius:10px;
+                             font-size:14px;">${t}</li>`).join("")}
+              </ul>
+            </div>`).join("")}
+        </div>
+      </div>`;
+  }
+
+  if (schedule) {
+    return `
+      <div class="card view fade-in" style="text-align:center;">
+        <div class="title" style="margin-bottom:16px;">${it.name}</div>
+        <div class="muted" style="margin-bottom:20px;">🕒 Расписание соревнований</div>
+        <a href="${schedule}" target="_blank" class="btn" style="margin-top:10px;">Открыть расписание</a>
+      </div>`;
+  }
+
+  return `
+    <div class="card view fade-in" style="text-align:center;">
+      <div class="title" style="margin-bottom:16px;">${it.name}</div>
+      <div class="muted" style="font-size:15px;">⏳ Скоро тут будет расписание</div>
+    </div>`;
+}
+
+// --- Приветствие ---
+function view_intro() {
+  backBtn.style.display = "none";
+  return `
+    <div style="display:flex;flex-direction:column;align-items:center;
+                justify-content:center;height:70vh;text-align:center;animation:fadeIn 1s;">
+      <img src="./brand.png" style="width:100px;height:auto;margin-bottom:45px;opacity:0.95;">
+      <div style="font-family:'Unbounded',sans-serif;font-weight:700;
+                  font-size:22px;color:var(--accent);line-height:1.4;
+                  margin-bottom:45px;white-space:pre-line;">
+        Привет!\nБудем рады тебе помочь
+      </div>
+      <div style="font-family:'Unbounded',sans-serif;font-weight:700;
+                  font-size:18px;color:var(--accent);opacity:0.9;">
+        Команда О!БСУДИМ
+      </div>
+    </div>`;
+}
 // --- Страница события ---
 function view_event_details(kind, idx) {
   const items = kind === "international" ? DATA.international : DATA.russian;
@@ -241,63 +347,64 @@ function view_event_details(kind, idx) {
   const c = colorForClass(classify(it));
   backBtn.style.display = "inline-flex";
 
-  return `<div class="card view fade-in" style="border-top:4px solid ${c};">
-    <div class="title" style="margin-bottom:18px;">${it.name}</div>
-    <div style="margin-bottom:8px;">📅 ${fmtDateRange(it.start, it.end)}</div>
-    <div class="muted">📍 ${[it.city, it.country].filter(Boolean).join(", ")}</div>
-    <div class="grid" style="margin-top:28px;gap:36px;">
-      ${columnList("Мужчины", p.men, kind, idx)}
-      ${columnList("Женщины", p.women, kind, idx)}
-      ${columnList("Пары", p.pairs, kind, idx)}
-      ${columnList("Танцы на льду", p.dance, kind, idx)}
-    </div>
-  </div>`;
-}
+  const now = new Date();
+  const end = new Date(it.end);
+  const showSchedule = now <= end;
 
-// --- Приветствие ---
-function view_intro() {
-  backBtn.style.display = "none";
+  function podiumBlock(title, arr) {
+    if (!arr || arr.length < 3) return "";
+    return `
+      <div class="podium-card" style="margin-bottom:20px;">
+        <div class="title category" style="margin-bottom:8px;">${title}</div>
+        <div class="podium">
+          <div class="place"><span class="medal">🥇</span>${arr[0]}</div>
+          <div class="place"><span class="medal">🥈</span>${arr[1]}</div>
+          <div class="place"><span class="medal">🥉</span>${arr[2]}</div>
+        </div>
+      </div>`;
+  }
+
+  const top3 = it.results_top3 || {};
+  const podiumHTML = Object.keys(top3).length
+    ? `
+      <div class="card" style="margin-top:28px;">
+        <div class="title" style="margin-bottom:14px;">🏆 Итоги соревнования</div>
+        ${podiumBlock("Мужчины", top3["мужчины"])}
+        ${podiumBlock("Женщины", top3["женщины"])}
+        ${podiumBlock("Пары", top3["пары"])}
+        ${podiumBlock("Танцы на льду", top3["танцы на льду"])}
+      </div>`
+    : "";
+
   return `
-    <div style="
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      height:70vh;
-      text-align:center;
-      animation:fadeIn 1s;
-    ">
-      
-      <!-- логотип -->
-      <img src="./brand.png"
-           style="width:100px;height:auto;margin-bottom:45px;opacity:0.95;">
+    <div class="card view fade-in" style="border-top:4px solid ${c};">
+      <div class="title" style="margin-bottom:18px;">${it.name}</div>
+      <div style="margin-bottom:8px;">📅 ${fmtDateRange(it.start, it.end)}</div>
+      <div class="muted">📍 ${[it.city, it.country].filter(Boolean).join(", ")}</div>
 
-      <!-- текст приветствия без плашки -->
-      <div style="
-        font-family:'Unbounded',sans-serif;
-        font-weight:700;
-        font-size:22px;
-        color:var(--accent);
-        line-height:1.4;
-        margin-bottom:45px;
-        white-space:pre-line;
-      ">
-        Привет!\nБудем рады тебе помочь
-      </div>
+      ${
+        showSchedule
+          ? `<div class="card clickable schedule-btn" data-kind="${kind}" data-idx="${idx}"
+               style="margin-top:28px; text-align:center; padding:22px;">
+              <div class="title" style="margin-bottom:8px;">🕒 Расписание соревнований</div>
+              <p class="muted" style="font-size:14px;">Открыть расписание этапа</p>
+            </div>`
+          : `<div class="card" style="margin-top:28px; text-align:center; padding:22px; opacity:0.8;">
+              <div class="title" style="margin-bottom:6px;">⏱ Турнир завершён</div>
+              <p class="muted" style="font-size:14px;">Расписание больше недоступно</p>
+            </div>`
+      }
 
-      <!-- подпись -->
-      <div style="
-        font-family:'Unbounded',sans-serif;
-        font-weight:700;
-        font-size:18px;
-        color:var(--accent);
-        opacity:0.9;
-      ">
-        Команда О!БСУДИМ
+      ${!showSchedule ? podiumHTML : ""}
+
+      <div class="grid" style="margin-top:28px;gap:36px;">
+        ${columnList("Мужчины", p.men, kind, idx)}
+        ${columnList("Женщины", p.women, kind, idx)}
+        ${columnList("Пары", p.pairs, kind, idx)}
+        ${columnList("Танцы на льду", p.dance, kind, idx)}
       </div>
     </div>`;
 }
-
 // --- Рендер ---
 function render() {
   const top = NAV.at(-1) || { view: "intro" };
@@ -306,18 +413,10 @@ function render() {
   if (top.view === "intro") html = view_intro();
   if (top.view === "menu") html = view_menu();
   if (top.view === "calendar_select") html = view_calendar_select();
-  if (top.view === "calendar_list") {
-    const kind = top.params.kind;
-    const items = kind === "international" ? DATA.international : DATA.russian;
-    html = `<div class="card view fade-in" style="padding-bottom:24px;">
-      <div class="title" style="margin-bottom:18px;">
-        ${kind === "international" ? "Зарубежные старты" : "Российские старты"}
-      </div>
-      <div style="margin-top:18px;">${listView(items, kind)}</div>
-    </div>`;
-  }
+  if (top.view === "calendar_list") html = view_calendar_list(top.params.kind);
   if (top.view === "event_details") html = view_event_details(top.params.kind, top.params.idx);
   if (top.view === "results") html = view_results(top.params.kind, top.params.idx, top.params.category);
+  if (top.view === "schedule") html = view_schedule(top.params.kind, top.params.idx);
   if (top.view === "merch") html = view_merch();
 
   app.innerHTML = html;
@@ -326,6 +425,9 @@ function render() {
   if (top.view === "menu") {
     document.getElementById("btnCalendar")?.addEventListener("click",()=>go("calendar_select"));
     document.getElementById("btnMerch")?.addEventListener("click",()=>go("merch"));
+    document.getElementById("btnSupport")?.addEventListener("click",()=> {
+      window.open("https://sberbank.ru/sberbankbank/obsudiim", "_blank");
+    });
     document.querySelectorAll(".card.clickable").forEach(c =>
       c.addEventListener("click",()=>{
         const kind=c.dataset.kind;const idx=+c.dataset.idx;
@@ -347,6 +449,13 @@ function render() {
   }
 
   if (top.view === "event_details") {
+    document.querySelectorAll(".schedule-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const kind = btn.dataset.kind;
+        const idx = +btn.dataset.idx;
+        go("schedule", { kind, idx });
+      });
+    });
     document.querySelectorAll(".btn-mini").forEach(btn => {
       btn.addEventListener("click", () => {
         const kind = btn.dataset.kind;
@@ -357,9 +466,11 @@ function render() {
     });
   }
 
-  backBtn.style.display = NAV.length > 1 ? "inline-flex" : "none";
+  const hideBackOn = ["intro", "menu"];
+  backBtn.style.display = hideBackOn.includes(top.view) ? "none" : "inline-flex";
   tBack.textContent = "Назад";
 }
+
 
 // --- Загрузка календаря и запуск ---
 async function load() {
@@ -387,49 +498,20 @@ async function load() {
     header.classList.add("visible");
   }, 2000);
 })();
-// --- Пульсирующий индикатор ---
-const stylePulse = document.createElement("style");
-stylePulse.textContent = `
-.pulse {
-  width:12px;
-  height:12px;
-  border-radius:50%;
-  animation:pulse 1.8s infinite ease-in-out;
-  display:inline-block;
-  margin-right:6px;
-}
 
-/* Плавная пульсация */
-@keyframes pulse {
-  0%   { transform:scale(0.9); opacity:0.7; }
-  50%  { transform:scale(1.4); opacity:1; }
-  100% { transform:scale(0.9); opacity:0.7; }
+// --- Страница настольной игры ---
+function view_merch() {
+  backBtn.style.display = "inline-flex";
+  return `
+    <div class="card view fade-in clickable" 
+         onclick="window.open('https://t.me/obsudiim_fk/15054','_blank')" 
+         style="text-align:center; padding:40px 20px; cursor:pointer;">
+      <div class="muted" style="font-size:16px; letter-spacing:1px; margin-bottom:10px;">
+        настольная игра
+      </div>
+      <div style="font-family:'Unbounded', sans-serif; font-weight:700;
+                  font-size:28px; color:var(--accent); letter-spacing:1px;">
+        ПРО!КАТ ЖИЗНИ
+      </div>
+    </div>`;
 }
-
-/* Светлая тема — бордовый шарик */
-[data-theme="light"] .pulse,
-html[data-theme="light"] .pulse,
-body[data-theme="light"] .pulse {
-  background:#8A1538;
-  box-shadow:0 0 10px rgba(138,17,56,0.4);
-}
-
-/* Тёмная тема — розовый шарик с подсветкой */
-[data-theme="dark"] .pulse,
-html[data-theme="dark"] .pulse,
-body[data-theme="dark"] .pulse {
-  background:#ffb7c7;
-  box-shadow:0 0 12px rgba(255,183,199,0.7);
-}
-
-/* Анимация появления */
-.fade-in {
-  animation:fadeIn .8s ease-in-out;
-}
-@keyframes fadeIn {
-  from { opacity:0; transform:translateY(10px); }
-  to   { opacity:1; transform:translateY(0); }
-}
-`;
-document.head.appendChild(stylePulse);
-
