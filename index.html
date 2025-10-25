@@ -91,7 +91,7 @@
       color:#2b161b;
       box-shadow:0 0 10px rgba(217,76,102,0.25);
     }
-    .btn:hover{box-shadow:0 0 14px 3px var(--accent);transform:translateY(-1px)}
+    .btn:hover{box-shadow:0 0 14px 3px rgba(130,17,48,0.35);transform:translateY(-1px)}
 
     .card {
       background:var(--card-bg);
@@ -107,7 +107,6 @@
     .title {font-family:'Unbounded',sans-serif;font-weight:700;font-size:18px;color:var(--accent);}
     .muted{color:var(--muted);}
 
-    /* --- Отступы между всеми плашками --- */
     .grid {
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -145,7 +144,6 @@
     .title.category{font-size:16px;margin-bottom:8px;color:var(--accent);}
     [data-theme="dark"] .title.category{color:#d6baff;}
 
-    /* --- Плашки результатов --- */
     .results-card {
       display:block;
       background:var(--card-bg);
@@ -159,6 +157,31 @@
     }
     .results-card:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(130,17,48,0.25);}
     [data-theme="dark"] .results-card{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);box-shadow:0 0 16px rgba(217,76,102,0.3);}
+
+    /* --- Поддержка канала --- */
+    a, a:visited, a:hover, a:active {
+      color: inherit !important;
+      text-decoration: none !important;
+    }
+    .support-btn {
+      background: linear-gradient(180deg, #fff7fa, #ffe3eb);
+      border: 1px solid #f4a5b6;
+      box-shadow: inset 0 1px 2px rgba(255,255,255,0.8),
+                  0 0 8px rgba(130,17,48,0.25);
+      color: #821130;
+      font-weight: 600;
+      transition: 0.25s;
+    }
+    [data-theme="dark"] .support-btn {
+      background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.08));
+      border: 1px solid rgba(255,255,255,0.25);
+      color: #ffd7e0;
+      box-shadow: 0 0 8px rgba(217,76,102,0.3);
+    }
+    .support-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 10px rgba(130,17,48,0.3);
+    }
   </style>
 </head>
 
@@ -175,6 +198,15 @@
 
   <div class="container">
     <div id="app" class="view"></div>
+
+    <!-- Поддержи канал -->
+    <div class="card" style="text-align:center;margin-top:40px;">
+      <div class="title" style="margin-bottom:10px;">💖 Поддержи канал</div>
+      <p class="muted" style="margin-bottom:18px;">Твоя поддержка помогает развивать проект</p>
+      <a href="https://tbank.ru/cf/A3o7MPogyVI" target="_blank" rel="noopener" class="support-link">
+        <button class="btn support-btn">Перейти к поддержке</button>
+      </a>
+    </div>
   </div>
 
   <script src="./app.js"></script>
