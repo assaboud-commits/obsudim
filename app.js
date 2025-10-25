@@ -152,7 +152,7 @@ function view_menu() {
         <button class="btn" id="btnCalendar">Открыть</button>
       </div>
 
-      <!-- 🔹 Плашка настольной игры ПРО!КАТ ЖИЗНИ -->
+            <!-- 🔹 Плашка настольной игры ПРО!КАТ ЖИЗНИ -->
       <a href="https://t.me/obsudiim_fk/15054" target="_blank"
          class="card clickable"
          style="text-align:center; padding:36px 20px; text-decoration:none; cursor:pointer;">
@@ -165,17 +165,18 @@ function view_menu() {
         </div>
       </a>
 
-           <!-- ❤️ Поддержать канал (Tinkoff) -->
-      <div class="card clickable" id="btnSupport"
-           style="text-align:center;padding:24px;border:1px solid var(--accent);
-                  background:linear-gradient(180deg,#fff,#ffe5ec);
-                  box-shadow:0 4px 20px rgba(130,17,48,0.15); cursor:pointer;"
-           onclick="window.open('https://tbank.ru/cf/A3o7MPogyVI','_blank')">
+      <!-- ❤️ Поддержать канал -->
+      <a href="#" target="_blank" class="card clickable" id="btnSupport"
+         style="text-align:center;padding:24px;border:1px solid var(--accent);
+                background:linear-gradient(180deg,#fff,#ffe5ec);
+                box-shadow:0 4px 20px rgba(130,17,48,0.15);">
         <div style="font-size:36px;margin-bottom:8px;color:var(--accent);">❤️</div>
         <div class="title" style="font-size:18px;">Поддержать канал</div>
         <p class="muted" style="font-size:14px;">Нажми, чтобы сделать доброе дело</p>
-      </div>;
+      </a>
+    </div>`;
 }
+
 // --- Страница выбора календаря соревнований ---
 function view_calendar_select() {
   backBtn.style.display = "inline-flex";
