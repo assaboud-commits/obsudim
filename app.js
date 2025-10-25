@@ -263,19 +263,29 @@ function view_results(kind, idx, category) {
   return `
     <div class="card view fade-in" style="text-align:center;">
       <div class="title" style="margin-bottom:16px;">${it.name}</div>
-      <div class="muted" style="margin-bottom:12px;">📊 Результаты — ${category}</div>
-      <div class="grid" style="gap:24px;justify-content:center;">
+      <div class="muted" style="margin-bottom:20px;">📊 Результаты — ${category}</div>
+
+      <div class="grid" style="gap:24px;justify-content:center;max-width:600px;margin:0 auto;">
         <a class="results-card ${shortUrl ? "clickable" : "disabled"}"
-           style="min-width:240px; text-decoration:none; cursor:${shortUrl ? "pointer" : "default"};"
-           ${shortUrl ? `href="${shortUrl}" target="_blank"` : ""}>
-          <div class="title category" style="font-size:16px;">Короткая программа</div>
-          ${!shortUrl ? `<p class="muted" style="font-size:14px;">⏳ Нет ссылки</p>` : ""}
+           ${shortUrl ? `href="${shortUrl}" target="_blank"` : ""}
+           style="text-decoration:none;">
+          <div class="title category" style="font-size:16px;margin-bottom:6px;">
+            Короткая программа
+          </div>
+          ${shortUrl
+            ? `<p class="muted" style="font-size:14px;">Открыть протокол</p>`
+            : `<p class="muted" style="font-size:14px;">⏳ Нет ссылки</p>`}
         </a>
+
         <a class="results-card ${freeUrl ? "clickable" : "disabled"}"
-           style="min-width:240px; text-decoration:none; cursor:${freeUrl ? "pointer" : "default"};"
-           ${freeUrl ? `href="${freeUrl}" target="_blank"` : ""}>
-          <div class="title category" style="font-size:16px;">Произвольная программа</div>
-          ${!freeUrl ? `<p class="muted" style="font-size:14px;">⏳ Нет ссылки</p>` : ""}
+           ${freeUrl ? `href="${freeUrl}" target="_blank"` : ""}
+           style="text-decoration:none;">
+          <div class="title category" style="font-size:16px;margin-bottom:6px;">
+            Произвольная программа
+          </div>
+          ${freeUrl
+            ? `<p class="muted" style="font-size:14px;">Открыть протокол</p>`
+            : `<p class="muted" style="font-size:14px;">⏳ Нет ссылки</p>`}
         </a>
       </div>
     </div>`;
@@ -355,9 +365,10 @@ function view_event_details(kind, idx) {
   const c = colorForClass(classify(it));
   backBtn.style.display = "inline-flex";
 
+  // 🔧 теперь пьедестал показывается всегда, независимо от даты
   const now = new Date();
   const end = new Date(it.end);
-  const showSchedule = now <= end;
+  const showSchedule = true;
 
   function podiumBlock(title, arr) {
     if (!arr || arr.length < 3) return "";
@@ -390,20 +401,13 @@ function view_event_details(kind, idx) {
       <div style="margin-bottom:8px;">📅 ${fmtDateRange(it.start, it.end)}</div>
       <div class="muted">📍 ${[it.city, it.country].filter(Boolean).join(", ")}</div>
 
-      ${
-        showSchedule
-          ? `<div class="card clickable schedule-btn" data-kind="${kind}" data-idx="${idx}"
-               style="margin-top:28px; text-align:center; padding:22px;">
-              <div class="title" style="margin-bottom:8px;">🕒 Расписание соревнований</div>
-              <p class="muted" style="font-size:14px;">Открыть расписание этапа</p>
-            </div>`
-          : `<div class="card" style="margin-top:28px; text-align:center; padding:22px; opacity:0.8;">
-              <div class="title" style="margin-bottom:6px;">⏱ Турнир завершён</div>
-              <p class="muted" style="font-size:14px;">Расписание больше недоступно</p>
-            </div>`
-      }
+      <div class="card clickable schedule-btn" data-kind="${kind}" data-idx="${idx}"
+           style="margin-top:28px; text-align:center; padding:22px;">
+        <div class="title" style="margin-bottom:8px;">🕒 Расписание соревнований</div>
+        <p class="muted" style="font-size:14px;">Открыть расписание этапа</p>
+      </div>
 
-      ${!showSchedule ? podiumHTML : ""}
+      ${podiumHTML}
 
       <div class="grid" style="margin-top:28px;gap:36px;">
         ${columnList("Мужчины", p.men, kind, idx)}
