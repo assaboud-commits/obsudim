@@ -429,15 +429,24 @@ function render() {
   app.innerHTML = html;
 
   // --- обработчики ---
+   // --- обработчики ---
   if (top.view === "menu") {
     document.getElementById("btnCalendar")?.addEventListener("click",()=>go("calendar_select"));
-    document.getElementById("btnMerch")?.addEventListener("click",()=>go("merch"));
-    document.getElementById("btnSupport")?.addEventListener("click",()=> {
-      window.open("https://sberbank.ru/sberbankbank/obsudiim", "_blank");
+    
+    // 🔹 Кнопка ПРО!КАТ ЖИЗНИ — сразу ведёт в Telegram
+    document.getElementById("btnMerch")?.addEventListener("click",()=>{
+      window.open("https://t.me/obsudiim_fk/15054","_blank");
     });
+
+    // ❤️ Поддержать канал — ссылка на Tinkoff
+    document.getElementById("btnSupport")?.addEventListener("click",()=> {
+      window.open("https://tbank.ru/cf/A3o7MPogyVI", "_blank");
+    });
+
     document.querySelectorAll(".card.clickable").forEach(c =>
       c.addEventListener("click",()=>{
-        const kind=c.dataset.kind;const idx=+c.dataset.idx;
+        const kind=c.dataset.kind;
+        const idx=+c.dataset.idx;
         go("event_details",{kind,idx});
       }));
   }
@@ -454,6 +463,7 @@ function render() {
       })
     );
   }
+
 
   if (top.view === "event_details") {
     document.querySelectorAll(".schedule-btn").forEach(btn => {
